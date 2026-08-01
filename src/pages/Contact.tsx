@@ -1,0 +1,77 @@
+import { Mail, Phone, MapPin, Instagram, Facebook } from 'lucide-react'
+import { CONTACT } from '../data'
+import ContactForm from '../components/ui/ContactForm'
+
+export default function Contact() {
+  return (
+    <div>
+      {/* Header — llega hasta el tope real de la página para quedar detrás del navbar transparente */}
+      <section className="bg-brand-600 pt-36 pb-20">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <p className="text-brand-100 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">Contáctanos</p>
+          <h1 className="font-display text-5xl text-white max-w-xl">
+            Encuentra el proyecto <span className="italic text-brand-100">ideal para ti</span>
+          </h1>
+        </div>
+      </section>
+
+      {/* Body */}
+      <section className="py-20 bg-brand-600">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-16 items-start">
+
+          {/* Left */}
+          <div>
+            <p className="font-body text-brand-50 leading-relaxed mb-10">
+              Recibe asesoría gratuita en menos de 24 horas. Nuestros asesores te guiarán para encontrar la mejor opción según tus necesidades y presupuesto.
+            </p>
+
+            <div className="space-y-5 mb-10">
+              {[
+                { icon: Phone,  label: 'Teléfono', value: CONTACT.phone,   href: `tel:${CONTACT.phone}` },
+                { icon: Mail,   label: 'Email',    value: CONTACT.email,   href: `mailto:${CONTACT.email}` },
+              ].map(({ icon: Icon, label, value, href }) => (
+                <a key={label} href={href} className="flex items-center gap-4 group">
+                  <div className="w-12 h-12 bg-white/10 border border-white/20 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-colors">
+                    <Icon size={18} className="text-white" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-brand-100 font-body">{label}</p>
+                    <p className="text-white font-body font-medium group-hover:text-brand-100 transition-colors">{value}</p>
+                  </div>
+                </a>
+              ))}
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-white/10 border border-white/20 flex items-center justify-center shrink-0">
+                  <MapPin size={18} className="text-white" />
+                </div>
+                <div>
+                  <p className="text-xs text-brand-100 font-body">Dirección</p>
+                  <p className="text-white font-body font-medium">{CONTACT.address}</p>
+                  <p className="text-brand-100 font-body text-sm">Sala de ventas: {CONTACT.sales}</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="border-t border-white/20 pt-8">
+              <p className="text-xs text-brand-100 font-body tracking-widest uppercase mb-4">Síguenos</p>
+              <div className="flex gap-4">
+                <a href={CONTACT.instagram} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-brand-50 hover:text-white transition-colors font-body text-sm">
+                  <Instagram size={18} /> Instagram
+                </a>
+                <a href={CONTACT.facebook} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-brand-50 hover:text-white transition-colors font-body text-sm">
+                  <Facebook size={18} /> Facebook
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Right — Form */}
+          <div className="bg-white p-8 md:p-10">
+            <h3 className="font-display text-xl text-gray-900 mb-6">¿Quieres más información?</h3>
+            <ContactForm />
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}
