@@ -56,7 +56,7 @@ export default function Navbar() {
               sin importar cuánto midan los nav links o el botón a los lados. */}
           <Link to="/" className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
             <img
-              src={transparent ? '/logos/logo-blanco.png' : '/logos/logo.png'}
+              src={`${import.meta.env.BASE_URL}logos/${transparent ? 'logo-blanco.png' : 'logo.png'}`}
               alt="Condes Corporación"
               className={`w-auto transition-all duration-500 ${transparent ? 'h-20' : 'h-10'}`}
             />
