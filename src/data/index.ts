@@ -459,6 +459,17 @@ export const seasonalBanner = {
   href: '/contacto',
 }
 
+// Carrusel del hero de Inicio: renders principales de varios proyectos en
+// venta. Actualizar esta lista si se agrega/retira un proyecto destacado.
+export const heroImages: string[] = [
+  'https://condescorporacion.com/wp-content/uploads/2025/12/FOTO-FLORENCIA-PRINCIPAL-scaled.png',
+  'https://condescorporacion.com/wp-content/uploads/2026/08/RENDER-PRINCIPAL-edit-scaled.png',
+  'https://condescorporacion.com/wp-content/uploads/2025/12/FOTO-MONTSERRAT-PRINCIPAL-scaled.png',
+  'https://condescorporacion.com/wp-content/uploads/2026/02/FOTO-COSTA-REAL-PRINCIPAL.png',
+  'https://condescorporacion.com/wp-content/uploads/2026/04/PARQUE-CENTRAL-EDIFICIO.png',
+  'https://condescorporacion.com/wp-content/uploads/2026/01/FOTO-JARDINES-S-PRINCIPAL-scaled.jpg',
+]
+
 export const teamImages: string[] = [
   'https://condescorporacion.com/wp-content/uploads/2026/04/Arquitectura-1-1.png',
   'https://condescorporacion.com/wp-content/uploads/2026/04/Legal-1.png',

@@ -86,7 +86,7 @@ export default function About() {
       <section className="relative min-h-[75vh] flex items-end pb-16 overflow-hidden" ref={heroRef}>
         <div className="absolute inset-0 reveal">
           <img
-            src="https://condescorporacion.com/wp-content/uploads/elementor/thumbs/FOTO-CONDES-R.-PRINCIPAL-scaled-rhd99b4h8oj041ki7yac94kin6dtcs1qfozruan648.png"
+            src="https://condescorporacion.com/wp-content/uploads/2026/04/PARQUE-CENTRAL-EDIFICIO.png"
             alt="Condes Corporación"
             className="w-full h-full object-cover animate-ken-burns"
           />

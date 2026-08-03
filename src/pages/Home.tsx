@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, ChevronRight, Pause, Play } from 'lucide-react'
 import { useScrollReveal } from '../hooks/useScrollReveal'
-import { visibleProjects, teamImages, seasonalBanner } from '../data'
+import { visibleProjects, teamImages, heroImages, seasonalBanner } from '../data'
 import ProjectCardLight from '../components/ui/ProjectCardLight'
 
 const costaReal = visibleProjects.find((p) => p.slug === 'costa-real')
 const TEAM_SLIDE_INTERVAL = 4500 // ms entre cada cambio de foto del carrusel de equipo
+const HERO_SLIDE_INTERVAL = 6000 // ms entre cada cambio de render en el hero
 const HOME_PROJECTS_LIMIT = 4
 
 export default function Home() {
@@ -36,16 +37,32 @@ export default function Home() {
     return () => clearInterval(id)
   }, [teamAutoplay])
 
+  // Carrusel del hero: crossfade automático entre renders de varios proyectos.
+  const [activeHeroImg, setActiveHeroImg] = useState(0)
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setActiveHeroImg((i) => (i + 1) % heroImages.length)
+    }, HERO_SLIDE_INTERVAL)
+    return () => clearInterval(id)
+  }, [])
+
   return (
     <>
       {/* HERO — imagen a pantalla completa, título corto, un solo CTA */}
       <section className="relative min-h-screen flex items-end pb-28 overflow-hidden" ref={heroRef}>
         <div className="absolute inset-0 reveal">
-          <img
-            src="https://condescorporacion.com/wp-content/uploads/elementor/thumbs/FOTO-FLORENCIA-PRINCIPAL-scaled-rhd99c2bfikafnj52goytmbz8k96kh5grtn9bklry0.png"
-            alt="Condes Corporación"
-            className="w-full h-full object-cover animate-ken-burns"
-          />
+          {heroImages.map((src, i) => (
+            <img
+              key={src}
+              src={src}
+              alt="Condes Corporación"
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+                i === activeHeroImg ? 'opacity-100 animate-ken-burns' : 'opacity-0'
+              }`}
+              loading={i === 0 ? 'eager' : 'lazy'}
+            />
+          ))}
           <div className="absolute inset-0 bg-gradient-to-t from-gray-950/90 via-gray-950/25 to-gray-950/10" />
         </div>
 
