@@ -24,7 +24,9 @@ export default function Navbar() {
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-      transparent ? 'bg-transparent' : 'bg-white/95 backdrop-blur-sm shadow-sm border-b border-gray-100'
+      transparent
+        ? 'bg-gradient-to-b from-gray-950/40 via-gray-950/15 to-transparent backdrop-blur-sm'
+        : 'bg-white/95 backdrop-blur-sm shadow-sm border-b border-gray-100'
     }`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className={`relative flex items-center justify-between transition-all duration-500 ${transparent ? 'h-32' : 'h-24'}`}>
