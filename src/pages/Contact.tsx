@@ -5,12 +5,22 @@ import ContactForm from '../components/ui/ContactForm'
 export default function Contact() {
   return (
     <div>
-      {/* Header — llega hasta el tope real de la página para quedar detrás del navbar transparente */}
-      <section className="bg-brand-600 pt-36 pb-20">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <p className="text-brand-100 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">Contáctanos</p>
+      {/* Header — imagen a pantalla completa (render), texto abajo. Llega hasta
+          el tope real de la página para quedar detrás del navbar transparente. */}
+      <section className="relative min-h-[60vh] flex items-end pb-16 overflow-hidden">
+        <div className="absolute inset-0">
+          <img
+            src="https://condescorporacion.com/wp-content/uploads/2026/01/FOTO-JARDINES-S-PRINCIPAL-scaled.jpg"
+            alt="Contáctanos — Condes Corporación"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-900/90 via-brand-900/30 to-brand-900/10" />
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full">
+          <p className="text-brand-200 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">Contáctanos</p>
           <h1 className="font-display text-5xl text-white max-w-xl">
-            Encuentra el proyecto <span className="italic text-brand-100">ideal para ti</span>
+            Encuentra el proyecto <span className="italic text-brand-200">ideal para ti</span>
           </h1>
         </div>
       </section>
