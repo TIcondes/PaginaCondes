@@ -27,7 +27,7 @@ export default function Navbar() {
       transparent ? 'bg-transparent' : 'bg-white/95 backdrop-blur-sm shadow-sm border-b border-gray-100'
     }`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className={`relative flex items-center justify-between transition-all duration-500 ${transparent ? 'h-28' : 'h-16'}`}>
+        <div className={`relative flex items-center justify-between transition-all duration-500 ${transparent ? 'h-32' : 'h-24'}`}>
           <nav className="hidden md:flex items-center gap-10">
             {navLinks.map((link) => {
               const active = location.pathname === link.to || (link.to !== '/' && location.pathname.startsWith(link.to))
@@ -35,7 +35,7 @@ export default function Navbar() {
                 <Link
                   key={link.to}
                   to={link.to}
-                  className={`font-body text-sm font-bold italic tracking-wide transition-colors duration-200 relative group ${
+                  className={`font-body text-base italic tracking-wide transition-colors duration-200 relative group ${
                     transparent
                       ? 'text-white/90 hover:text-white'
                       : active
@@ -58,7 +58,7 @@ export default function Navbar() {
             <img
               src={`${import.meta.env.BASE_URL}logos/${transparent ? 'logo-blanco.png' : 'logo.png'}`}
               alt="Condes Corporación"
-              className={`w-auto transition-all duration-500 ${transparent ? 'h-20' : 'h-10'}`}
+              className={`w-auto transition-all duration-500 ${transparent ? 'h-24' : 'h-16'}`}
             />
           </Link>
 
@@ -66,13 +66,13 @@ export default function Navbar() {
             href={CONTACT.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
-            className={`hidden md:inline-flex items-center gap-2 text-sm font-body font-bold italic px-5 py-2.5 transition-all duration-300 ${
+            className={`hidden md:inline-flex items-center gap-2 text-base font-body italic px-7 py-3.5 transition-all duration-300 ${
               transparent
                 ? 'bg-white/10 text-white border border-white/30 hover:bg-white/20'
                 : 'bg-brand-600 text-white hover:bg-brand-700'
             }`}
           >
-            <Phone size={15} />
+            <Phone size={18} />
             Hablar con asesor
           </a>
 
@@ -81,7 +81,7 @@ export default function Navbar() {
             className={`md:hidden p-2 transition-colors ${transparent ? 'text-white' : 'text-gray-700'}`}
             aria-label="Toggle menu"
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+            {isOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
       </div>
@@ -94,7 +94,7 @@ export default function Navbar() {
             <Link
               key={link.to}
               to={link.to}
-              className="block py-3 text-gray-700 font-body font-bold italic hover:text-brand-600 transition-colors border-b border-gray-50 last:border-0"
+              className="block py-3 text-gray-700 font-body italic hover:text-brand-600 transition-colors border-b border-gray-50 last:border-0"
             >
               {link.label}
             </Link>
@@ -103,7 +103,7 @@ export default function Navbar() {
             href={CONTACT.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 mt-3 bg-brand-600 text-white px-5 py-3 text-sm font-bold italic w-full justify-center"
+            className="flex items-center gap-2 mt-3 bg-brand-600 text-white px-5 py-3 text-sm italic w-full justify-center"
           >
             <Phone size={15} />
             Hablar con un asesor
