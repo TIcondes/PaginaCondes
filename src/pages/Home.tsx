@@ -10,21 +10,16 @@ const TEAM_SLIDE_INTERVAL = 4500 // ms entre cada cambio de foto del carrusel de
 const HOME_PROJECTS_LIMIT = 4
 
 export default function Home() {
-  // "En venta" agrupa disponible + preventa (aún no entregado); "Entregados"
-  // es únicamente lo ya finalizado. Si todavía no hay proyectos entregados,
-  // esa pestaña muestra un mensaje en vez de inventar datos.
-  const [projectFilter, setProjectFilter] = useState<'venta' | 'entregados'>('venta')
+  // Solo proyectos en venta (disponible o preventa); los entregados no se
+  // muestran en el Home — el catálogo completo con ese filtro vive en /proyectos.
   const homeProjects = projects
-    .filter((p) => (projectFilter === 'venta' ? p.status !== 'entregado' : p.status === 'entregado'))
+    .filter((p) => p.status !== 'entregado')
     .slice(0, HOME_PROJECTS_LIMIT)
 
   const heroRef = useScrollReveal()
   const bannerRef = useScrollReveal()
   const nosotrosRef = useScrollReveal()
-  // Depende de projectFilter: al cambiar de pestaña, React monta tarjetas
-  // nuevas (nuevos elementos `.reveal`) que el observer todavía no conoce.
-  // Sin este deps, esas tarjetas se quedan en opacity:0 para siempre.
-  const projectsRef = useScrollReveal([projectFilter])
+  const projectsRef = useScrollReveal()
   const ctaRef = useScrollReveal()
 
   // Carrusel de fotos del equipo: cambia de imagen lentamente con un
@@ -142,43 +137,18 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Encabezado + pestañas */}
+          {/* Encabezado */}
           <div className="text-center mb-12">
             <p className="reveal text-brand-600 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">Conoce nuestros proyectos</p>
-            <h2 className="reveal reveal-delay-1 font-display text-3xl md:text-4xl text-gray-900 mb-8">Escoge tu mejor opción</h2>
-
-            <div className="reveal reveal-delay-2 inline-flex items-center gap-8 border-b border-gray-100">
-              <button
-                onClick={() => setProjectFilter('venta')}
-                className={`pb-3 text-sm font-body font-medium tracking-wide transition-colors relative ${
-                  projectFilter === 'venta' ? 'text-brand-700' : 'text-gray-400 hover:text-gray-600'
-                }`}
-              >
-                Proyectos en venta
-                {projectFilter === 'venta' && <span className="absolute -bottom-px left-0 right-0 h-0.5 bg-brand-600" />}
-              </button>
-              <button
-                onClick={() => setProjectFilter('entregados')}
-                className={`pb-3 text-sm font-body font-medium tracking-wide transition-colors relative ${
-                  projectFilter === 'entregados' ? 'text-brand-700' : 'text-gray-400 hover:text-gray-600'
-                }`}
-              >
-                Proyectos entregados
-                {projectFilter === 'entregados' && <span className="absolute -bottom-px left-0 right-0 h-0.5 bg-brand-600" />}
-              </button>
-            </div>
+            <h2 className="reveal reveal-delay-1 font-display text-3xl md:text-4xl text-gray-900">Escoge tu mejor opción</h2>
           </div>
 
           {/* Grid */}
-          {homeProjects.length === 0 ? (
-            <p className="text-center text-gray-400 font-body py-10">Aún no tenemos proyectos entregados — ¡vuelve pronto!</p>
-          ) : (
-            <div className="grid sm:grid-cols-2 gap-x-8 gap-y-14">
-              {homeProjects.map((project, i) => (
-                <ProjectCardLight key={project.id} project={project} index={i} />
-              ))}
-            </div>
-          )}
+          <div className="grid sm:grid-cols-2 gap-x-8 gap-y-14">
+            {homeProjects.map((project, i) => (
+              <ProjectCardLight key={project.id} project={project} index={i} />
+            ))}
+          </div>
 
           <div className="flex justify-end mt-12">
             <Link
