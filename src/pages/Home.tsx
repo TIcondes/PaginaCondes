@@ -7,7 +7,7 @@ import ProjectCardLight from '../components/ui/ProjectCardLight'
 
 const costaReal = visibleProjects.find((p) => p.slug === 'costa-real')
 const TEAM_SLIDE_INTERVAL = 4500 // ms entre cada cambio de foto del carrusel de equipo
-const HERO_SLIDE_INTERVAL = 6000 // ms entre cada cambio de render en el hero
+const HERO_SLIDE_INTERVAL = 12000 // ms entre cada cambio de render en el hero (debe coincidir con heroZoom en index.css)
 const HOME_PROJECTS_LIMIT = 4
 
 export default function Home() {

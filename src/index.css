@@ -78,5 +78,5 @@
   100% { transform: scale(1); }
 }
 .animate-hero-zoom {
-  animation: heroZoom 6s ease-in-out;
+  animation: heroZoom 12s ease-in-out;
 }
