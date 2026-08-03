@@ -205,6 +205,10 @@ export const projects: Project[] = [
     id: '3',
     name: 'Condes Residencial',
     slug: 'condes',
+    // Oculto a pedido: ya no aparece en condescorporacion.com. Se conservan
+    // todos sus datos por si se retoma más adelante — para volver a
+    // publicarlo, borra esta línea (o ponla en `false`).
+    hidden: true,
     location: 'Cerro Colorado · Arequipa',
     district: 'Cerro Colorado',
     city: 'Arequipa',
@@ -388,7 +392,61 @@ export const projects: Project[] = [
       },
     ],
   },
+  {
+    id: '7',
+    name: 'Torre Mónaco',
+    slug: 'monaco',
+    location: 'J.L.B. y R. · Arequipa',
+    district: 'José Luis Bustamante y Rivero',
+    city: 'Arequipa',
+    tag: 'Nuevo',
+    status: 'preventa',
+    // Proyecto mixto (departamentos + espacios comerciales); el sistema de
+    // filtros solo distingue casas/departamentos, así que se clasifica como
+    // "departamentos" y el detalle comercial queda en features/tipologías.
+    type: ['departamentos'],
+    zone: 'ciudad',
+    images: [
+      'https://condescorporacion.com/wp-content/uploads/2026/08/RENDER-PRINCIPAL-edit-scaled.png',
+    ],
+    areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
+    minApartmentSize: 103,
+    features: ['Departamentos desde 103.24 m²', 'Espacios comerciales desde 52.98 m²', 'Servicios completos'],
+    description: 'Torre Mónaco combina arquitectura moderna, ambientes funcionales y detalles que priorizan el confort y la seguridad, sobre la Av. Lambramani en José Luis Bustamante y Rivero — una ubicación estratégica con conexiones subterráneas y acabados de calidad.',
+    amenities: ['Ubicación estratégica', 'Estacionamiento techado', 'Seguridad 24h', 'Conexiones subterráneas', 'Documentación certificada'],
+    gallery: {
+      renders: [
+        'https://condescorporacion.com/wp-content/uploads/2026/08/RENDER-PRINCIPAL-edit-scaled.png',
+        'https://condescorporacion.com/wp-content/uploads/2026/08/Escena-16-edit-scaled.png',
+        'https://condescorporacion.com/wp-content/uploads/2026/08/MON_ARQ_RENDER_TIPO_3Escena-10-edit-scaled.png',
+        'https://condescorporacion.com/wp-content/uploads/2026/08/MON_ARQ_RENDER_TIPO_3Escena-11-edit-scaled.png',
+      ],
+      planimetria: ['https://condescorporacion.com/wp-content/uploads/2026/08/TORRE-MONACO_PLN_JUNIO2026_A3-01-scaled.png'],
+      avance: [PLACEHOLDER_AVANCE_IMAGE], // Pendiente: reemplazar por fotos reales de avance de obra
+    },
+    typologies: [
+      {
+        name: 'Departamento — 103 m²',
+        area: 103,
+        bedrooms: 3,
+        bathrooms: 2,
+        planImage: 'https://condescorporacion.com/wp-content/uploads/2026/08/TORRE-MONACO_PLN_JUNIO2026_A3-01-scaled.png',
+        features: ['Terraza', 'Acabados de calidad', 'Estacionamiento techado'],
+      },
+      {
+        name: 'Espacio comercial — 53 m²',
+        area: 53,
+        planImage: 'https://condescorporacion.com/wp-content/uploads/2026/08/TORRE-MONACO_PLN_JUNIO2026_A3-01-scaled.png',
+        features: ['Frente a Av. Lambramani', 'Ideal para negocio', 'Acceso independiente'],
+      },
+    ],
+  },
 ]
+
+// Vista pública de `projects`: excluye los marcados como `hidden`. Úsala en
+// vez de `projects` en cualquier página/componente que liste o busque
+// proyectos para mostrar al usuario (Home, /proyectos, ProjectDetail).
+export const visibleProjects: Project[] = projects.filter((p) => !p.hidden)
 
 // Banner formal para promociones o novedades de temporada, mostrado en el
 // Home antes de la sección de equipo. Edita estos 4 campos cuando cambie la

@@ -2,17 +2,17 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, ChevronRight, Pause, Play } from 'lucide-react'
 import { useScrollReveal } from '../hooks/useScrollReveal'
-import { projects, teamImages, seasonalBanner } from '../data'
+import { visibleProjects, teamImages, seasonalBanner } from '../data'
 import ProjectCardLight from '../components/ui/ProjectCardLight'
 
-const costaReal = projects.find((p) => p.slug === 'costa-real')
+const costaReal = visibleProjects.find((p) => p.slug === 'costa-real')
 const TEAM_SLIDE_INTERVAL = 4500 // ms entre cada cambio de foto del carrusel de equipo
 const HOME_PROJECTS_LIMIT = 4
 
 export default function Home() {
   // Solo proyectos en venta (disponible o preventa); los entregados no se
   // muestran en el Home — el catálogo completo con ese filtro vive en /proyectos.
-  const homeProjects = projects
+  const homeProjects = visibleProjects
     .filter((p) => p.status !== 'entregado')
     .slice(0, HOME_PROJECTS_LIMIT)
 

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useScrollReveal } from '../hooks/useScrollReveal'
-import { projects } from '../data'
+import { visibleProjects } from '../data'
 import ProjectCardLight from '../components/ui/ProjectCardLight'
 import FilterBar from '../components/ui/FilterBar'
 import type { Project } from '../types'
@@ -21,7 +21,7 @@ function applyFilter(projects: Project[], filter: string): Project[] {
 
 export default function Projects() {
   const [filter, setFilter] = useState('all')
-  const filtered = applyFilter(projects, filter)
+  const filtered = applyFilter(visibleProjects, filter)
   const ref = useScrollReveal([filter])
 
   return (

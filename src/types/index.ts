@@ -65,6 +65,11 @@ export interface Project {
   features: string[]                        // Viñetas principales para el resumen del proyecto
   description: string                       // Descripción completa para la vista de detalle
   amenities?: string[]                      // Áreas comunes y servicios
+  // Oculta el proyecto de todas las vistas públicas (Home, catálogo /proyectos
+  // y su propia página de detalle) sin borrar sus datos. Útil para pausar la
+  // publicación de un proyecto (ej. vendido, en revisión) y poder reactivarlo
+  // después con solo quitar este campo. Ver `visibleProjects` en data/index.ts.
+  hidden?: boolean
 }
 
 export interface NavLink {

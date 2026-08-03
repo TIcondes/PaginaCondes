@@ -1,6 +1,6 @@
 import { useState, FormEvent } from 'react'
 import { ArrowRight, CheckCircle2 } from 'lucide-react'
-import { projects } from '../../data'
+import { visibleProjects } from '../../data'
 import type { ContactFormData } from '../../types'
 
 interface Props {
@@ -61,7 +61,7 @@ export default function ContactForm({ defaultProject }: Props) {
         <select name="project" value={form.project} onChange={handleChange} required
           className="w-full border border-gray-200 px-4 py-3 text-sm font-body text-gray-900 focus:outline-none focus:border-brand-500 transition-colors bg-white">
           <option value="">Elija su proyecto</option>
-          {projects.map((p) => <option key={p.id} value={p.name}>{p.name}</option>)}
+          {visibleProjects.map((p) => <option key={p.id} value={p.name}>{p.name}</option>)}
         </select>
       </div>
 

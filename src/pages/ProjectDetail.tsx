@@ -1,7 +1,7 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
 import { MapPin, Home, Building2, CheckCircle, ArrowLeft, ArrowRight, Bed, Bath, RotateCw } from 'lucide-react'
 import { useState, lazy, Suspense } from 'react'
-import { projects, CONTACT } from '../data'
+import { visibleProjects, CONTACT } from '../data'
 
 // Three.js (usado por Panorama360Viewer) pesa varios cientos de KB: se carga
 // como chunk aparte vía import() dinámico, y solo se descarga cuando el
@@ -26,7 +26,7 @@ const galleryLabels: Record<GalleryTab, string> = {
 
 export default function ProjectDetail() {
   const { slug } = useParams<{ slug: string }>()
-  const project = projects.find((p) => p.slug === slug)
+  const project = visibleProjects.find((p) => p.slug === slug)
   const [activeImg, setActiveImg] = useState(0)
   const [galleryTab, setGalleryTab] = useState<GalleryTab>('renders')
   const [show360, setShow360] = useState(false)
@@ -48,9 +48,9 @@ export default function ProjectDetail() {
   const activeTab: GalleryTab = availableTabs.includes(galleryTab) ? galleryTab : availableTabs[0]
   const tabImages = gallery[activeTab] ?? []
 
-  const currentIdx = projects.findIndex((p) => p.slug === slug)
-  const prev = projects[currentIdx - 1]
-  const next = projects[currentIdx + 1]
+  const currentIdx = visibleProjects.findIndex((p) => p.slug === slug)
+  const prev = visibleProjects[currentIdx - 1]
+  const next = visibleProjects[currentIdx + 1]
 
   const selectedTypology = project.typologies?.[selectedTypologyIndex]
 
