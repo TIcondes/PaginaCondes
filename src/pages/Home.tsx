@@ -67,8 +67,8 @@ export default function Home() {
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full">
-          <h1 className="reveal font-display text-4xl md:text-6xl lg:text-7xl text-white uppercase tracking-wide leading-tight max-w-4xl mb-8">
-            Creamos <span className="italic text-brand-300 normal-case">hogares</span> que inspiran
+          <h1 className="reveal font-display text-4xl md:text-6xl lg:text-7xl text-white tracking-wide leading-tight max-w-4xl mb-8">
+            Creamos <span className="italic text-brand-300">hogares</span> que inspiran
           </h1>
           <Link to="/proyectos" className="reveal reveal-delay-1 btn-pill">
             Ver proyectos <ChevronRight size={16} />
@@ -192,8 +192,8 @@ export default function Home() {
           </div>
 
           <div className="relative z-10 max-w-2xl mx-auto px-6">
-            <h2 className="reveal reveal-delay-1 font-display text-3xl md:text-5xl text-white uppercase tracking-wide mb-8">
-              ¿Listo para encontrar <span className="italic text-brand-300 normal-case">tu hogar ideal?</span>
+            <h2 className="reveal reveal-delay-1 font-display text-3xl md:text-5xl text-white tracking-wide mb-8">
+              ¿Listo para encontrar <span className="italic text-brand-300">tu hogar ideal?</span>
             </h2>
             <Link to="/contacto" className="reveal reveal-delay-2 btn-pill">
               Contáctanos <ChevronRight size={16} />
