@@ -83,7 +83,7 @@ export default function About() {
     <div>
       {/* Header — imagen a pantalla completa (render), texto abajo. Llega hasta
           el tope real de la página para quedar detrás del navbar transparente. */}
-      <section className="relative min-h-[75vh] flex items-end pb-16 overflow-hidden" ref={heroRef}>
+      <section className="relative min-h-[60vh] flex items-end pb-16 overflow-hidden" ref={heroRef}>
         <div className="absolute inset-0 reveal">
           <img
             src="https://condescorporacion.com/wp-content/uploads/2026/04/PARQUE-CENTRAL-EDIFICIO.png"
