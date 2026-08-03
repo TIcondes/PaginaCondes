@@ -66,3 +66,17 @@
 .animate-ken-burns {
   animation: kenBurns 20s ease-out forwards;
 }
+
+/* Igual que kenBurns, pero crece y vuelve a su tamaño original en un solo
+   ciclo — pensado para carruseles, donde el cambio de imagen debe coincidir
+   con el momento en que la animación termina de "regresar". La duración
+   debe coincidir con el intervalo del carrusel que la use (ver HERO_SLIDE_INTERVAL
+   en Home.tsx). */
+@keyframes heroZoom {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+.animate-hero-zoom {
+  animation: heroZoom 6s ease-in-out;
+}

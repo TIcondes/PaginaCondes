@@ -58,7 +58,7 @@ export default function Home() {
               src={src}
               alt="Condes Corporación"
               className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
-                i === activeHeroImg ? 'opacity-100 animate-ken-burns' : 'opacity-0'
+                i === activeHeroImg ? 'opacity-100 animate-hero-zoom' : 'opacity-0'
               }`}
               loading={i === 0 ? 'eager' : 'lazy'}
             />
