@@ -6,7 +6,27 @@ export default function Footer() {
   return (
     <footer className="bg-gray-900 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+        <div className="mb-12">
+          <h4 className="font-body text-xs text-gray-500 tracking-[0.25em] uppercase mb-5">Ubicación</h4>
+          <div className="overflow-hidden border border-gray-800 rounded-sm">
+            <iframe
+              title="Ubicación Condes Corporación"
+              src={`https://www.google.com/maps?q=${encodeURIComponent(CONTACT.address + ', Arequipa, Perú')}&output=embed`}
+              width="100%"
+              height="260"
+              style={{ border: 0 }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+          </div>
+        </div>
+
+        {/* En móvil, Menú va a la derecha del logo (grid de 2 columnas) en vez
+            de apilarse todo en una sola columna pegada a la izquierda.
+            Contacto ocupa el ancho completo debajo. Desde md, vuelve a las
+            3 columnas lado a lado de siempre. */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 mb-12">
           <div>
             <img
               src="https://condescorporacion.com/wp-content/uploads/2025/12/logo_V.png"
@@ -18,7 +38,7 @@ export default function Footer() {
             </p>
           </div>
 
-          <div>
+          <div className="text-center">
             <h4 className="font-body text-xs text-gray-500 tracking-[0.25em] uppercase mb-5">Menú</h4>
             <nav className="space-y-3">
               {navLinks.map((link) => (
@@ -33,7 +53,7 @@ export default function Footer() {
             </nav>
           </div>
 
-          <div>
+          <div className="col-span-2 md:col-span-1">
             <h4 className="font-body text-xs text-gray-500 tracking-[0.25em] uppercase mb-5">Contacto</h4>
             <div className="space-y-3">
               <a href={`mailto:${CONTACT.email}`} className="flex items-start gap-3 text-sm text-gray-400 hover:text-white transition-colors">
@@ -52,22 +72,6 @@ export default function Footer() {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-
-        <div className="mb-12">
-          <h4 className="font-body text-xs text-gray-500 tracking-[0.25em] uppercase mb-5">Ubicación</h4>
-          <div className="overflow-hidden border border-gray-800 rounded-sm">
-            <iframe
-              title="Ubicación Condes Corporación"
-              src={`https://www.google.com/maps?q=${encodeURIComponent(CONTACT.address + ', Arequipa, Perú')}&output=embed`}
-              width="100%"
-              height="260"
-              style={{ border: 0 }}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              allowFullScreen
-            />
           </div>
         </div>
 
