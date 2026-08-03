@@ -2,7 +2,6 @@ import { useParams, Link, Navigate } from 'react-router-dom'
 import { MapPin, Home, Building2, CheckCircle, ArrowLeft, ArrowRight, Bed, Bath, RotateCw } from 'lucide-react'
 import { useState, lazy, Suspense } from 'react'
 import { projects, CONTACT } from '../data'
-import ContactForm from '../components/ui/ContactForm'
 
 // Three.js (usado por Panorama360Viewer) pesa varios cientos de KB: se carga
 // como chunk aparte vía import() dinámico, y solo se descarga cuando el
@@ -17,10 +16,11 @@ function Panorama360Fallback() {
   )
 }
 
-type GalleryTab = 'renders' | 'planimetria' | 'avance'
+// La planimetría ya no va en este carrusel de pestañas: se muestra como
+// imagen fija más abajo, junto a la información del proyecto.
+type GalleryTab = 'renders' | 'avance'
 const galleryLabels: Record<GalleryTab, string> = {
   renders: 'Renders',
-  planimetria: 'Planimetría',
   avance: 'Avance de obra',
 }
 
@@ -237,23 +237,42 @@ export default function ProjectDetail() {
                   </div>
                 </div>
               )}
+
+              {/* Planimetría — imagen fija, ya no forma parte del carrusel de pestañas de arriba */}
+              {project.gallery?.planimetria?.[0] && (
+                <div>
+                  <h2 className="font-display text-2xl text-gray-900 mb-4">Planimetría</h2>
+                  <div className="border border-gray-100 bg-gray-50">
+                    <img
+                      src={project.gallery.planimetria[0]}
+                      alt={`Planimetría de ${project.name}`}
+                      className="w-full h-auto object-contain"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                </div>
+              )}
             </div>
 
-            {/* Right — Contact form */}
+            {/* Right — CTA hacia contacto */}
             <div>
-              <div className="sticky top-28 bg-white border border-gray-100 p-8 shadow-sm">
-                <h3 className="font-display text-xl text-gray-900 mb-6">¿Te interesa este proyecto?</h3>
-                <ContactForm defaultProject={project.name} />
-                <div className="mt-4 text-center">
-                  <a
-                    href={CONTACT.whatsapp}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs text-brand-600 font-body hover:text-brand-700 transition-colors"
-                  >
-                    O contáctanos por WhatsApp →
-                  </a>
-                </div>
+              <div className="sticky top-28 bg-white border border-gray-100 p-8 shadow-sm text-center">
+                <h3 className="font-display text-xl text-gray-900 mb-3">¿Te interesa este proyecto?</h3>
+                <p className="font-body text-sm text-gray-500 leading-relaxed mb-6">
+                  Escríbenos y un asesor te contactará para resolver todas tus dudas sobre {project.name}.
+                </p>
+                <Link to="/contacto" className="btn-primary w-full justify-center">
+                  Contáctanos <ArrowRight size={16} />
+                </Link>
+                <a
+                  href={CONTACT.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block mt-4 text-xs text-brand-600 font-body hover:text-brand-700 transition-colors"
+                >
+                  O contáctanos por WhatsApp →
+                </a>
               </div>
             </div>
           </div>
