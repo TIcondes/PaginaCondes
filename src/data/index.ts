@@ -471,10 +471,14 @@ export const projects: Project[] = [
     gallery: {
       renders: [
         'https://condescorporacion.com/wp-content/uploads/2026/08/SANTA-MARIA-25.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/08/01-scaled.jpg',
-        'https://condescorporacion.com/wp-content/uploads/2026/08/03-scaled.jpg',
-        'https://condescorporacion.com/wp-content/uploads/2026/08/04-scaled.jpg',
+        'https://condescorporacion.com/wp-content/uploads/2026/08/09-1-scaled.jpg',
         'https://condescorporacion.com/wp-content/uploads/2026/08/08-scaled.jpg',
+        'https://condescorporacion.com/wp-content/uploads/2026/08/04-scaled.jpg',
+        'https://condescorporacion.com/wp-content/uploads/2026/08/01-scaled.jpg',
+        'https://condescorporacion.com/wp-content/uploads/2026/08/MED-04-scaled.jpg',
+        'https://condescorporacion.com/wp-content/uploads/2026/08/MED-08-scaled.jpg',
+        'https://condescorporacion.com/wp-content/uploads/2026/08/03-scaled.jpg',
+        'https://condescorporacion.com/wp-content/uploads/2026/08/04-1-scaled.jpg',
       ],
       planimetria: ['https://condescorporacion.com/wp-content/uploads/2026/08/SANTA-MARIA_PLANIMETRIA-MARZO-1-01-scaled.png'],
       avance: [PLACEHOLDER_AVANCE_IMAGE], // Pendiente: reemplazar por fotos reales de avance de obra
