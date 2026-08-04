@@ -113,6 +113,7 @@ export const projects: Project[] = [
     images: [
       'https://condescorporacion.com/wp-content/uploads/2025/12/FOTO-FLORENCIA-PRINCIPAL-scaled.png',
     ],
+    logo: 'logos/proyectos/florencia.png',
     areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
 
     // ---------------------------------------------------
@@ -168,6 +169,7 @@ export const projects: Project[] = [
     images: [
       'https://condescorporacion.com/wp-content/uploads/2025/12/FOTO-MONTSERRAT-PRINCIPAL-scaled.png',
     ],
+    logo: 'logos/proyectos/monserrat.png',
     areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
     minHouseSize: 142,
     minApartmentSize: 109,
@@ -276,6 +278,7 @@ export const projects: Project[] = [
     images: [
       'https://condescorporacion.com/wp-content/uploads/2026/01/FOTO-JARDINES-S-PRINCIPAL-scaled.jpg',
     ],
+    logo: 'logos/proyectos/jardines-del-sol.png',
     areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
     minHouseSize: 121,
     minApartmentSize: 112,
@@ -322,6 +325,7 @@ export const projects: Project[] = [
     images: [
       'https://condescorporacion.com/wp-content/uploads/2026/04/PARQUE-CENTRAL-EDIFICIO.png',
     ],
+    logo: 'logos/proyectos/parquecentral.png',
     areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
     minHouseSize: 113,
     minApartmentSize: 82,
@@ -368,6 +372,7 @@ export const projects: Project[] = [
     images: [
       'https://condescorporacion.com/wp-content/uploads/2026/02/FOTO-COSTA-REAL-PRINCIPAL.png',
     ],
+    logo: 'logos/proyectos/costa-real.png',
     areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
     minHouseSize: 110,
     features: ['Casas desde 110 m²', 'Frente a playa', 'Servicios completos'],
@@ -408,6 +413,7 @@ export const projects: Project[] = [
     images: [
       'https://condescorporacion.com/wp-content/uploads/2026/08/RENDER-PRINCIPAL-edit-scaled.png',
     ],
+    logo: 'logos/proyectos/monaco.png',
     areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
     minApartmentSize: 103,
     features: ['Departamentos desde 103.24 m²', 'Espacios comerciales desde 52.98 m²', 'Servicios completos'],
@@ -437,6 +443,54 @@ export const projects: Project[] = [
         area: 53,
         planImage: 'https://condescorporacion.com/wp-content/uploads/2026/08/TORRE-MONACO_PLN_JUNIO2026_A3-01-scaled.png',
         features: ['Frente a Av. Lambramani', 'Ideal para negocio', 'Acceso independiente'],
+      },
+    ],
+  },
+  {
+    id: '8',
+    name: 'Residencias Santa María',
+    slug: 'santa-maria',
+    location: 'Mejía · Arequipa',
+    district: 'Mejía',
+    city: 'Arequipa',
+    tag: 'Nuevo',
+    status: 'preventa',
+    // Proyecto de casas y lotes de playa; el sistema de filtros solo distingue
+    // casas/departamentos, así que se clasifica como "casas".
+    type: ['casas'],
+    zone: 'playa',
+    images: [
+      'https://condescorporacion.com/wp-content/uploads/2026/08/SANTA-MARIA-25.png',
+    ],
+    logo: 'logos/proyectos/santa-maria.png',
+    areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
+    minHouseSize: 215,
+    features: ['Casas desde 215 m²', 'Lotes desde 300 m²', 'Frente a playa'],
+    description: 'Residencias Santa María es nuestro nuevo proyecto frente al mar en Mejía, a pocos minutos de la plaza principal. Pensado para despertar frente al océano, combina casas y lotes de playa con áreas comunes completas: club house, piscinas recreativas, canchas deportivas y amplias zonas verdes.',
+    amenities: ['Club house', 'Dos piscinas recreativas', 'Canchas deportivas', 'Plazas y jardines', 'Conexiones subterráneas', 'Pet-friendly', 'Seguridad 24h'],
+    gallery: {
+      renders: [
+        'https://condescorporacion.com/wp-content/uploads/2026/08/SANTA-MARIA-25.png',
+        'https://condescorporacion.com/wp-content/uploads/2026/08/01-scaled.jpg',
+        'https://condescorporacion.com/wp-content/uploads/2026/08/03-scaled.jpg',
+        'https://condescorporacion.com/wp-content/uploads/2026/08/04-scaled.jpg',
+        'https://condescorporacion.com/wp-content/uploads/2026/08/08-scaled.jpg',
+      ],
+      planimetria: ['https://condescorporacion.com/wp-content/uploads/2026/08/SANTA-MARIA_PLANIMETRIA-MARZO-1-01-scaled.png'],
+      avance: [PLACEHOLDER_AVANCE_IMAGE], // Pendiente: reemplazar por fotos reales de avance de obra
+    },
+    typologies: [
+      {
+        name: 'Casa de playa — 215 m²',
+        area: 215,
+        planImage: 'https://condescorporacion.com/wp-content/uploads/2026/08/SANTA-MARIA_PLANIMETRIA-MARZO-1-01-scaled.png',
+        features: ['Diseño de casa de playa', 'Doble altura', 'Club house cercano'],
+      },
+      {
+        name: 'Lote — 300 m²',
+        area: 300,
+        planImage: 'https://condescorporacion.com/wp-content/uploads/2026/08/SANTA-MARIA_PLANIMETRIA-MARZO-1-01-scaled.png',
+        features: ['Terreno independiente', 'Conexiones subterráneas', 'Zona de club house cercana'],
       },
     ],
   },

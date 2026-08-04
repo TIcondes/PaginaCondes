@@ -51,6 +51,7 @@ export interface Project {
   type: ('casas' | 'departamentos')[]       // Tipos de inmuebles ofrecidos (para filtrado)
   zone: 'ciudad' | 'playa'                  // Zona geográfica (para filtrado)
   images: string[]                          // Imágenes principales para la tarjeta de presentación
+  logo?: string                             // Isotipo/logo a color del proyecto (public/logos/proyectos), mostrado en la tarjeta y en el detalle
   gallery?: ProjectGallery                  // Galería categorizada (renders, planimetría, avance)
   // Recorrido 360° caminable del proyecto: un único recorrido por proyecto
   // (no por tipología), con nodos/ambientes conectados por hotspots en las

@@ -35,7 +35,16 @@ export default function ProjectCardLight({ project, index = 0 }: Props) {
       </div>
 
       <div className="pt-6 px-1">
-        <h3 className="font-display text-lg text-brand-800 font-bold mb-3">{project.name}</h3>
+        {project.logo && (
+          <img
+            src={`${import.meta.env.BASE_URL}${project.logo}`}
+            alt={`Logo ${project.name}`}
+            className="h-14 w-auto max-w-[160px] object-contain mx-auto mb-4"
+            loading="lazy"
+          />
+        )}
+        <h3 className="font-display text-lg text-brand-800 font-bold mb-1 text-center">{project.name}</h3>
+        <p className="text-sm text-gray-400 font-body text-center mb-5 pb-5 border-b border-gray-100">{project.location}</p>
         <div className="space-y-1.5 mb-5">
           {project.minHouseSize && (
             <div className="flex items-center gap-2 text-sm text-gray-500 font-body">

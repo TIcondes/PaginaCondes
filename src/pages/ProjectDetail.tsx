@@ -79,6 +79,14 @@ export default function ProjectDetail() {
           <Link to="/proyectos" className="inline-flex items-center gap-2 text-brand-300 text-xs font-body tracking-widest uppercase mb-4 hover:text-white transition-colors">
             <ArrowLeft size={14} /> Todos los proyectos
           </Link>
+          {project.logo && (
+            <img
+              src={`${import.meta.env.BASE_URL}${project.logo}`}
+              alt={`Logo ${project.name}`}
+              className="h-14 md:h-16 w-auto max-w-[200px] object-contain bg-white/95 p-2 mb-4"
+              loading="lazy"
+            />
+          )}
           <h1 className="font-display text-4xl md:text-5xl text-white mb-2">{project.name}</h1>
           <div className="flex items-center gap-2 text-white/70">
             <MapPin size={14} className="text-brand-400" />
