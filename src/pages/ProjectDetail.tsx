@@ -1,5 +1,5 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
-import { MapPin, Home, Building2, CheckCircle, ArrowLeft, ArrowRight, Bed, Bath, RotateCw } from 'lucide-react'
+import { MapPin, Home, Building2, CheckCircle, ArrowLeft, ArrowRight, Bed, Bath, RotateCw, Phone, Clock } from 'lucide-react'
 import { useState, lazy, Suspense } from 'react'
 import { visibleProjects, CONTACT } from '../data'
 
@@ -384,6 +384,77 @@ export default function ProjectDetail() {
                 <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
               </Link>
             ) : <div />}
+          </div>
+        </div>
+      </section>
+
+      {/* Ubicación y Mapa CTA */}
+      <section className="relative py-24 flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0">
+          <img
+            src={project.images[0]}
+            alt={project.name}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gray-950/80" />
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full">
+          <div className="grid lg:grid-cols-2 items-stretch bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden shadow-2xl">
+            
+            {/* Mapa (Iframe de Google Maps) */}
+            <div className="h-72 lg:h-auto w-full bg-gray-800 relative">
+              <iframe
+                title={`Mapa de ${project.name}`}
+                src={`https://maps.google.com/maps?q=${encodeURIComponent(project.name + ' ' + project.city)}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
+                width="100%"
+                height="100%"
+                style={{ border: 0, position: 'absolute', inset: 0 }}
+                allowFullScreen={false}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+
+            {/* Texto y Contacto */}
+            <div className="p-8 lg:p-12 text-white flex flex-col justify-center">
+              <p className="text-brand-400 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">
+                Ubicado en {project.district || project.city}
+              </p>
+              <h2 className="font-display text-3xl md:text-4xl mb-10">Conoce nuestro proyecto</h2>
+              
+              <div className="space-y-6 mb-10 font-body">
+                <div className="flex items-start gap-4">
+                  <MapPin size={24} className="text-brand-400 shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-semibold text-lg">{project.name}</p>
+                    <p className="text-gray-300 mt-1">{project.location}</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-center gap-4">
+                  <Phone size={24} className="text-brand-400 shrink-0" />
+                  <p className="text-lg font-medium">{CONTACT.phone}</p>
+                </div>
+                
+                <div className="flex items-start gap-4">
+                  <Clock size={24} className="text-brand-400 shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-gray-300">Lun - Vie: 9:00 a.m. - 6:00 p.m.</p>
+                    <p className="text-gray-300 mt-1">Sáb: 9:00 a.m. - 1:00 p.m.</p>
+                  </div>
+                </div>
+              </div>
+
+              <a
+                href={`https://maps.google.com/?q=${encodeURIComponent(project.name + ' ' + project.city)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary inline-flex items-center gap-2 w-full sm:w-auto justify-center"
+              >
+                Abrir en Google Maps <ArrowRight size={16} />
+              </a>
+            </div>
           </div>
         </div>
       </section>
