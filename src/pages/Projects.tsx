@@ -21,7 +21,6 @@ function applyFilter(projects: Project[], filter: string): Project[] {
 
 export default function Projects() {
   const [filter, setFilter] = useState('all')
-  const filter = filterState
   const filtered = applyFilter(visibleProjects, filter)
   const headerRef = useScrollReveal()
   const ref = useScrollReveal([filter])
