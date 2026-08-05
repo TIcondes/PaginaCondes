@@ -15,13 +15,15 @@ export default function ProjectCardLight({ project, index = 0 }: Props) {
   return (
     <div className={`group reveal ${delayClasses[index % delayClasses.length]}`}>
       <div className="relative aspect-[4/3]">
-        <img
-          src={project.images[0]}
-          alt={project.name}
-          className="w-full h-full object-cover rounded-2xl transition-transform duration-500 group-hover:scale-[1.02]"
-          loading="lazy"
-          decoding="async"
-        />
+        <Link to={`/proyectos/${project.slug}`} className="block w-full h-full">
+          <img
+            src={project.images[0]}
+            alt={project.name}
+            className="w-full h-full object-cover rounded-2xl transition-transform duration-500 group-hover:scale-[1.02]"
+            loading="lazy"
+            decoding="async"
+          />
+        </Link>
         <Link
           to={`/proyectos/${project.slug}`}
           aria-label={`Ver ${project.name}`}
