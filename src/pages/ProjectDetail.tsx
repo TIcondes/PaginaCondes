@@ -1,6 +1,7 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
 import { MapPin, Home, Building2, CheckCircle, ArrowLeft, ArrowRight, Bed, Bath, RotateCw, Phone, Clock } from 'lucide-react'
 import { useState, lazy, Suspense } from 'react'
+import { useScrollReveal } from '../hooks/useScrollReveal'
 import { visibleProjects, CONTACT } from '../data'
 
 // Three.js (usado por Panorama360Viewer) pesa varios cientos de KB: se carga
@@ -39,6 +40,11 @@ export default function ProjectDetail() {
   // Tipología elegida en el selector de la sección "Tipología"
   const [selectedTypologyIndex, setSelectedTypologyIndex] = useState(0)
 
+  const heroRef = useScrollReveal()
+  const galleryRef = useScrollReveal()
+  const virtualRef = useScrollReveal()
+  const contentRef = useScrollReveal()
+
   if (!project) return <Navigate to="/proyectos" replace />
 
   const gallery = project.gallery ?? { renders: project.images }
@@ -67,28 +73,28 @@ export default function ProjectDetail() {
   return (
     <div>
       {/* Hero — llega hasta el tope real de la página para quedar detrás del navbar transparente */}
-      <section className="relative h-72 md:h-96 overflow-hidden">
+      <section className="relative h-72 md:h-96 overflow-hidden" ref={heroRef}>
         <img
           src={project.images[0]}
           alt={project.name}
-          className="w-full h-full object-cover transition-all duration-700"
+          className="w-full h-full object-cover transition-all duration-700 reveal"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-gray-950/80 via-gray-900/40 to-transparent" />
 
         <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10 max-w-7xl mx-auto">
-          <Link to="/proyectos" className="inline-flex items-center gap-2 text-brand-300 text-xs font-body tracking-widest uppercase mb-4 hover:text-white transition-colors">
+          <Link to="/proyectos" className="reveal inline-flex items-center gap-2 text-brand-300 text-xs font-body tracking-widest uppercase mb-4 hover:text-white transition-colors">
             <ArrowLeft size={14} /> Todos los proyectos
           </Link>
           {project.logo && (
             <img
               src={`${import.meta.env.BASE_URL}${project.logo}`}
               alt={`Logo ${project.name}`}
-              className="h-14 md:h-16 w-auto max-w-[200px] object-contain bg-white/95 p-2 mb-4"
+              className="reveal reveal-delay-1 h-14 md:h-16 w-auto max-w-[200px] object-contain bg-white/95 p-2 mb-4"
               loading="lazy"
             />
           )}
-          <h1 className="font-display text-4xl md:text-5xl text-white mb-2">{project.name}</h1>
-          <div className="flex items-center gap-2 text-white/70">
+          <h1 className="reveal reveal-delay-2 font-display text-4xl md:text-5xl text-white mb-2">{project.name}</h1>
+          <div className="reveal reveal-delay-3 flex items-center gap-2 text-white/70">
             <MapPin size={14} className="text-brand-400" />
             <span className="font-body text-sm">{project.location}</span>
           </div>
@@ -96,9 +102,9 @@ export default function ProjectDetail() {
       </section>
 
       {/* Categorized gallery: Renders / Planimetría / Avance de obra */}
-      <section className="bg-gray-50 border-y border-gray-100 py-10">
+      <section className="bg-gray-50 border-y border-gray-100 py-10" ref={galleryRef}>
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="flex flex-wrap gap-2 mb-6">
+          <div className="reveal flex flex-wrap gap-2 mb-6">
             {availableTabs.map((tab) => (
               <button
                 key={tab}
@@ -116,7 +122,7 @@ export default function ProjectDetail() {
 
           {tabImages.length > 0 && (
             <>
-              <div className="relative overflow-hidden bg-gray-900 aspect-[16/9] mb-3">
+              <div className="reveal reveal-delay-1 relative overflow-hidden bg-gray-900 aspect-[16/9] mb-3">
                 <img
                   src={tabImages[Math.min(activeImg, tabImages.length - 1)]}
                   alt={`${project.name} — ${galleryLabels[activeTab]}`}
@@ -146,10 +152,10 @@ export default function ProjectDetail() {
       </section>
 
       {/* Recorrido Virtual 360° — visor nativo con Three.js, sin iframes externos */}
-      <section className="bg-gray-950 py-10">
+      <section className="bg-gray-950 py-10" ref={virtualRef}>
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <p className="text-brand-400 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">Recorrido virtual</p>
-          <h2 className="font-display text-2xl text-white mb-6">
+          <p className="reveal text-brand-400 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">Recorrido virtual</p>
+          <h2 className="reveal reveal-delay-1 font-display text-2xl text-white mb-6">
             Explora en <span className="italic text-brand-300">360°</span>
           </h2>
 
@@ -194,20 +200,20 @@ export default function ProjectDetail() {
       </section>
 
       {/* Content */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white" ref={contentRef}>
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="grid lg:grid-cols-3 gap-12">
 
             {/* Left — details */}
             <div className="lg:col-span-2 space-y-10">
               {/* Description */}
-              <div>
+              <div className="reveal">
                 <h2 className="font-display text-2xl text-gray-900 mb-4">Descripción</h2>
                 <p className="font-body text-gray-600 leading-relaxed">{project.description}</p>
               </div>
 
               {/* Specs */}
-              <div>
+              <div className="reveal reveal-delay-1">
                 <h2 className="font-display text-2xl text-gray-900 mb-6">Características</h2>
                 <div className="grid sm:grid-cols-2 gap-4">
                   {project.minHouseSize && (
@@ -233,7 +239,7 @@ export default function ProjectDetail() {
 
               {/* Amenities */}
               {project.amenities && (
-                <div>
+                <div className="reveal reveal-delay-2">
                   <h2 className="font-display text-2xl text-gray-900 mb-6">Servicios y amenidades</h2>
                   <div className="grid sm:grid-cols-2 gap-3">
                     {project.amenities.map((item) => (
@@ -248,7 +254,7 @@ export default function ProjectDetail() {
 
               {/* Planimetría — imagen fija, ya no forma parte del carrusel de pestañas de arriba */}
               {project.gallery?.planimetria?.[0] && (
-                <div>
+                <div className="reveal reveal-delay-3">
                   <h2 className="font-display text-2xl text-gray-900 mb-4">Planimetría</h2>
                   <div className="border border-gray-100 bg-gray-50">
                     <img
@@ -264,7 +270,7 @@ export default function ProjectDetail() {
             </div>
 
             {/* Right — CTA hacia contacto */}
-            <div>
+            <div className="reveal reveal-delay-2">
               <div className="sticky top-28 bg-white border border-gray-100 p-8 shadow-sm text-center">
                 <h3 className="font-display text-xl text-gray-900 mb-3">¿Te interesa este proyecto?</h3>
                 <p className="font-body text-sm text-gray-500 leading-relaxed mb-6">
