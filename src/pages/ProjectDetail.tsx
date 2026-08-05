@@ -458,6 +458,9 @@ export default function ProjectDetail() {
           </div>
         </div>
       </section>
+
+      {/* Separador visual para dividir la sección oscura del CTA y el Footer */}
+      <div className="h-8 md:h-12 bg-brand-600 w-full" />
     </div>
   )
 }
