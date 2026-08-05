@@ -21,15 +21,17 @@ function applyFilter(projects: Project[], filter: string): Project[] {
 
 export default function Projects() {
   const [filter, setFilter] = useState('all')
+  const filter = filterState
   const filtered = applyFilter(visibleProjects, filter)
+  const headerRef = useScrollReveal()
   const ref = useScrollReveal([filter])
 
   return (
     <div>
       {/* Page header — imagen a pantalla completa (render), texto abajo. Llega
           hasta el tope real de la página para quedar detrás del navbar transparente. */}
-      <section className="relative min-h-[60vh] flex items-end pb-16 overflow-hidden">
-        <div className="absolute inset-0">
+      <section className="relative min-h-[60vh] flex items-end pb-16 overflow-hidden" ref={headerRef}>
+        <div className="absolute inset-0 reveal">
           <img
             src="https://condescorporacion.com/wp-content/uploads/2026/08/RENDER-PRINCIPAL-edit-scaled.png"
             alt="Proyectos Condes Corporación"
@@ -39,8 +41,8 @@ export default function Projects() {
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full">
-          <p className="text-brand-300 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">Portafolio</p>
-          <h1 className="font-display text-5xl text-white">
+          <p className="reveal text-brand-300 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">Portafolio</p>
+          <h1 className="reveal reveal-delay-1 font-display text-5xl text-white">
             Todos nuestros <span className="italic text-brand-300">proyectos</span>
           </h1>
         </div>
@@ -49,12 +51,12 @@ export default function Projects() {
       {/* Filter + Grid */}
       <section className="py-16 bg-white" ref={ref}>
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="mb-14">
+          <div className="mb-14 reveal">
             <FilterBar options={filterOptions} active={filter} onChange={setFilter} />
           </div>
 
           {filtered.length === 0 ? (
-            <div className="text-center py-20 text-gray-400 font-body">
+            <div className="text-center py-20 text-gray-400 font-body reveal reveal-delay-1">
               No hay proyectos con ese filtro.
             </div>
           ) : (
