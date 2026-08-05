@@ -79,7 +79,10 @@ export default function ProjectDetail() {
           alt={project.name}
           className="w-full h-full object-cover transition-all duration-700 reveal"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-950/80 via-gray-900/40 to-transparent" />
+        {/* Degradado de abajo hacia arriba para el texto */}
+        <div className="absolute inset-0 bg-gradient-to-t from-gray-950/90 via-gray-950/40 to-gray-950/10" />
+        {/* Degradado de izquierda a derecha para que el logo blanco se vea sobre la imagen */}
+        <div className="absolute inset-0 bg-gradient-to-r from-gray-950/80 via-gray-950/30 to-transparent" />
 
         <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10 max-w-7xl mx-auto">
           <Link to="/proyectos" className="reveal inline-flex items-center gap-2 text-brand-300 text-xs font-body tracking-widest uppercase mb-4 hover:text-white transition-colors">
@@ -89,7 +92,8 @@ export default function ProjectDetail() {
             <img
               src={`${import.meta.env.BASE_URL}${project.logo}`}
               alt={`Logo ${project.name}`}
-              className="reveal reveal-delay-1 h-14 md:h-16 w-auto max-w-[200px] object-contain bg-white/95 p-2 mb-4"
+              className="reveal reveal-delay-1 h-14 md:h-16 w-auto max-w-[200px] object-contain mb-4"
+              style={{ filter: 'brightness(0) invert(1)' }}
               loading="lazy"
             />
           )}
