@@ -1,10 +1,10 @@
 import type { Project, NavLink, PanoramaArea } from '../types'
 
 export const navLinks: NavLink[] = [
-  { label: 'Inicio',     to: '/' },
-  { label: 'Proyectos',  to: '/proyectos' },
-  { label: 'Nosotros',   to: '/nosotros' },
-  { label: 'Contacto',   to: '/contacto' },
+  { label: 'Inicio', to: '/' },
+  { label: 'Proyectos', to: '/proyectos' },
+  { label: 'Nosotros', to: '/nosotros' },
+  { label: 'Contacto', to: '/contacto' },
 ]
 
 // ============================================================================
@@ -460,7 +460,7 @@ export const projects: Project[] = [
     type: ['casas'],
     zone: 'playa',
     images: [
-      'https://condescorporacion.com/wp-content/uploads/2026/08/SANTA-MARIA-25.png',
+      'https://condescorporacion.com/wp-content/uploads/2026/08/09-1-scaled.jpg',
     ],
     logo: 'logos/proyectos/santa-maria.png',
     areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
@@ -470,7 +470,6 @@ export const projects: Project[] = [
     amenities: ['Club house', 'Dos piscinas recreativas', 'Canchas deportivas', 'Plazas y jardines', 'Conexiones subterráneas', 'Pet-friendly', 'Seguridad 24h'],
     gallery: {
       renders: [
-        'https://condescorporacion.com/wp-content/uploads/2026/08/SANTA-MARIA-25.png',
         'https://condescorporacion.com/wp-content/uploads/2026/08/09-1-scaled.jpg',
         'https://condescorporacion.com/wp-content/uploads/2026/08/08-scaled.jpg',
         'https://condescorporacion.com/wp-content/uploads/2026/08/04-scaled.jpg',
@@ -537,12 +536,12 @@ export const teamImages: string[] = [
 ]
 
 export const CONTACT = {
-  email:     'callcenter@condescorporacion.com',
-  phone:     '+51 958 295 181',
-  address:   'C. Parque Las Condes 123, Arequipa',
-  sales:     'Auxiliar Lambramani',
+  email: 'callcenter@condescorporacion.com',
+  phone: '+51 958 295 181',
+  address: 'C. Parque Las Condes 123, Arequipa',
+  sales: 'Auxiliar Lambramani',
   instagram: 'https://www.instagram.com/condes_corp',
-  facebook:  'https://www.facebook.com/share/17gaUMEzSG/',
-  tiktok:    'https://www.tiktok.com/@condes.corporacion',
-  whatsapp:  'https://wa.me/51958295181',
+  facebook: 'https://www.facebook.com/share/17gaUMEzSG/',
+  tiktok: 'https://www.tiktok.com/@condes.corporacion',
+  whatsapp: 'https://wa.me/51958295181',
 }
