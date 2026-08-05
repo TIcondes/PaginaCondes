@@ -3,6 +3,8 @@ import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import WhatsAppButton from './components/layout/WhatsAppButton'
 import ScrollToTopButton from './components/layout/ScrollToTopButton'
+import ProjectTransition from './components/ui/ProjectTransition'
+import { TransitionProvider } from './context/TransitionContext'
 import Home from './pages/Home'
 import Projects from './pages/Projects'
 import ProjectDetail from './pages/ProjectDetail'
@@ -11,7 +13,7 @@ import Contact from './pages/Contact'
 
 export default function App() {
   return (
-    <>
+    <TransitionProvider>
       <Navbar />
       <main>
         <Routes>
@@ -26,6 +28,7 @@ export default function App() {
       <Footer />
       <WhatsAppButton />
       <ScrollToTopButton />
-    </>
+      <ProjectTransition />
+    </TransitionProvider>
   )
 }

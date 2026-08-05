@@ -80,3 +80,91 @@
 .animate-hero-zoom {
   animation: heroZoom 16s ease-in-out;
 }
+
+/* ========================================================================== */
+/* Transición animada entre proyectos                                         */
+/* ========================================================================== */
+
+/* Overlay a pantalla completa */
+.project-transition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: overlayFadeIn 0.4s ease forwards;
+}
+
+.project-transition-overlay.fade-out {
+  animation: overlayFadeOut 0.6s ease forwards;
+}
+
+/* Imagen de fondo difuminada */
+.project-transition-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.project-transition-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(12px);
+  transform: scale(1.1);
+  animation: bgZoomIn 1.6s ease forwards;
+}
+
+.project-transition-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+}
+
+/* Logo del proyecto: crece y aparece en el centro */
+.project-transition-logo {
+  position: relative;
+  z-index: 1;
+  max-width: 280px;
+  max-height: 180px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1) drop-shadow(0 4px 24px rgba(0,0,0,0.4));
+  animation: logoGrow 1.0s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Nombre del proyecto (fallback si no hay logo) */
+.project-transition-name {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-display, serif);
+  font-size: 3rem;
+  color: white;
+  text-align: center;
+  text-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  animation: logoGrow 1.0s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Keyframes */
+@keyframes overlayFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes overlayFadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+@keyframes logoGrow {
+  0%   { opacity: 0; transform: scale(0.4); }
+  60%  { opacity: 1; }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes bgZoomIn {
+  from { transform: scale(1.1); filter: blur(16px); }
+  to   { transform: scale(1.15); filter: blur(10px); }
+}

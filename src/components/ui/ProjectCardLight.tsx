@@ -1,5 +1,6 @@
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { ArrowUpRight, Home, Building2 } from 'lucide-react'
+import { useProjectTransition } from '../../context/TransitionContext'
 import type { Project } from '../../types'
 
 interface Props {
@@ -12,10 +13,18 @@ const delayClasses = ['', 'reveal-delay-1', 'reveal-delay-2', 'reveal-delay-3']
 // Tarjeta de proyecto "clara" (fondo blanco, esquinas redondeadas), usada
 // tanto en la sección de proyectos del Home como en el catálogo /proyectos.
 export default function ProjectCardLight({ project, index = 0 }: Props) {
+  const navigate = useNavigate()
+  const { startTransition } = useProjectTransition()
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    startTransition(project, navigate)
+  }
+
   return (
     <div className={`group reveal ${delayClasses[index % delayClasses.length]}`}>
       <div className="relative aspect-[4/3]">
-        <Link to={`/proyectos/${project.slug}`} className="block w-full h-full">
+        <a href={`/proyectos/${project.slug}`} onClick={handleClick} className="block w-full h-full cursor-pointer">
           <img
             src={project.images[0]}
             alt={project.name}
@@ -23,14 +32,15 @@ export default function ProjectCardLight({ project, index = 0 }: Props) {
             loading="lazy"
             decoding="async"
           />
-        </Link>
-        <Link
-          to={`/proyectos/${project.slug}`}
+        </a>
+        <a
+          href={`/proyectos/${project.slug}`}
+          onClick={handleClick}
           aria-label={`Ver ${project.name}`}
           className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/90 flex items-center justify-center text-gray-900 shadow-sm hover:bg-white transition-colors"
         >
           <ArrowUpRight size={18} />
-        </Link>
+        </a>
         <span className="absolute -bottom-3 left-5 bg-brand-600 text-white text-xs font-body font-medium px-3 py-1.5 rounded-full shadow-sm">
           {project.location}
         </span>
@@ -61,12 +71,13 @@ export default function ProjectCardLight({ project, index = 0 }: Props) {
             </div>
           )}
         </div>
-        <Link
-          to={`/proyectos/${project.slug}`}
+        <a
+          href={`/proyectos/${project.slug}`}
+          onClick={handleClick}
           className="inline-flex items-center justify-center bg-brand-800 text-white text-xs font-body font-semibold tracking-wide uppercase px-5 py-2.5 rounded-full hover:bg-brand-900 transition-colors"
         >
           Más información
-        </Link>
+        </a>
       </div>
     </div>
   )
