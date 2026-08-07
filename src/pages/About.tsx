@@ -157,7 +157,7 @@ export default function About() {
           transform/perspective de forma consistente, puede no quedar 100%
           fijo — degrada a un fondo que igual se ve bien, solo sin el efecto. */}
       <div className="relative">
-        <div className="fixed inset-0 -z-10">
+        <div className="fixed inset-0 -z-10 bg-white">
           <img
             src="https://condescorporacion.com/wp-content/uploads/2026/08/09-1-scaled.jpg"
             alt="Condes Corporación"
