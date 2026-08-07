@@ -45,7 +45,7 @@ export default function Contact() {
                 { icon: Mail,   label: 'Email',    value: CONTACT.email,   href: `mailto:${CONTACT.email}` },
               ].map(({ icon: Icon, label, value, href }, i) => (
                 <a key={label} href={href} className={`flex items-center gap-4 group reveal reveal-delay-${(i % 3) + 1}`}>
-                  <div className="w-12 h-12 bg-white/10 border border-white/20 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-colors">
+                  <div className="w-12 h-12 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center shrink-0 transition-all duration-300 group-hover:bg-white/20 group-hover:scale-110 group-hover:-rotate-3">
                     <Icon size={18} className="text-white" />
                   </div>
                   <div>
@@ -54,8 +54,8 @@ export default function Contact() {
                   </div>
                 </a>
               ))}
-              <div className="flex items-start gap-4 reveal reveal-delay-3">
-                <div className="w-12 h-12 bg-white/10 border border-white/20 flex items-center justify-center shrink-0">
+              <div className="flex items-start gap-4 reveal reveal-delay-3 group">
+                <div className="w-12 h-12 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center shrink-0 transition-all duration-300 group-hover:bg-white/20 group-hover:scale-110 group-hover:-rotate-3">
                   <MapPin size={18} className="text-white" />
                 </div>
                 <div>
@@ -80,7 +80,7 @@ export default function Contact() {
           </div>
 
           {/* Right — Form */}
-          <div className="bg-white p-8 md:p-10 reveal reveal-delay-2">
+          <div className="bg-white rounded-2xl p-8 md:p-10 shadow-lg hover:shadow-xl transition-shadow duration-300 reveal reveal-delay-2">
             <h3 className="font-display text-xl text-gray-900 mb-6">¿Quieres más información?</h3>
             <ContactForm />
           </div>

@@ -528,7 +528,6 @@ export const heroImages: string[] = [
 ]
 
 export const teamImages: string[] = [
-  'https://condescorporacion.com/wp-content/uploads/2026/04/Arquitectura-1-1.png',
   'https://condescorporacion.com/wp-content/uploads/2026/04/Legal-1.png',
   'https://condescorporacion.com/wp-content/uploads/2026/04/Maqueteria-1.png',
   'https://condescorporacion.com/wp-content/uploads/2026/04/CONTABLE.png',
