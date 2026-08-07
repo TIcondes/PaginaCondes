@@ -161,7 +161,7 @@ export default function About() {
           <img
             src="https://condescorporacion.com/wp-content/uploads/2026/08/09-1-scaled.jpg"
             alt="Condes Corporación"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover animate-fade-in"
           />
         </div>
 
