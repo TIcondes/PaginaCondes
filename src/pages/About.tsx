@@ -21,6 +21,7 @@ const SHOW_TEAM_SECTION = false
 
 export default function About() {
   const heroRef = useScrollReveal()
+  const introRef = useScrollReveal()
   const teamRef = useScrollReveal()
   const valuesRef = useScrollReveal()
 
@@ -85,9 +86,71 @@ export default function About() {
 
   return (
     <div>
-      {/* Header + Misión + Visión comparten UNA sola imagen de fondo fija
+      {/* Header — imagen propia (render), texto abajo. Llega hasta el tope
+          real de la página para quedar detrás del navbar transparente. */}
+      <section className="relative min-h-[60vh] flex items-end pb-16 overflow-hidden" ref={heroRef}>
+        <div className="absolute inset-0 reveal">
+          <img
+            src="https://condescorporacion.com/wp-content/uploads/2026/04/PARQUE-CENTRAL-EDIFICIO.png"
+            alt="Condes Corporación"
+            className="w-full h-full object-cover animate-ken-burns"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-gray-950/90 via-gray-950/30 to-gray-950/10" />
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full">
+          <p className="reveal text-brand-300 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">Quiénes somos</p>
+          <h1 className="reveal reveal-delay-1 font-display text-4xl md:text-5xl text-white max-w-xl">
+            Un equipo de <span className="italic text-brand-300">profesionales</span>
+          </h1>
+        </div>
+      </section>
+
+      {/* Somos Condes Corporación — banner de presentación con carrusel chico
+          del equipo (mismas fotos que antes, ahora en formato reducido con
+          puntos en vez de flechas/pausa). Va entre el título y Misión/Visión,
+          como en condescorporacion.com. */}
+      <section className="py-20 bg-gray-50" ref={introRef}>
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 grid md:grid-cols-2 gap-12 items-center">
+          <div className="reveal">
+            <p className="text-brand-600 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">Somos</p>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-gray-900 mb-5">Condes Corporación</h2>
+            <p className="font-body text-gray-500 leading-relaxed">
+              Fundada en 2023, somos una desarrolladora inmobiliaria arequipeña firmemente comprometida con el crecimiento y desarrollo de la región. Nuestro portafolio incluye un significativo número de proyectos diseñados con la misión de brindar un espacio propio y seguro a las familias del sur del Perú.
+            </p>
+          </div>
+
+          <div className="reveal reveal-delay-1 relative aspect-[4/3] w-full max-w-md mx-auto md:mx-0 md:ml-auto overflow-hidden rounded-2xl shadow-lg">
+            {teamImages.map((src, i) => (
+              <img
+                key={src}
+                src={src}
+                alt="Equipo Condes Corporación"
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+                  i === activeImg ? 'opacity-100' : 'opacity-0'
+                }`}
+                loading={i === 0 ? 'eager' : 'lazy'}
+              />
+            ))}
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
+              {teamImages.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActiveImg(i)}
+                  aria-label={`Ver foto ${i + 1} del equipo`}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                    i === activeImg ? 'w-5 bg-white' : 'w-1.5 bg-white/50 hover:bg-white/80'
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Misión + Visión comparten UNA sola imagen de fondo fija
           (position: fixed, no bg-fixed por sección) para que se vea como una
-          única foto continua detrás de las tres, sin el "salto" que se ve al
+          única foto continua detrás de las dos, sin el "salto" que se ve al
           usar un bg-fixed independiente por sección. El wrapper es `relative`
           solo para contener el `fixed`; no afecta el layout normal. En iOS
           Safari, que ignora `position: fixed` dentro de contextos con
@@ -101,19 +164,6 @@ export default function About() {
             className="w-full h-full object-cover"
           />
         </div>
-
-        {/* Header — texto abajo. Llega hasta el tope real de la página para
-            quedar detrás del navbar transparente. */}
-        <section className="relative min-h-[60vh] flex items-end pb-16 overflow-hidden" ref={heroRef}>
-          <div className="absolute inset-0 bg-gradient-to-t from-gray-950/90 via-gray-950/30 to-gray-950/10 reveal" />
-
-          <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full">
-            <p className="reveal text-brand-300 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">Quiénes somos</p>
-            <h1 className="reveal reveal-delay-1 font-display text-4xl md:text-5xl text-white max-w-xl">
-              Un equipo de <span className="italic text-brand-300">profesionales</span>
-            </h1>
-          </div>
-        </section>
 
         {/* Misión */}
         <section className="relative py-32 md:py-40 overflow-hidden">
