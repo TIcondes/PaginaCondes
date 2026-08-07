@@ -148,16 +148,18 @@ export default function About() {
         </div>
       </section>
 
-      {/* Misión + Visión comparten UNA sola imagen de fondo fija
-          (position: fixed, no bg-fixed por sección) para que se vea como una
-          única foto continua detrás de las dos, sin el "salto" que se ve al
-          usar un bg-fixed independiente por sección. El wrapper es `relative`
-          solo para contener el `fixed`; no afecta el layout normal. En iOS
-          Safari, que ignora `position: fixed` dentro de contextos con
-          transform/perspective de forma consistente, puede no quedar 100%
-          fijo — degrada a un fondo que igual se ve bien, solo sin el efecto. */}
+      {/* Misión + Visión comparten UNA sola imagen de fondo, fijada con
+          position: sticky (no fixed) para que solo quede pegada mientras se
+          hace scroll DENTRO de este bloque — con `fixed` la imagen cubría
+          todo el viewport desde el principio, así que si esta imagen
+          cargaba antes que la del header de arriba, se alcanzaba a ver acá
+          arriba por encima suyo. El truco es: el div sticky reserva 100vh de
+          alto en el flujo normal, y el contenido de Misión/Visión que sigue
+          usa -mt-[100vh] para "subir" y quedar visualmente encima. En iOS
+          Safari el sticky puede comportarse distinto, pero al no ser fixed
+          ya no se filtra por encima de otras secciones. */}
       <div className="relative">
-        <div className="fixed inset-0 -z-10 bg-white">
+        <div className="sticky top-0 h-screen bg-white overflow-hidden">
           <img
             src="https://condescorporacion.com/wp-content/uploads/2026/08/09-1-scaled.jpg"
             alt="Condes Corporación"
@@ -165,39 +167,41 @@ export default function About() {
           />
         </div>
 
-        {/* Misión */}
-        <section className="relative py-32 md:py-40 overflow-hidden">
-          <div className="absolute inset-0 bg-gray-950/70" />
-          <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
-            <div className="max-w-xl mr-auto text-left">
-              <div className="w-16 h-16 bg-white/10 border border-white/20 flex items-center justify-center mb-6">
-                <Target size={28} className="text-white" />
+        <div className="relative z-10 -mt-[100vh]">
+          {/* Misión */}
+          <section className="relative py-32 md:py-40 overflow-hidden">
+            <div className="absolute inset-0 bg-gray-950/70" />
+            <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
+              <div className="max-w-xl mr-auto text-left">
+                <div className="w-16 h-16 bg-white/10 border border-white/20 flex items-center justify-center mb-6">
+                  <Target size={28} className="text-white" />
+                </div>
+                <p className="text-brand-300 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">Misión</p>
+                <h2 className="font-display text-3xl md:text-4xl text-white mb-6">¿Qué hacemos?</h2>
+                <p className="font-body text-gray-200 leading-relaxed text-lg">
+                  Desarrollar proyectos inmobiliarios de alta calidad que mejoren la calidad de vida de las familias arequipeñas, ofreciendo diseños funcionales, estructuras seguras y procesos legales transparentes. Actuamos con responsabilidad, honestidad y compromiso en cada etapa del proceso constructivo.
+                </p>
               </div>
-              <p className="text-brand-300 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">Misión</p>
-              <h2 className="font-display text-3xl md:text-4xl text-white mb-6">¿Qué hacemos?</h2>
-              <p className="font-body text-gray-200 leading-relaxed text-lg">
-                Desarrollar proyectos inmobiliarios de alta calidad que mejoren la calidad de vida de las familias arequipeñas, ofreciendo diseños funcionales, estructuras seguras y procesos legales transparentes. Actuamos con responsabilidad, honestidad y compromiso en cada etapa del proceso constructivo.
-              </p>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* Visión — mismo fondo compartido, degradado en el tono oficial de marca en vez de negro. */}
-        <section className="relative py-32 md:py-40 overflow-hidden">
-          <div className="absolute inset-0 bg-brand-900/80" />
-          <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
-            <div className="max-w-xl ml-auto text-left">
-              <div className="w-16 h-16 bg-white/10 border border-white/20 flex items-center justify-center mb-6">
-                <Eye size={28} className="text-white" />
+          {/* Visión — mismo fondo compartido, degradado en el tono oficial de marca en vez de negro. */}
+          <section className="relative py-32 md:py-40 overflow-hidden">
+            <div className="absolute inset-0 bg-brand-900/80" />
+            <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
+              <div className="max-w-xl ml-auto text-left">
+                <div className="w-16 h-16 bg-white/10 border border-white/20 flex items-center justify-center mb-6">
+                  <Eye size={28} className="text-white" />
+                </div>
+                <p className="text-brand-100 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">Visión</p>
+                <h2 className="font-display text-3xl md:text-4xl text-white mb-6">¿A dónde vamos?</h2>
+                <p className="font-body text-brand-50 leading-relaxed text-lg">
+                  Ser la empresa inmobiliaria líder del sur del Perú, reconocida por la calidad de sus proyectos, la solidez de su equipo profesional y la confianza que depositan en nosotros las familias que eligen Condes Corporación como su aliado para encontrar el hogar de sus sueños.
+                </p>
               </div>
-              <p className="text-brand-100 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">Visión</p>
-              <h2 className="font-display text-3xl md:text-4xl text-white mb-6">¿A dónde vamos?</h2>
-              <p className="font-body text-brand-50 leading-relaxed text-lg">
-                Ser la empresa inmobiliaria líder del sur del Perú, reconocida por la calidad de sus proyectos, la solidez de su equipo profesional y la confianza que depositan en nosotros las familias que eligen Condes Corporación como su aliado para encontrar el hogar de sus sueños.
-              </p>
             </div>
-          </div>
-        </section>
+          </section>
+        </div>
       </div>
 
       {/* Disciplines — pila de imágenes solapadas: la activa grande y nítida,
