@@ -107,11 +107,13 @@ export default function About() {
 
       {/* Misión — panel con render de fondo fijo (bg-fixed): al hacer scroll,
           el contenido se mueve por encima mientras la imagen queda quieta
-          detrás, dando sensación de profundidad. En iOS Safari, que no
-          soporta background-attachment: fixed, se ve como un fondo normal. */}
+          detrás, dando sensación de profundidad. Usa el mismo render que el
+          header de arriba para que se sienta como una sola imagen continua.
+          En iOS Safari, que no soporta background-attachment: fixed, se ve
+          como un fondo normal. */}
       <section
         className="relative bg-fixed bg-cover bg-center py-32 md:py-40 overflow-hidden"
-        style={{ backgroundImage: 'url(https://condescorporacion.com/wp-content/uploads/2026/02/FOTO-COSTA-REAL-PRINCIPAL.png)' }}
+        style={{ backgroundImage: 'url(https://condescorporacion.com/wp-content/uploads/2026/04/PARQUE-CENTRAL-EDIFICIO.png)' }}
       >
         <div className="absolute inset-0 bg-gray-950/70" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
@@ -128,11 +130,11 @@ export default function About() {
         </div>
       </section>
 
-      {/* Visión — mismo tratamiento de panel fijo, con otro render y un
+      {/* Visión — mismo panel fijo y mismo render que Misión/header, con un
           degradado en el tono oficial de marca en vez de negro. */}
       <section
         className="relative bg-fixed bg-cover bg-center py-32 md:py-40 overflow-hidden"
-        style={{ backgroundImage: 'url(https://condescorporacion.com/wp-content/uploads/2026/08/RENDER-PRINCIPAL-edit-scaled.png)' }}
+        style={{ backgroundImage: 'url(https://condescorporacion.com/wp-content/uploads/2026/04/PARQUE-CENTRAL-EDIFICIO.png)' }}
       >
         <div className="absolute inset-0 bg-brand-900/80" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
