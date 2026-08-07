@@ -15,6 +15,10 @@ const disciplines = [
 
 const TEAM_SLIDE_INTERVAL = 4500 // ms entre cada cambio de foto
 
+// Oculta la sección "Equipo" (foto grande a pantalla completa) a pedido, sin
+// borrar su código ni sus datos — para volver a mostrarla, poner en `true`.
+const SHOW_TEAM_SECTION = false
+
 export default function About() {
   const heroRef = useScrollReveal()
   const teamRef = useScrollReveal()
@@ -206,40 +210,42 @@ export default function About() {
       </section>
 
       {/* Equipo — imagen grande a pantalla completa con el texto superpuesto */}
-      <section className="relative h-[55vh] min-h-[420px] md:h-[85vh] md:min-h-[600px] flex items-end pb-20 overflow-hidden" ref={teamRef}>
-        <div className="absolute inset-0 reveal">
-          {teamImages.map((src, i) => (
-            <img
-              key={src}
-              src={src}
-              alt="Equipo Condes Corporación"
-              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
-                i === activeImg ? 'opacity-100' : 'opacity-0'
-              }`}
-              loading={i === 0 ? 'eager' : 'lazy'}
-            />
-          ))}
-          <div className="absolute inset-0 bg-gradient-to-t from-gray-950/90 via-gray-950/20 to-transparent" />
-        </div>
+      {SHOW_TEAM_SECTION && (
+        <section className="relative h-[55vh] min-h-[420px] md:h-[85vh] md:min-h-[600px] flex items-end pb-20 overflow-hidden" ref={teamRef}>
+          <div className="absolute inset-0 reveal">
+            {teamImages.map((src, i) => (
+              <img
+                key={src}
+                src={src}
+                alt="Equipo Condes Corporación"
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+                  i === activeImg ? 'opacity-100' : 'opacity-0'
+                }`}
+                loading={i === 0 ? 'eager' : 'lazy'}
+              />
+            ))}
+            <div className="absolute inset-0 bg-gradient-to-t from-gray-950/90 via-gray-950/20 to-transparent" />
+          </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full">
-          <p className="reveal text-brand-300 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">Nuestro equipo</p>
-          <h2 className="reveal reveal-delay-1 font-display text-3xl md:text-5xl text-white max-w-2xl mb-8">
-            Conoce a los <span className="italic text-brand-300">profesionales</span>
-          </h2>
-          <a href={CONTACT.whatsapp} target="_blank" rel="noopener noreferrer" className="reveal reveal-delay-2 btn-pill">
-            Hablar con nosotros <ArrowRight size={16} />
-          </a>
-        </div>
+          <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full">
+            <p className="reveal text-brand-300 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">Nuestro equipo</p>
+            <h2 className="reveal reveal-delay-1 font-display text-3xl md:text-5xl text-white max-w-2xl mb-8">
+              Conoce a los <span className="italic text-brand-300">profesionales</span>
+            </h2>
+            <a href={CONTACT.whatsapp} target="_blank" rel="noopener noreferrer" className="reveal reveal-delay-2 btn-pill">
+              Hablar con nosotros <ArrowRight size={16} />
+            </a>
+          </div>
 
-        <button
-          onClick={() => setTeamAutoplay((playing) => !playing)}
-          className="absolute bottom-8 right-8 md:right-12 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/30 flex items-center justify-center text-white hover:bg-white/20 transition-colors z-10"
-          aria-label={teamAutoplay ? 'Pausar carrusel de fotos' : 'Reanudar carrusel de fotos'}
-        >
-          {teamAutoplay ? <Pause size={16} /> : <Play size={16} />}
-        </button>
-      </section>
+          <button
+            onClick={() => setTeamAutoplay((playing) => !playing)}
+            className="absolute bottom-8 right-8 md:right-12 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/30 flex items-center justify-center text-white hover:bg-white/20 transition-colors z-10"
+            aria-label={teamAutoplay ? 'Pausar carrusel de fotos' : 'Reanudar carrusel de fotos'}
+          >
+            {teamAutoplay ? <Pause size={16} /> : <Play size={16} />}
+          </button>
+        </section>
+      )}
     </div>
   )
 }
