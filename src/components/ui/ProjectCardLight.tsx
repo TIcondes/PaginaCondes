@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { ArrowUpRight, Home, Building2 } from 'lucide-react'
+import { Home, Building2 } from 'lucide-react'
 import { useProjectTransition } from '../../context/TransitionContext'
 import type { Project } from '../../types'
 
@@ -32,14 +32,6 @@ export default function ProjectCardLight({ project, index = 0 }: Props) {
             loading="lazy"
             decoding="async"
           />
-        </a>
-        <a
-          href={`/proyectos/${project.slug}`}
-          onClick={handleClick}
-          aria-label={`Ver ${project.name}`}
-          className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/90 flex items-center justify-center text-gray-900 shadow-sm hover:bg-white transition-colors"
-        >
-          <ArrowUpRight size={18} />
         </a>
         <span className="absolute -bottom-3 left-5 bg-brand-600 text-white text-xs font-body font-medium px-3 py-1.5 rounded-full shadow-sm">
           {project.location}
