@@ -29,7 +29,7 @@ export default function Navbar() {
         : 'bg-white/95 backdrop-blur-sm shadow-sm border-b border-gray-100'
     }`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className={`relative flex items-center justify-between transition-all duration-500 ${transparent ? 'h-32' : 'h-24'}`}>
+        <div className={`relative flex items-center justify-between transition-all duration-500 ${transparent ? 'h-20 md:h-32' : 'h-16 md:h-24'}`}>
           <nav className="hidden md:flex items-center gap-10">
             {navLinks.map((link) => {
               const active = location.pathname === link.to || (link.to !== '/' && location.pathname.startsWith(link.to))
@@ -60,7 +60,7 @@ export default function Navbar() {
             <img
               src={`${import.meta.env.BASE_URL}logos/${transparent ? 'logo-blanco.png' : 'logo.png'}`}
               alt="Condes Corporación"
-              className={`w-auto transition-all duration-500 ${transparent ? 'h-24' : 'h-16'}`}
+              className={`w-auto transition-all duration-500 ${transparent ? 'h-14 md:h-24' : 'h-10 md:h-16'}`}
             />
           </Link>
 

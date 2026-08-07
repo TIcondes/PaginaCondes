@@ -8,7 +8,7 @@ export const navLinks: NavLink[] = [
 ]
 
 // ============================================================================
-// 🏗️ BASE DE DATOS DE PROYECTOS (LOCAL)
+// BASE DE DATOS DE PROYECTOS (LOCAL)
 // ============================================================================
 // No se usan bases de datos ni archivos JSON externos: toda la información
 // vive aquí, tipada por la interfaz `Project` (ver src/types/index.ts).

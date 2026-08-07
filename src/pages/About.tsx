@@ -206,7 +206,7 @@ export default function About() {
       </section>
 
       {/* Equipo — imagen grande a pantalla completa con el texto superpuesto */}
-      <section className="relative h-[85vh] min-h-[600px] flex items-end pb-20 overflow-hidden" ref={teamRef}>
+      <section className="relative h-[55vh] min-h-[420px] md:h-[85vh] md:min-h-[600px] flex items-end pb-20 overflow-hidden" ref={teamRef}>
         <div className="absolute inset-0 reveal">
           {teamImages.map((src, i) => (
             <img

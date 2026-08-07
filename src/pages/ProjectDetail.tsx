@@ -73,7 +73,7 @@ export default function ProjectDetail() {
   return (
     <div>
       {/* Hero — llega hasta el tope real de la página para quedar detrás del navbar transparente */}
-      <section className="relative h-72 md:h-96 overflow-hidden" ref={heroRef}>
+      <section className="relative h-[23rem] md:h-96 overflow-hidden" ref={heroRef}>
         <img
           src={project.images[0]}
           alt={project.name}
