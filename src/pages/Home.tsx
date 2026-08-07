@@ -95,54 +95,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* NOSOTROS — texto breve + carrusel de fotos con crossfade automático */}
-      <section className="py-24 bg-white" ref={nosotrosRef}>
+      {/* PROYECTOS — fondo blanco: intro + encabezado centrado con pestañas + grid. */}
+      <section className="pt-16 pb-24 bg-white" ref={projectsRef}>
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <p className="reveal text-brand-600 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">Nuestro equipo</p>
-              <h2 className="reveal reveal-delay-1 font-display text-3xl md:text-4xl text-gray-900 leading-tight mb-5">
-                Ingenieros y arquitectos <span className="italic text-brand-800">a tu servicio</span>
-              </h2>
-              <p className="reveal reveal-delay-2 font-body text-gray-500 leading-relaxed mb-8 max-w-md">
-                Un equipo multidisciplinario que respalda cada proyecto con procesos transparentes y diseño de calidad.
-              </p>
-              <Link to="/nosotros" className="reveal reveal-delay-3 btn-dark inline-flex">
-                Conoce el equipo <ArrowRight size={16} />
-              </Link>
-            </div>
-
-            <div className="reveal reveal-delay-2 relative aspect-[4/3] overflow-hidden bg-gray-100">
-              {teamImages.map((src, i) => (
-                <img
-                  key={src}
-                  src={src}
-                  alt="Equipo Condes Corporación"
-                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
-                    i === activeTeamImg ? 'opacity-100' : 'opacity-0'
-                  }`}
-                  loading={i === 0 ? 'eager' : 'lazy'}
-                />
-              ))}
-              <button
-                onClick={() => setTeamAutoplay((playing) => !playing)}
-                className="absolute bottom-4 right-4 w-9 h-9 flex items-center justify-center bg-gray-950/60 text-white hover:bg-gray-950/80 transition-colors"
-                aria-label={teamAutoplay ? 'Pausar carrusel de fotos' : 'Reanudar carrusel de fotos'}
-              >
-                {teamAutoplay ? <Pause size={14} /> : <Play size={14} />}
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* PROYECTOS — fondo blanco: intro + encabezado centrado con pestañas + grid.
-          Separador propio arriba porque la sección anterior (Nosotros) también
-          es blanca y, si no, se confunden en un solo bloque sin corte visual. */}
-      <section className="pt-4 pb-24 bg-white" ref={projectsRef}>
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="border-t border-gray-100 mb-20" />
-
           {/* Intro */}
           <div className="grid md:grid-cols-2 gap-10 items-center mb-20">
             <h2 className="reveal font-display text-3xl md:text-4xl leading-tight">
@@ -175,6 +130,48 @@ export default function Home() {
             >
               <ArrowRight size={18} />
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* NOSOTROS — carrusel de fotos a la izquierda, texto breve a la derecha.
+          Va después de Proyectos; el fondo gris lo separa del blanco de arriba. */}
+      <section className="py-24 bg-gray-50" ref={nosotrosRef}>
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className="reveal reveal-delay-2 relative aspect-[4/3] overflow-hidden bg-gray-100">
+              {teamImages.map((src, i) => (
+                <img
+                  key={src}
+                  src={src}
+                  alt="Equipo Condes Corporación"
+                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+                    i === activeTeamImg ? 'opacity-100' : 'opacity-0'
+                  }`}
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                />
+              ))}
+              <button
+                onClick={() => setTeamAutoplay((playing) => !playing)}
+                className="absolute bottom-4 right-4 w-9 h-9 flex items-center justify-center bg-gray-950/60 text-white hover:bg-gray-950/80 transition-colors"
+                aria-label={teamAutoplay ? 'Pausar carrusel de fotos' : 'Reanudar carrusel de fotos'}
+              >
+                {teamAutoplay ? <Pause size={14} /> : <Play size={14} />}
+              </button>
+            </div>
+
+            <div>
+              <p className="reveal text-brand-600 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">Nuestro equipo</p>
+              <h2 className="reveal reveal-delay-1 font-display text-3xl md:text-4xl text-gray-900 leading-tight mb-5">
+                Ingenieros y arquitectos <span className="italic text-brand-800">a tu servicio</span>
+              </h2>
+              <p className="reveal reveal-delay-2 font-body text-gray-500 leading-relaxed mb-8 max-w-md">
+                Un equipo multidisciplinario que respalda cada proyecto con procesos transparentes y diseño de calidad.
+              </p>
+              <Link to="/nosotros" className="reveal reveal-delay-3 btn-dark inline-flex">
+                Conoce el equipo <ArrowRight size={16} />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
