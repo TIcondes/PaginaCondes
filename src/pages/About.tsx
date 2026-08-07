@@ -159,7 +159,7 @@ export default function About() {
       <div className="relative">
         <div className="fixed inset-0 -z-10">
           <img
-            src="https://condescorporacion.com/wp-content/uploads/2026/04/PARQUE-CENTRAL-EDIFICIO.png"
+            src="https://condescorporacion.com/wp-content/uploads/2026/08/09-1-scaled.jpg"
             alt="Condes Corporación"
             className="w-full h-full object-cover"
           />
