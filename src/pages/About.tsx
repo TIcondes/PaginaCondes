@@ -105,25 +105,37 @@ export default function About() {
         </div>
       </section>
 
-      {/* Misión — sección propia, fondo blanco, contenido alineado a la izquierda */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+      {/* Misión — panel con render de fondo fijo (bg-fixed): al hacer scroll,
+          el contenido se mueve por encima mientras la imagen queda quieta
+          detrás, dando sensación de profundidad. En iOS Safari, que no
+          soporta background-attachment: fixed, se ve como un fondo normal. */}
+      <section
+        className="relative bg-fixed bg-cover bg-center py-32 md:py-40 overflow-hidden"
+        style={{ backgroundImage: 'url(https://condescorporacion.com/wp-content/uploads/2026/02/FOTO-COSTA-REAL-PRINCIPAL.png)' }}
+      >
+        <div className="absolute inset-0 bg-gray-950/70" />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
           <div className="max-w-xl mr-auto text-left">
-            <div className="w-16 h-16 bg-brand-50 flex items-center justify-center mb-6">
-              <Target size={28} className="text-brand-600" />
+            <div className="w-16 h-16 bg-white/10 border border-white/20 flex items-center justify-center mb-6">
+              <Target size={28} className="text-white" />
             </div>
-            <p className="text-brand-600 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">Misión</p>
-            <h2 className="font-display text-3xl md:text-4xl text-gray-900 mb-6">¿Qué hacemos?</h2>
-            <p className="font-body text-gray-500 leading-relaxed text-lg">
+            <p className="text-brand-300 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">Misión</p>
+            <h2 className="font-display text-3xl md:text-4xl text-white mb-6">¿Qué hacemos?</h2>
+            <p className="font-body text-gray-200 leading-relaxed text-lg">
               Desarrollar proyectos inmobiliarios de alta calidad que mejoren la calidad de vida de las familias arequipeñas, ofreciendo diseños funcionales, estructuras seguras y procesos legales transparentes. Actuamos con responsabilidad, honestidad y compromiso en cada etapa del proceso constructivo.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Visión — sección propia, color oficial de marca de fondo, contenido alineado a la derecha */}
-      <section className="py-24 bg-brand-600">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+      {/* Visión — mismo tratamiento de panel fijo, con otro render y un
+          degradado en el tono oficial de marca en vez de negro. */}
+      <section
+        className="relative bg-fixed bg-cover bg-center py-32 md:py-40 overflow-hidden"
+        style={{ backgroundImage: 'url(https://condescorporacion.com/wp-content/uploads/2026/08/RENDER-PRINCIPAL-edit-scaled.png)' }}
+      >
+        <div className="absolute inset-0 bg-brand-900/80" />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
           <div className="max-w-xl ml-auto text-left">
             <div className="w-16 h-16 bg-white/10 border border-white/20 flex items-center justify-center mb-6">
               <Eye size={28} className="text-white" />
