@@ -85,71 +85,70 @@ export default function About() {
 
   return (
     <div>
-      {/* Header — imagen a pantalla completa (render), texto abajo. Llega hasta
-          el tope real de la página para quedar detrás del navbar transparente. */}
-      <section className="relative min-h-[60vh] flex items-end pb-16 overflow-hidden" ref={heroRef}>
-        <div className="absolute inset-0 reveal">
+      {/* Header + Misión + Visión comparten UNA sola imagen de fondo fija
+          (position: fixed, no bg-fixed por sección) para que se vea como una
+          única foto continua detrás de las tres, sin el "salto" que se ve al
+          usar un bg-fixed independiente por sección. El wrapper es `relative`
+          solo para contener el `fixed`; no afecta el layout normal. En iOS
+          Safari, que ignora `position: fixed` dentro de contextos con
+          transform/perspective de forma consistente, puede no quedar 100%
+          fijo — degrada a un fondo que igual se ve bien, solo sin el efecto. */}
+      <div className="relative">
+        <div className="fixed inset-0 -z-10">
           <img
             src="https://condescorporacion.com/wp-content/uploads/2026/04/PARQUE-CENTRAL-EDIFICIO.png"
             alt="Condes Corporación"
-            className="w-full h-full object-cover animate-ken-burns"
+            className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-gray-950/90 via-gray-950/30 to-gray-950/10" />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full">
-          <p className="reveal text-brand-300 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">Quiénes somos</p>
-          <h1 className="reveal reveal-delay-1 font-display text-4xl md:text-5xl text-white max-w-xl">
-            Un equipo de <span className="italic text-brand-300">profesionales</span>
-          </h1>
-        </div>
-      </section>
+        {/* Header — texto abajo. Llega hasta el tope real de la página para
+            quedar detrás del navbar transparente. */}
+        <section className="relative min-h-[60vh] flex items-end pb-16 overflow-hidden" ref={heroRef}>
+          <div className="absolute inset-0 bg-gradient-to-t from-gray-950/90 via-gray-950/30 to-gray-950/10 reveal" />
 
-      {/* Misión — panel con render de fondo fijo (bg-fixed): al hacer scroll,
-          el contenido se mueve por encima mientras la imagen queda quieta
-          detrás, dando sensación de profundidad. Usa el mismo render que el
-          header de arriba para que se sienta como una sola imagen continua.
-          En iOS Safari, que no soporta background-attachment: fixed, se ve
-          como un fondo normal. */}
-      <section
-        className="relative bg-fixed bg-cover bg-center py-32 md:py-40 overflow-hidden"
-        style={{ backgroundImage: 'url(https://condescorporacion.com/wp-content/uploads/2026/04/PARQUE-CENTRAL-EDIFICIO.png)' }}
-      >
-        <div className="absolute inset-0 bg-gray-950/70" />
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="max-w-xl mr-auto text-left">
-            <div className="w-16 h-16 bg-white/10 border border-white/20 flex items-center justify-center mb-6">
-              <Target size={28} className="text-white" />
-            </div>
-            <p className="text-brand-300 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">Misión</p>
-            <h2 className="font-display text-3xl md:text-4xl text-white mb-6">¿Qué hacemos?</h2>
-            <p className="font-body text-gray-200 leading-relaxed text-lg">
-              Desarrollar proyectos inmobiliarios de alta calidad que mejoren la calidad de vida de las familias arequipeñas, ofreciendo diseños funcionales, estructuras seguras y procesos legales transparentes. Actuamos con responsabilidad, honestidad y compromiso en cada etapa del proceso constructivo.
-            </p>
+          <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full">
+            <p className="reveal text-brand-300 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">Quiénes somos</p>
+            <h1 className="reveal reveal-delay-1 font-display text-4xl md:text-5xl text-white max-w-xl">
+              Un equipo de <span className="italic text-brand-300">profesionales</span>
+            </h1>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Visión — mismo panel fijo y mismo render que Misión/header, con un
-          degradado en el tono oficial de marca en vez de negro. */}
-      <section
-        className="relative bg-fixed bg-cover bg-center py-32 md:py-40 overflow-hidden"
-        style={{ backgroundImage: 'url(https://condescorporacion.com/wp-content/uploads/2026/04/PARQUE-CENTRAL-EDIFICIO.png)' }}
-      >
-        <div className="absolute inset-0 bg-brand-900/80" />
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="max-w-xl ml-auto text-left">
-            <div className="w-16 h-16 bg-white/10 border border-white/20 flex items-center justify-center mb-6">
-              <Eye size={28} className="text-white" />
+        {/* Misión */}
+        <section className="relative py-32 md:py-40 overflow-hidden">
+          <div className="absolute inset-0 bg-gray-950/70" />
+          <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
+            <div className="max-w-xl mr-auto text-left">
+              <div className="w-16 h-16 bg-white/10 border border-white/20 flex items-center justify-center mb-6">
+                <Target size={28} className="text-white" />
+              </div>
+              <p className="text-brand-300 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">Misión</p>
+              <h2 className="font-display text-3xl md:text-4xl text-white mb-6">¿Qué hacemos?</h2>
+              <p className="font-body text-gray-200 leading-relaxed text-lg">
+                Desarrollar proyectos inmobiliarios de alta calidad que mejoren la calidad de vida de las familias arequipeñas, ofreciendo diseños funcionales, estructuras seguras y procesos legales transparentes. Actuamos con responsabilidad, honestidad y compromiso en cada etapa del proceso constructivo.
+              </p>
             </div>
-            <p className="text-brand-100 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">Visión</p>
-            <h2 className="font-display text-3xl md:text-4xl text-white mb-6">¿A dónde vamos?</h2>
-            <p className="font-body text-brand-50 leading-relaxed text-lg">
-              Ser la empresa inmobiliaria líder del sur del Perú, reconocida por la calidad de sus proyectos, la solidez de su equipo profesional y la confianza que depositan en nosotros las familias que eligen Condes Corporación como su aliado para encontrar el hogar de sus sueños.
-            </p>
           </div>
-        </div>
-      </section>
+        </section>
+
+        {/* Visión — mismo fondo compartido, degradado en el tono oficial de marca en vez de negro. */}
+        <section className="relative py-32 md:py-40 overflow-hidden">
+          <div className="absolute inset-0 bg-brand-900/80" />
+          <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
+            <div className="max-w-xl ml-auto text-left">
+              <div className="w-16 h-16 bg-white/10 border border-white/20 flex items-center justify-center mb-6">
+                <Eye size={28} className="text-white" />
+              </div>
+              <p className="text-brand-100 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">Visión</p>
+              <h2 className="font-display text-3xl md:text-4xl text-white mb-6">¿A dónde vamos?</h2>
+              <p className="font-body text-brand-50 leading-relaxed text-lg">
+                Ser la empresa inmobiliaria líder del sur del Perú, reconocida por la calidad de sus proyectos, la solidez de su equipo profesional y la confianza que depositan en nosotros las familias que eligen Condes Corporación como su aliado para encontrar el hogar de sus sueños.
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
 
       {/* Disciplines — pila de imágenes solapadas: la activa grande y nítida,
           las demás detrás y difuminadas. Se recorre arrastrando, sin botones.
