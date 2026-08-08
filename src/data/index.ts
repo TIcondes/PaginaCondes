@@ -129,9 +129,23 @@ export const projects: Project[] = [
     gallery: {
       renders: [
         'https://condescorporacion.com/wp-content/uploads/2025/12/FOTO-FLORENCIA-PRINCIPAL-scaled.png',
+        'https://condescorporacion.com/wp-content/uploads/2026/02/FOTO-1-_FLORENCIA-_-GALERIA-1-scaled.png',
+        'https://condescorporacion.com/wp-content/uploads/2026/02/FOTO-2-_FLORENCIA-_-GALERIA-1-scaled.png',
+        'https://condescorporacion.com/wp-content/uploads/2026/02/FOTO-3-_FLORENCIA-_-GALERIA-1-scaled.png',
+        'https://condescorporacion.com/wp-content/uploads/2026/02/FOTO-4-_FLORENCIA-_-GALERIA-1-scaled.png',
+        'https://condescorporacion.com/wp-content/uploads/2026/02/FOTO-6-_FLORENCIA-_-GALERIA-1-scaled.png',
       ],
       planimetria: ['https://condescorporacion.com/wp-content/uploads/2026/01/PLANIMETRIA-FLORENCIA-02.png'],
-      avance: [PLACEHOLDER_AVANCE_IMAGE],            // Pendiente: reemplazar por fotos reales de avance de obra
+      // Fotos reales de avance de obra (no renders), tomadas en la propia
+      // construcción — vienen numeradas por vivienda/etapa en el servidor.
+      avance: [
+        'https://condescorporacion.com/wp-content/uploads/2026/06/1-PRIMERA.png',
+        'https://condescorporacion.com/wp-content/uploads/2026/06/2-SEGUNDA.png',
+        'https://condescorporacion.com/wp-content/uploads/2026/06/3-TERCERA.png',
+        'https://condescorporacion.com/wp-content/uploads/2026/06/4-CUARTA.png',
+        'https://condescorporacion.com/wp-content/uploads/2026/06/5-QUINTA.png',
+        'https://condescorporacion.com/wp-content/uploads/2026/06/6-SEXTA.png',
+      ],
     },
 
     // ---------------------------------------------------
@@ -179,9 +193,21 @@ export const projects: Project[] = [
     gallery: {
       renders: [
         'https://condescorporacion.com/wp-content/uploads/2025/12/FOTO-MONTSERRAT-PRINCIPAL-scaled.png',
+        'https://condescorporacion.com/wp-content/uploads/2026/02/FOTO-3-MONTSERRAT_-GALERIA-scaled.png',
+        'https://condescorporacion.com/wp-content/uploads/2026/02/FOTO-4-MONTSERRAT_-GALERIA-scaled.png',
+        'https://condescorporacion.com/wp-content/uploads/2026/02/FOTO-5-MONTSERRAT_-GALERIA-scaled.png',
+        'https://condescorporacion.com/wp-content/uploads/2026/02/FOTO-6-MONTSERRAT_-GALERIA-scaled.png',
       ],
       planimetria: ['https://condescorporacion.com/wp-content/uploads/2026/02/PLANIMETRIA-MONTSERRAT.png'],
-      avance: [PLACEHOLDER_AVANCE_IMAGE],            // Pendiente: reemplazar por fotos reales de avance de obra
+      // Fotos reales de avance de obra (no renders), tomadas en la propia construcción.
+      avance: [
+        'https://condescorporacion.com/wp-content/uploads/2026/05/MONSE-1.png',
+        'https://condescorporacion.com/wp-content/uploads/2026/05/MONSE-2.png',
+        'https://condescorporacion.com/wp-content/uploads/2026/05/MONSE-3.png',
+        'https://condescorporacion.com/wp-content/uploads/2026/05/2-FOTO-1-FB.png',
+        'https://condescorporacion.com/wp-content/uploads/2026/05/3-FOTO-2-FB.png',
+        'https://condescorporacion.com/wp-content/uploads/2026/05/4-FOTO-3-FB.png',
+      ],
     },
     typologies: [
       {
@@ -288,6 +314,11 @@ export const projects: Project[] = [
     gallery: {
       renders: [
         'https://condescorporacion.com/wp-content/uploads/2026/01/FOTO-JARDINES-S-PRINCIPAL-scaled.jpg',
+        'https://condescorporacion.com/wp-content/uploads/2026/05/3_Mesa-de-trabajo-1-scaled.png',
+        'https://condescorporacion.com/wp-content/uploads/2026/05/4_Mesa-de-trabajo-1-scaled.png',
+        'https://condescorporacion.com/wp-content/uploads/2026/05/5_Mesa-de-trabajo-1-scaled.png',
+        'https://condescorporacion.com/wp-content/uploads/2026/05/7_Mesa-de-trabajo-1-scaled.png',
+        'https://condescorporacion.com/wp-content/uploads/2026/05/8_Mesa-de-trabajo-1-scaled.png',
       ],
       planimetria: ['https://condescorporacion.com/wp-content/uploads/2026/06/PLANIMETRIA-JARDINES-DEL-SOL.png'],
       avance: [PLACEHOLDER_AVANCE_IMAGE],            // Pendiente: reemplazar por fotos reales de avance de obra
@@ -381,6 +412,11 @@ export const projects: Project[] = [
     gallery: {
       renders: [
         'https://condescorporacion.com/wp-content/uploads/2026/02/FOTO-COSTA-REAL-PRINCIPAL.png',
+        'https://condescorporacion.com/wp-content/uploads/2026/03/FOTO-1_-COSTAS_GALERIA1-scaled.png',
+        'https://condescorporacion.com/wp-content/uploads/2026/02/FOTO-2_-COSTAS_GALERIA1-scaled.png',
+        'https://condescorporacion.com/wp-content/uploads/2026/02/FOTO-3_-COSTAS_GALERIA1-scaled.png',
+        'https://condescorporacion.com/wp-content/uploads/2026/02/FOTO-4_-COSTAS_GALERIA1-scaled.png',
+        'https://condescorporacion.com/wp-content/uploads/2026/02/FOTO-5_-COSTAS_GALERIA1.png',
       ],
       planimetria: ['https://condescorporacion.com/wp-content/uploads/2026/05/PLANIMETRIA-COSTA-REAL-MAYO2026-scaled.png'],
       avance: [PLACEHOLDER_AVANCE_IMAGE],            // Pendiente: reemplazar por fotos reales de avance de obra
@@ -425,6 +461,11 @@ export const projects: Project[] = [
         'https://condescorporacion.com/wp-content/uploads/2026/08/Escena-16-edit-scaled.png',
         'https://condescorporacion.com/wp-content/uploads/2026/08/MON_ARQ_RENDER_TIPO_3Escena-10-edit-scaled.png',
         'https://condescorporacion.com/wp-content/uploads/2026/08/MON_ARQ_RENDER_TIPO_3Escena-11-edit-scaled.png',
+        'https://condescorporacion.com/wp-content/uploads/2026/08/TMO_TIP2_SALA-DET-2-edit-scaled.png',
+        'https://condescorporacion.com/wp-content/uploads/2026/08/TMO_TIP2_TERRAZA-1-edit-scaled.png',
+        'https://condescorporacion.com/wp-content/uploads/2026/08/TMO_TIP2_TERRAZA-3-edit-scaled.png',
+        'https://condescorporacion.com/wp-content/uploads/2026/08/TMO_VIVIENDA_TIP_3_RENDER-edit.png',
+        'https://condescorporacion.com/wp-content/uploads/2026/08/TERRAZA-scaled.jpeg',
       ],
       planimetria: ['https://condescorporacion.com/wp-content/uploads/2026/08/TORRE-MONACO_PLN_JUNIO2026_A3-01-scaled.png'],
       avance: [PLACEHOLDER_AVANCE_IMAGE], // Pendiente: reemplazar por fotos reales de avance de obra
