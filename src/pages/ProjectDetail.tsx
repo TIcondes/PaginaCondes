@@ -1,6 +1,6 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
 import { MapPin, Home, Building2, CheckCircle, ArrowLeft, ArrowRight, Bed, Bath, RotateCw, Phone, Clock } from 'lucide-react'
-import { useState, lazy, Suspense } from 'react'
+import { useState, useEffect, lazy, Suspense } from 'react'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 import { visibleProjects, CONTACT } from '../data'
 
@@ -25,6 +25,8 @@ const galleryLabels: Record<GalleryTab, string> = {
   avance: 'Avance de obra',
 }
 
+const GALLERY_SLIDE_INTERVAL = 5000 // ms que tarda la barra en llenarse antes de pasar al siguiente render
+
 export default function ProjectDetail() {
   const { slug } = useParams<{ slug: string }>()
   const project = visibleProjects.find((p) => p.slug === slug)
@@ -48,14 +50,31 @@ export default function ProjectDetail() {
   const contentRef = useScrollReveal()
   const locationRef = useScrollReveal()
 
-  if (!project) return <Navigate to="/proyectos" replace />
-
-  const gallery = project.gallery ?? { renders: project.images }
+  const gallery = project?.gallery ?? { renders: project?.images ?? [] }
   const availableTabs = (Object.keys(galleryLabels) as GalleryTab[]).filter(
     (k) => (gallery[k]?.length ?? 0) > 0
   )
   const activeTab: GalleryTab = availableTabs.includes(galleryTab) ? galleryTab : availableTabs[0]
   const tabImages = gallery[activeTab] ?? []
+
+  // Barra de progreso tipo "historia": se llena en GALLERY_SLIDE_INTERVAL ms
+  // y al terminar pasa sola al siguiente render. Se reinicia cada vez que
+  // cambia la imagen activa (por autoplay o por click en una barra).
+  const [galleryProgress, setGalleryProgress] = useState(0)
+  useEffect(() => {
+    if (tabImages.length <= 1) return
+    setGalleryProgress(0)
+    const start = Date.now()
+    const id = setInterval(() => {
+      const pct = Math.min(((Date.now() - start) / GALLERY_SLIDE_INTERVAL) * 100, 100)
+      setGalleryProgress(pct)
+      if (pct >= 100) setActiveImg((i) => (i + 1) % tabImages.length)
+    }, 50)
+    return () => clearInterval(id)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeImg, activeTab, tabImages.length])
+
+  if (!project) return <Navigate to="/proyectos" replace />
 
   const currentIdx = visibleProjects.findIndex((p) => p.slug === slug)
   const prev = visibleProjects[currentIdx - 1]
@@ -128,33 +147,38 @@ export default function ProjectDetail() {
           </div>
 
           {tabImages.length > 0 && (
-            <>
-              <div className="reveal reveal-delay-1 relative overflow-hidden bg-gray-900 aspect-[16/9] mb-3">
-                <img
-                  key={`${activeTab}-${activeImg}`}
-                  src={tabImages[Math.min(activeImg, tabImages.length - 1)]}
-                  alt={`${project.name} — ${galleryLabels[activeTab]}`}
-                  className="w-full h-full object-cover animate-gallery-fade"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
+            <div className="reveal reveal-delay-1 relative overflow-hidden bg-gray-900 aspect-[16/9]">
+              {/* Barra de progreso tipo "historia": cada segmento representa un
+                  render; el activo se va llenando solo y al completarse pasa
+                  al siguiente. Clic en un segmento salta directo a esa imagen. */}
               {tabImages.length > 1 && (
-                <div className="flex gap-2 overflow-x-auto">
-                  {tabImages.map((src, i) => (
+                <div className="absolute top-3 left-3 right-3 z-10 flex gap-1.5">
+                  {tabImages.map((_, i) => (
                     <button
                       key={i}
                       onClick={() => setActiveImg(i)}
-                      className={`reveal reveal-delay-${(i % 4) + 1} w-24 h-16 overflow-hidden shrink-0 transition-all duration-200 hover:scale-105 ${
-                        activeImg === i ? 'ring-2 ring-brand-500 scale-105' : 'opacity-60 hover:opacity-100'
-                      }`}
+                      aria-label={`Ir a la imagen ${i + 1} de ${tabImages.length}`}
+                      className="flex-1 h-1 bg-white/25 rounded-full overflow-hidden"
                     >
-                      <img src={src} alt="" className="w-full h-full object-cover" loading="lazy" decoding="async" />
+                      <div
+                        className="h-full bg-white rounded-full"
+                        style={{
+                          width: i < activeImg ? '100%' : i === activeImg ? `${galleryProgress}%` : '0%',
+                        }}
+                      />
                     </button>
                   ))}
                 </div>
               )}
-            </>
+              <img
+                key={`${activeTab}-${activeImg}`}
+                src={tabImages[Math.min(activeImg, tabImages.length - 1)]}
+                alt={`${project.name} — ${galleryLabels[activeTab]}`}
+                className="w-full h-full object-cover animate-gallery-fade"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
           )}
         </div>
       </section>
