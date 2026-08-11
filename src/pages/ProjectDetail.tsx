@@ -41,7 +41,9 @@ export default function ProjectDetail() {
   const [selectedTypologyIndex, setSelectedTypologyIndex] = useState(0)
 
   const heroRef = useScrollReveal()
-  const galleryRef = useScrollReveal()
+  // Depende de galleryTab: al cambiar entre Renders / Avance de obra, las
+  // miniaturas y botones vuelven a animar su entrada en vez de aparecer de golpe.
+  const galleryRef = useScrollReveal([galleryTab])
   const virtualRef = useScrollReveal()
   const contentRef = useScrollReveal()
   const locationRef = useScrollReveal()
@@ -109,12 +111,12 @@ export default function ProjectDetail() {
       {/* Categorized gallery: Renders / Planimetría / Avance de obra */}
       <section className="bg-gray-50 border-y border-gray-100 py-10" ref={galleryRef}>
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="reveal flex flex-wrap gap-2 mb-6">
-            {availableTabs.map((tab) => (
+          <div className="flex flex-wrap gap-2 mb-6">
+            {availableTabs.map((tab, i) => (
               <button
                 key={tab}
                 onClick={() => { setGalleryTab(tab); setActiveImg(0) }}
-                className={`px-4 py-2 text-sm font-body font-medium border transition-all duration-200 ${
+                className={`reveal reveal-delay-${i + 1} px-4 py-2 text-sm font-body font-medium border transition-all duration-200 hover:scale-105 active:scale-95 ${
                   activeTab === tab
                     ? 'bg-brand-600 text-white border-brand-600'
                     : 'bg-white text-gray-600 border-gray-200 hover:border-brand-400 hover:text-brand-600'
@@ -129,9 +131,10 @@ export default function ProjectDetail() {
             <>
               <div className="reveal reveal-delay-1 relative overflow-hidden bg-gray-900 aspect-[16/9] mb-3">
                 <img
+                  key={`${activeTab}-${activeImg}`}
                   src={tabImages[Math.min(activeImg, tabImages.length - 1)]}
                   alt={`${project.name} — ${galleryLabels[activeTab]}`}
-                  className="w-full h-full object-cover transition-opacity duration-500"
+                  className="w-full h-full object-cover animate-gallery-fade"
                   loading="lazy"
                   decoding="async"
                 />
@@ -142,8 +145,8 @@ export default function ProjectDetail() {
                     <button
                       key={i}
                       onClick={() => setActiveImg(i)}
-                      className={`w-24 h-16 overflow-hidden shrink-0 transition-all ${
-                        activeImg === i ? 'ring-2 ring-brand-500' : 'opacity-60 hover:opacity-100'
+                      className={`reveal reveal-delay-${(i % 4) + 1} w-24 h-16 overflow-hidden shrink-0 transition-all duration-200 hover:scale-105 ${
+                        activeImg === i ? 'ring-2 ring-brand-500 scale-105' : 'opacity-60 hover:opacity-100'
                       }`}
                     >
                       <img src={src} alt="" className="w-full h-full object-cover" loading="lazy" decoding="async" />
