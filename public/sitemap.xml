@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Generado a mano a partir de src/data/index.ts (proyectos NO ocultos).
+  Si se agrega, oculta o quita un proyecto, actualizar esta lista también.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://ticondes.github.io/PaginaCondes/</loc></url>
+  <url><loc>https://ticondes.github.io/PaginaCondes/proyectos</loc></url>
+  <url><loc>https://ticondes.github.io/PaginaCondes/proyectos/florencia</loc></url>
+  <url><loc>https://ticondes.github.io/PaginaCondes/proyectos/monserrat</loc></url>
+  <url><loc>https://ticondes.github.io/PaginaCondes/proyectos/jardines-del-sol</loc></url>
+  <url><loc>https://ticondes.github.io/PaginaCondes/proyectos/parquecentral</loc></url>
+  <url><loc>https://ticondes.github.io/PaginaCondes/proyectos/costa-real</loc></url>
+  <url><loc>https://ticondes.github.io/PaginaCondes/proyectos/monaco</loc></url>
+  <url><loc>https://ticondes.github.io/PaginaCondes/proyectos/santa-maria</loc></url>
+  <url><loc>https://ticondes.github.io/PaginaCondes/nosotros</loc></url>
+  <url><loc>https://ticondes.github.io/PaginaCondes/contacto</loc></url>
+</urlset>

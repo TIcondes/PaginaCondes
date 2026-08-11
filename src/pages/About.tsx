@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type PointerEvent } from 'react'
 import { useScrollReveal } from '../hooks/useScrollReveal'
+import { usePageMeta } from '../hooks/usePageMeta'
 import { teamImages, CONTACT } from '../data'
 import { Ruler, Scale, Shield, Calculator, ArrowRight, Target, Eye, Pause, Play } from 'lucide-react'
 
@@ -20,6 +21,11 @@ const TEAM_SLIDE_INTERVAL = 4500 // ms entre cada cambio de foto
 const SHOW_TEAM_SECTION = false
 
 export default function About() {
+  usePageMeta(
+    'Nosotros — Condes Corporación',
+    'Conoce al equipo detrás de Condes Corporación, desarrolladora inmobiliaria arequipeña.'
+  )
+
   const heroRef = useScrollReveal()
   const introRef = useScrollReveal()
   const teamRef = useScrollReveal()

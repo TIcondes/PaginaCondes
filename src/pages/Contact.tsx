@@ -2,8 +2,14 @@ import { Mail, Phone, MapPin, Instagram, Facebook } from 'lucide-react'
 import { CONTACT } from '../data'
 import ContactForm from '../components/ui/ContactForm'
 import { useScrollReveal } from '../hooks/useScrollReveal'
+import { usePageMeta } from '../hooks/usePageMeta'
 
 export default function Contact() {
+  usePageMeta(
+    'Contacto — Condes Corporación',
+    'Contáctanos y recibe asesoría gratuita para encontrar tu hogar ideal en Arequipa.'
+  )
+
   const headerRef = useScrollReveal()
   const bodyRef = useScrollReveal()
 

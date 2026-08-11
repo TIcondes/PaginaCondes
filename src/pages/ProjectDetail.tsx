@@ -2,6 +2,7 @@ import { useParams, Link, Navigate } from 'react-router-dom'
 import { MapPin, Home, Building2, CheckCircle, ArrowLeft, ArrowRight, ChevronLeft, ChevronRight, Bed, Bath, RotateCw, Phone, Clock } from 'lucide-react'
 import { useState, useEffect, lazy, Suspense } from 'react'
 import { useScrollReveal } from '../hooks/useScrollReveal'
+import { usePageMeta } from '../hooks/usePageMeta'
 import { visibleProjects, CONTACT } from '../data'
 
 // Three.js (usado por Panorama360Viewer) pesa varios cientos de KB: se carga
@@ -30,6 +31,12 @@ const GALLERY_SLIDE_INTERVAL = 5000 // ms que tarda la barra en llenarse antes d
 export default function ProjectDetail() {
   const { slug } = useParams<{ slug: string }>()
   const project = visibleProjects.find((p) => p.slug === slug)
+
+  usePageMeta(
+    project ? `${project.name} — Condes Corporación` : 'Proyecto no encontrado — Condes Corporación',
+    project?.description
+  )
+
   const [activeImg, setActiveImg] = useState(0)
   const [galleryTab, setGalleryTab] = useState<GalleryTab>('renders')
   const [show360, setShow360] = useState(false)

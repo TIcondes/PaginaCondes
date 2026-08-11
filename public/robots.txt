@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ticondes.github.io/PaginaCondes/sitemap.xml

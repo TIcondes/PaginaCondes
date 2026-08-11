@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, ChevronRight, Pause, Play } from 'lucide-react'
 import { useScrollReveal } from '../hooks/useScrollReveal'
+import { usePageMeta } from '../hooks/usePageMeta'
 import { visibleProjects, teamImages, heroImages, seasonalBanner } from '../data'
 import ProjectCardLight from '../components/ui/ProjectCardLight'
 
@@ -11,6 +12,11 @@ const HERO_SLIDE_INTERVAL = 16000 // ms entre cada cambio de render en el hero (
 const HOME_PROJECTS_LIMIT = 4
 
 export default function Home() {
+  usePageMeta(
+    'Condes Corporación — Tu hogar ideal en Arequipa',
+    'Proyectos inmobiliarios de calidad en Arequipa, Perú. Casas y departamentos con servicios completos.'
+  )
+
   // Solo proyectos en venta (disponible o preventa); los entregados no se
   // muestran en el Home — el catálogo completo con ese filtro vive en /proyectos.
   const homeProjects = visibleProjects

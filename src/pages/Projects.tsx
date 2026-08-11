@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useScrollReveal } from '../hooks/useScrollReveal'
+import { usePageMeta } from '../hooks/usePageMeta'
 import { visibleProjects } from '../data'
 import ProjectCardLight from '../components/ui/ProjectCardLight'
 import FilterBar from '../components/ui/FilterBar'
@@ -20,6 +21,11 @@ function applyFilter(projects: Project[], filter: string): Project[] {
 }
 
 export default function Projects() {
+  usePageMeta(
+    'Proyectos — Condes Corporación',
+    'Conoce todos nuestros proyectos inmobiliarios en Arequipa: casas y departamentos en venta y preventa.'
+  )
+
   const [filter, setFilter] = useState('all')
   const filtered = applyFilter(visibleProjects, filter)
   const headerRef = useScrollReveal()
