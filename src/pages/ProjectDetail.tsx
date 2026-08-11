@@ -1,5 +1,5 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
-import { MapPin, Home, Building2, CheckCircle, ArrowLeft, ArrowRight, Bed, Bath, RotateCw, Phone, Clock } from 'lucide-react'
+import { MapPin, Home, Building2, CheckCircle, ArrowLeft, ArrowRight, ChevronLeft, ChevronRight, Bed, Bath, RotateCw, Phone, Clock } from 'lucide-react'
 import { useState, useEffect, lazy, Suspense } from 'react'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 import { visibleProjects, CONTACT } from '../data'
@@ -178,6 +178,25 @@ export default function ProjectDetail() {
                 loading="lazy"
                 decoding="async"
               />
+
+              {tabImages.length > 1 && (
+                <>
+                  <button
+                    onClick={() => setActiveImg((i) => (i - 1 + tabImages.length) % tabImages.length)}
+                    aria-label="Render anterior"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-gray-950/50 backdrop-blur-sm text-white flex items-center justify-center hover:bg-gray-950/80 hover:scale-110 transition-all duration-200"
+                  >
+                    <ChevronLeft size={22} />
+                  </button>
+                  <button
+                    onClick={() => setActiveImg((i) => (i + 1) % tabImages.length)}
+                    aria-label="Siguiente render"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-gray-950/50 backdrop-blur-sm text-white flex items-center justify-center hover:bg-gray-950/80 hover:scale-110 transition-all duration-200"
+                  >
+                    <ChevronRight size={22} />
+                  </button>
+                </>
+              )}
             </div>
           )}
         </div>
