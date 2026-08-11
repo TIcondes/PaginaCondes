@@ -44,6 +44,7 @@ export default function ProjectDetail() {
   const galleryRef = useScrollReveal()
   const virtualRef = useScrollReveal()
   const contentRef = useScrollReveal()
+  const locationRef = useScrollReveal()
 
   if (!project) return <Navigate to="/proyectos" replace />
 
@@ -299,13 +300,13 @@ export default function ProjectDetail() {
               Ocupa las 3 columnas del grid (de lado a lado) para que el plano se vea a buen tamaño. */}
           {project.typologies && project.typologies.length > 0 && selectedTypology && (
             <div className="lg:col-span-3 mt-16 pt-10 border-t border-gray-100">
-              <p className="text-brand-600 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">Distribución</p>
-              <h2 className="font-display text-3xl text-gray-900 mb-8">
+              <p className="reveal text-brand-600 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">Distribución</p>
+              <h2 className="reveal reveal-delay-1 font-display text-3xl text-gray-900 mb-8">
                 Tipologías <span className="italic text-brand-800">disponibles</span>
               </h2>
 
               {project.typologies.length > 1 && (
-                <div className="flex flex-wrap gap-2 mb-8">
+                <div className="reveal reveal-delay-2 flex flex-wrap gap-2 mb-8">
                   {project.typologies.map((t, i) => (
                     <button
                       key={t.name}
@@ -322,7 +323,7 @@ export default function ProjectDetail() {
                 </div>
               )}
 
-              <div className="border border-gray-100 bg-white">
+              <div className="reveal reveal-delay-3 border border-gray-100 bg-white">
                 <div className="relative aspect-[21/9] bg-gray-50">
                   <img
                     src={selectedTypology.planImage}
@@ -375,7 +376,7 @@ export default function ProjectDetail() {
           )}
 
           {/* Prev / Next navigation */}
-          <div className="mt-16 pt-10 border-t border-gray-100 flex justify-between">
+          <div className="reveal mt-16 pt-10 border-t border-gray-100 flex justify-between">
             {prev ? (
               <Link to={`/proyectos/${prev.slug}`} className="group flex items-center gap-3 text-sm font-body text-gray-500 hover:text-brand-600 transition-colors">
                 <ArrowLeft size={16} className="transition-transform group-hover:-translate-x-1" />
@@ -399,7 +400,7 @@ export default function ProjectDetail() {
       </section>
 
       {/* Ubicación y Mapa CTA */}
-      <section className="relative py-24 flex items-center justify-center overflow-hidden">
+      <section className="relative py-24 flex items-center justify-center overflow-hidden" ref={locationRef}>
         <div className="absolute inset-0">
           <img
             src={project.images[0]}
@@ -410,8 +411,8 @@ export default function ProjectDetail() {
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full">
-          <div className="grid lg:grid-cols-2 items-stretch bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden shadow-2xl">
-            
+          <div className="reveal grid lg:grid-cols-2 items-stretch bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden shadow-2xl">
+
             {/* Mapa (Iframe de Google Maps) */}
             <div className="h-72 lg:h-auto w-full bg-gray-800 relative">
               <iframe
@@ -432,7 +433,7 @@ export default function ProjectDetail() {
                 Ubicado en {project.district || project.city}
               </p>
               <h2 className="font-display text-3xl md:text-4xl mb-10">Conoce nuestro proyecto</h2>
-              
+
               <div className="space-y-6 mb-10 font-body">
                 <div className="flex items-start gap-4">
                   <MapPin size={24} className="text-brand-400 shrink-0 mt-0.5" />
