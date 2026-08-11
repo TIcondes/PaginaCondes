@@ -204,9 +204,6 @@ export const projects: Project[] = [
       planimetria: ['https://condescorporacion.com/wp-content/uploads/2026/02/PLANIMETRIA-MONTSERRAT.png'],
       // Fotos reales de avance de obra (no renders), tomadas en la propia construcción.
       avance: [
-        'https://condescorporacion.com/wp-content/uploads/2026/05/MONSE-1.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/05/MONSE-2.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/05/MONSE-3.png',
         'https://condescorporacion.com/wp-content/uploads/2026/05/2-FOTO-1-FB.png',
         'https://condescorporacion.com/wp-content/uploads/2026/05/3-FOTO-2-FB.png',
         'https://condescorporacion.com/wp-content/uploads/2026/05/4-FOTO-3-FB.png',
