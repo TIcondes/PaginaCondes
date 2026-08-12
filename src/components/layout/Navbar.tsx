@@ -23,12 +23,19 @@ export default function Navbar() {
   const transparent = !scrolled
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-      transparent
-        ? 'bg-gradient-to-b from-gray-950/40 via-gray-950/15 to-transparent backdrop-blur-sm'
-        : 'bg-white/95 backdrop-blur-sm shadow-sm border-b border-gray-100'
-    }`}>
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+    <header className="fixed top-0 left-0 right-0 z-50">
+      {/* Fondo en dos capas que se funden con opacity en vez de cambiar el
+          background directamente: un gradiente no puede transicionar
+          suavemente a un color sólido (la transición simplemente salta), así
+          que en vez de eso se cruzan dos capas superpuestas. */}
+      <div className={`absolute inset-0 bg-gradient-to-b from-gray-950/40 via-gray-950/15 to-transparent backdrop-blur-sm transition-opacity duration-500 ${
+        transparent ? 'opacity-100' : 'opacity-0'
+      }`} />
+      <div className={`absolute inset-0 bg-white/95 backdrop-blur-sm shadow-sm border-b border-gray-100 transition-opacity duration-500 ${
+        transparent ? 'opacity-0' : 'opacity-100'
+      }`} />
+
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-12">
         <div className={`relative flex items-center justify-between transition-all duration-500 ${transparent ? 'h-20 md:h-32' : 'h-16 md:h-24'}`}>
           <nav className="hidden md:flex items-center gap-10">
             {navLinks.map((link) => {
@@ -55,12 +62,22 @@ export default function Navbar() {
           </nav>
 
           {/* Logo centrado de forma absoluta: queda perfectamente al medio
-              sin importar cuánto midan los nav links o el botón a los lados. */}
-          <Link to="/" className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+              sin importar cuánto midan los nav links o el botón a los lados.
+              Las dos versiones (blanca/color) se superponen y se funden con
+              opacity en vez de cambiar el `src`, que saltaría de golpe. */}
+          <Link
+            to="/"
+            className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-32 transition-all duration-500 ${transparent ? 'h-14 md:h-24' : 'h-10 md:h-16'}`}
+          >
             <img
-              src={`${import.meta.env.BASE_URL}logos/${transparent ? 'logo-blanco.png' : 'logo.png'}`}
+              src={`${import.meta.env.BASE_URL}logos/logo-blanco.png`}
               alt="Condes Corporación"
-              className={`w-auto transition-all duration-500 ${transparent ? 'h-14 md:h-24' : 'h-10 md:h-16'}`}
+              className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-500 ${transparent ? 'opacity-100' : 'opacity-0'}`}
+            />
+            <img
+              src={`${import.meta.env.BASE_URL}logos/logo.png`}
+              alt="Condes Corporación"
+              className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-500 ${transparent ? 'opacity-0' : 'opacity-100'}`}
             />
           </Link>
 
