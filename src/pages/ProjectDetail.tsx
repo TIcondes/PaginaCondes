@@ -1,6 +1,6 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
 import { MapPin, Home, Building2, CheckCircle, ArrowLeft, ArrowRight, ChevronLeft, ChevronRight, Bed, Bath, RotateCw, Phone, Clock } from 'lucide-react'
-import { useState, useEffect, lazy, Suspense } from 'react'
+import { useState, useRef, lazy, Suspense } from 'react'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 import { usePageMeta } from '../hooks/usePageMeta'
 import { visibleProjects, CONTACT } from '../data'
@@ -18,15 +18,61 @@ function Panorama360Fallback() {
   )
 }
 
-// La planimetría ya no va en este carrusel de pestañas: se muestra como
-// imagen fija más abajo, junto a la información del proyecto.
-type GalleryTab = 'renders' | 'avance'
-const galleryLabels: Record<GalleryTab, string> = {
-  renders: 'Renders',
-  avance: 'Avance de obra',
+// Expositor horizontal de imágenes (Renders / Avance de obra): todas las
+// fotos quedan a la vista de una vez, deslizables con flechas o con el dedo,
+// en vez de pestañas que ocultan un set detrás del otro.
+function ImageStrip({ title, images, projectName }: { title: string; images: string[]; projectName: string }) {
+  const scrollerRef = useRef<HTMLDivElement>(null)
+
+  const scroll = (dir: 1 | -1) => {
+    scrollerRef.current?.scrollBy({ left: dir * 300, behavior: 'smooth' })
+  }
+
+  if (images.length === 0) return null
+
+  return (
+    <div>
+      <p className="text-center text-brand-600 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-4">{title}</p>
+      <div className="relative">
+        {images.length > 1 && (
+          <button
+            onClick={() => scroll(-1)}
+            aria-label={`Ver ${title.toLowerCase()} anteriores`}
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white shadow-md flex items-center justify-center text-gray-700 hover:bg-gray-50 hover:scale-110 transition-all duration-200"
+          >
+            <ChevronLeft size={18} />
+          </button>
+        )}
+        <div ref={scrollerRef} className="no-scrollbar flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory px-1 py-1">
+          {images.map((src, i) => (
+            <img
+              key={src}
+              src={src}
+              alt={`${projectName} — ${title} ${i + 1}`}
+              className="w-64 sm:w-72 aspect-[4/3] object-cover rounded-2xl shrink-0 snap-start shadow-sm"
+              loading="lazy"
+              decoding="async"
+            />
+          ))}
+        </div>
+        {images.length > 1 && (
+          <button
+            onClick={() => scroll(1)}
+            aria-label={`Ver más ${title.toLowerCase()}`}
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white shadow-md flex items-center justify-center text-gray-700 hover:bg-gray-50 hover:scale-110 transition-all duration-200"
+          >
+            <ChevronRight size={18} />
+          </button>
+        )}
+      </div>
+    </div>
+  )
 }
 
-const GALLERY_SLIDE_INTERVAL = 5000 // ms que tarda la barra en llenarse antes de pasar al siguiente render
+// El avance de obra real (fotos de la construcción, no renders) solo existe
+// para estos proyectos por ahora; el resto usaría un placeholder genérico,
+// así que mejor no mostrar la sección en vez de mostrar algo falso.
+const PROJECTS_WITH_AVANCE = ['florencia', 'monserrat']
 
 export default function ProjectDetail() {
   const { slug } = useParams<{ slug: string }>()
@@ -37,8 +83,6 @@ export default function ProjectDetail() {
     project?.description
   )
 
-  const [activeImg, setActiveImg] = useState(0)
-  const [galleryTab, setGalleryTab] = useState<GalleryTab>('renders')
   const [show360, setShow360] = useState(false)
   // Área activa dentro del recorrido 360° caminable del proyecto (uno solo
   // por proyecto, no por tipología), y la orientación con la que la cámara
@@ -50,36 +94,15 @@ export default function ProjectDetail() {
   const [selectedTypologyIndex, setSelectedTypologyIndex] = useState(0)
 
   const heroRef = useScrollReveal()
-  // Depende de galleryTab: al cambiar entre Renders / Avance de obra, las
-  // miniaturas y botones vuelven a animar su entrada en vez de aparecer de golpe.
-  const galleryRef = useScrollReveal([galleryTab])
+  const galleryRef = useScrollReveal()
   const virtualRef = useScrollReveal()
   const contentRef = useScrollReveal()
   const locationRef = useScrollReveal()
 
-  const gallery = project?.gallery ?? { renders: project?.images ?? [] }
-  const availableTabs = (Object.keys(galleryLabels) as GalleryTab[]).filter(
-    (k) => (gallery[k]?.length ?? 0) > 0
-  )
-  const activeTab: GalleryTab = availableTabs.includes(galleryTab) ? galleryTab : availableTabs[0]
-  const tabImages = gallery[activeTab] ?? []
-
-  // Barra de progreso tipo "historia": se llena en GALLERY_SLIDE_INTERVAL ms
-  // y al terminar pasa sola al siguiente render. Se reinicia cada vez que
-  // cambia la imagen activa (por autoplay o por click en una barra).
-  const [galleryProgress, setGalleryProgress] = useState(0)
-  useEffect(() => {
-    if (tabImages.length <= 1) return
-    setGalleryProgress(0)
-    const start = Date.now()
-    const id = setInterval(() => {
-      const pct = Math.min(((Date.now() - start) / GALLERY_SLIDE_INTERVAL) * 100, 100)
-      setGalleryProgress(pct)
-      if (pct >= 100) setActiveImg((i) => (i + 1) % tabImages.length)
-    }, 50)
-    return () => clearInterval(id)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeImg, activeTab, tabImages.length])
+  const renderImages = project?.gallery?.renders ?? project?.images ?? []
+  const avanceImages = project && PROJECTS_WITH_AVANCE.includes(project.slug)
+    ? project.gallery?.avance ?? []
+    : []
 
   if (!project) return <Navigate to="/proyectos" replace />
 
@@ -134,79 +157,17 @@ export default function ProjectDetail() {
         </div>
       </section>
 
-      {/* Categorized gallery: Renders / Planimetría / Avance de obra */}
-      <section className="bg-gray-50 border-y border-gray-100 py-10" ref={galleryRef}>
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="flex flex-wrap gap-2 mb-6">
-            {availableTabs.map((tab, i) => (
-              <button
-                key={tab}
-                onClick={() => { setGalleryTab(tab); setActiveImg(0) }}
-                className={`reveal reveal-delay-${i + 1} px-4 py-2 text-sm font-body font-medium border transition-all duration-200 hover:scale-105 active:scale-95 ${
-                  activeTab === tab
-                    ? 'bg-brand-600 text-white border-brand-600'
-                    : 'bg-white text-gray-600 border-gray-200 hover:border-brand-400 hover:text-brand-600'
-                }`}
-              >
-                {galleryLabels[tab]}
-              </button>
-            ))}
-          </div>
-
-          {tabImages.length > 0 && (
-            <div className="reveal reveal-delay-1 relative overflow-hidden bg-gray-900 aspect-[16/9]">
-              {/* Barra de progreso tipo "historia": cada segmento representa un
-                  render; el activo se va llenando solo y al completarse pasa
-                  al siguiente. Clic en un segmento salta directo a esa imagen. */}
-              {tabImages.length > 1 && (
-                <div className="absolute top-3 left-3 right-3 z-10 flex gap-1.5">
-                  {tabImages.map((_, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setActiveImg(i)}
-                      aria-label={`Ir a la imagen ${i + 1} de ${tabImages.length}`}
-                      className="flex-1 h-1 bg-white/25 rounded-full overflow-hidden"
-                    >
-                      <div
-                        className="h-full bg-white rounded-full"
-                        style={{
-                          width: i < activeImg ? '100%' : i === activeImg ? `${galleryProgress}%` : '0%',
-                        }}
-                      />
-                    </button>
-                  ))}
-                </div>
-              )}
-              <img
-                key={`${activeTab}-${activeImg}`}
-                src={tabImages[Math.min(activeImg, tabImages.length - 1)]}
-                alt={`${project.name} — ${galleryLabels[activeTab]}`}
-                className="w-full h-full object-cover animate-gallery-fade"
-                loading="lazy"
-                decoding="async"
-              />
-
-              {tabImages.length > 1 && (
-                <>
-                  <button
-                    onClick={() => setActiveImg((i) => (i - 1 + tabImages.length) % tabImages.length)}
-                    aria-label="Render anterior"
-                    className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-gray-950/50 backdrop-blur-sm text-white flex items-center justify-center hover:bg-gray-950/80 hover:scale-110 transition-all duration-200"
-                  >
-                    <ChevronLeft size={22} />
-                  </button>
-                  <button
-                    onClick={() => setActiveImg((i) => (i + 1) % tabImages.length)}
-                    aria-label="Siguiente render"
-                    className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-gray-950/50 backdrop-blur-sm text-white flex items-center justify-center hover:bg-gray-950/80 hover:scale-110 transition-all duration-200"
-                  >
-                    <ChevronRight size={22} />
-                  </button>
-                </>
-              )}
-            </div>
-          )}
+      {/* Renders siempre visibles, y debajo (solo si existe) el avance de obra
+          en su propio expositor — ya no son pestañas que se ocultan entre sí. */}
+      <section className="bg-gray-50 border-y border-gray-100 py-10 space-y-10" ref={galleryRef}>
+        <div className="reveal max-w-7xl mx-auto px-6 lg:px-12">
+          <ImageStrip title="Renders" images={renderImages} projectName={project.name} />
         </div>
+        {avanceImages.length > 0 && (
+          <div className="reveal reveal-delay-1 max-w-7xl mx-auto px-6 lg:px-12">
+            <ImageStrip title="Avance de obra" images={avanceImages} projectName={project.name} />
+          </div>
+        )}
       </section>
 
       {/* Recorrido Virtual 360° — visor nativo con Three.js, sin iframes externos */}
