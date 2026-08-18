@@ -4,14 +4,13 @@ import { usePageMeta } from '../hooks/usePageMeta'
 import { teamImages, CONTACT } from '../data'
 import { Ruler, Scale, Shield, Calculator, ArrowRight, Target, Eye, Pause, Play } from 'lucide-react'
 
-// `image`: pega aquí la URL de la foto/render de cada área cuando la tengas
-// (ej. una obra en construcción para Ingeniería, un plano para Arquitectura).
-// Mientras esté vacío, el expositor muestra un fondo de color plano.
+const disciplinesImg = (file: string) => `${import.meta.env.BASE_URL}images/disciplinas/${file}`
+
 const disciplines = [
-  { icon: Ruler,      label: 'Arquitectura',  desc: 'Diseños funcionales y modernos adaptados a cada terreno y necesidad.',   image: '' },
-  { icon: Shield,     label: 'Ingeniería',    desc: 'Estructuras seguras certificadas por ingenieros colegiados.',           image: '' },
-  { icon: Scale,      label: 'Legal',         desc: 'Procesos 100% transparentes con respaldo legal en cada etapa.',         image: '' },
-  { icon: Calculator, label: 'Contabilidad',  desc: 'Gestión financiera responsable para proyectos sostenibles.',            image: '' },
+  { icon: Ruler,      label: 'Arquitectura',  desc: 'Diseños funcionales y modernos adaptados a cada terreno y necesidad.',   image: disciplinesImg('arquitectura.jpg') },
+  { icon: Shield,     label: 'Ingeniería',    desc: 'Estructuras seguras certificadas por ingenieros colegiados.',           image: disciplinesImg('ingenieria.jpg') },
+  { icon: Scale,      label: 'Legal',         desc: 'Procesos 100% transparentes con respaldo legal en cada etapa.',         image: disciplinesImg('legal.jpg') },
+  { icon: Calculator, label: 'Contabilidad',  desc: 'Gestión financiera responsable para proyectos sostenibles.',            image: disciplinesImg('contabilidad.jpg') },
 ]
 
 const TEAM_SLIDE_INTERVAL = 4500 // ms entre cada cambio de foto
