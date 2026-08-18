@@ -1,5 +1,5 @@
 import { useState, FormEvent } from 'react'
-import { ArrowRight, CheckCircle2 } from 'lucide-react'
+import { ArrowRight, CheckCircle2, AlertCircle } from 'lucide-react'
 import { visibleProjects } from '../../data'
 import type { ContactFormData } from '../../types'
 
@@ -15,10 +15,16 @@ const initial: ContactFormData = {
   contactMethod: 'phone',
 }
 
+// Web3Forms: envía el POST directo desde el navegador a la casilla configurada
+// en el dashboard de Web3Forms (sin backend propio). La access key es pública
+// a propósito — Web3Forms la diseñó para usarse en código de cliente.
+const WEB3FORMS_ACCESS_KEY = 'b70b0dcc-a865-4ca3-ade1-bad3dee92870'
+
 export default function ContactForm({ defaultProject }: Props) {
   const [form, setForm] = useState<ContactFormData>({ ...initial, project: defaultProject ?? '' })
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
@@ -27,9 +33,33 @@ export default function ContactForm({ defaultProject }: Props) {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     setLoading(true)
-    await new Promise((r) => setTimeout(r, 1200))
-    setLoading(false)
-    setSubmitted(true)
+    setError(false)
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: `Nuevo contacto desde la web — ${form.project || 'Condes Corporación'}`,
+          from_name: form.fullName,
+          name: form.fullName,
+          email: form.email,
+          telefono: form.phone,
+          proyecto_de_interes: form.project,
+          metodo_de_contacto_preferido: form.contactMethod === 'phone' ? 'Teléfono' : 'Correo',
+        }),
+      })
+      const data = await res.json()
+      if (data.success) {
+        setSubmitted(true)
+      } else {
+        setError(true)
+      }
+    } catch {
+      setError(true)
+    } finally {
+      setLoading(false)
+    }
   }
 
   if (submitted) {
@@ -91,6 +121,13 @@ export default function ContactForm({ defaultProject }: Props) {
           ))}
         </div>
       </div>
+
+      {error && (
+        <div className="flex items-center gap-2 text-sm text-red-600 font-body bg-red-50 border border-red-100 rounded-lg px-4 py-3">
+          <AlertCircle size={16} className="shrink-0" />
+          No se pudo enviar tu mensaje. Intenta de nuevo o escríbenos por WhatsApp.
+        </div>
+      )}
 
       <button type="submit" disabled={loading}
         className="w-full rounded-full bg-brand-600 text-white py-4 text-sm font-body font-medium tracking-widest uppercase flex items-center justify-center gap-2 hover:bg-brand-700 hover:scale-[1.01] transition-all disabled:opacity-70 disabled:hover:scale-100 active:scale-[0.99]">
