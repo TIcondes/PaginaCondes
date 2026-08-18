@@ -11,6 +11,7 @@ import Projects from './pages/Projects'
 import ProjectDetail from './pages/ProjectDetail'
 import About from './pages/About'
 import Contact from './pages/Contact'
+import Privacy from './pages/Privacy'
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
           <Route path="/proyectos/:slug"     element={<ProjectDetail />} />
           <Route path="/nosotros"            element={<About />} />
           <Route path="/contacto"            element={<Contact />} />
+          <Route path="/politica-de-privacidad" element={<Privacy />} />
           <Route path="*"                    element={<Home />} />
         </Routes>
       </main>

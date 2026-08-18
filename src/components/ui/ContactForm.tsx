@@ -1,4 +1,5 @@
 import { useState, FormEvent } from 'react'
+import { Link } from 'react-router-dom'
 import { ArrowRight, CheckCircle2, AlertCircle } from 'lucide-react'
 import { visibleProjects } from '../../data'
 import type { ContactFormData } from '../../types'
@@ -133,6 +134,13 @@ export default function ContactForm({ defaultProject }: Props) {
         className="w-full rounded-full bg-brand-600 text-white py-4 text-sm font-body font-medium tracking-widest uppercase flex items-center justify-center gap-2 hover:bg-brand-700 hover:scale-[1.01] transition-all disabled:opacity-70 disabled:hover:scale-100 active:scale-[0.99]">
         {loading ? <span className="animate-pulse">Enviando...</span> : <><span>Enviar</span><ArrowRight size={15} /></>}
       </button>
+
+      <p className="text-xs text-gray-400 font-body text-center">
+        Al enviar, aceptas nuestra{' '}
+        <Link to="/politica-de-privacidad" className="underline hover:text-brand-600 transition-colors">
+          política de privacidad
+        </Link>.
+      </p>
     </form>
   )
 }

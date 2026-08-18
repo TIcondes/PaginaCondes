@@ -78,7 +78,12 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="font-body text-sm text-gray-600">© 2026 Condes Corporación. Todos los derechos reservados.</p>
+          <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4">
+            <p className="font-body text-sm text-gray-600">© 2026 Condes Corporación. Todos los derechos reservados.</p>
+            <Link to="/politica-de-privacidad" className="font-body text-sm text-gray-600 hover:text-white transition-colors">
+              Política de privacidad
+            </Link>
+          </div>
           <div className="flex items-center gap-4">
             <a href={CONTACT.instagram} target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-white transition-colors" aria-label="Instagram"><Instagram size={18} /></a>
             <a href={CONTACT.facebook} target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-white transition-colors" aria-label="Facebook"><Facebook size={18} /></a>
