@@ -249,7 +249,7 @@ export default function About() {
                       zIndex: 20 - absDiff,
                       opacity,
                     }}
-                    className={`absolute left-1/2 top-0 w-[340px] md:w-[540px] h-full shadow-2xl ${blurClass} ${
+                    className={`absolute left-1/2 top-0 w-[85vw] max-w-[340px] md:w-[540px] md:max-w-none h-full shadow-2xl ${blurClass} ${
                       isDragging ? '' : 'transition-all duration-500 ease-out'
                     } ${isActive ? '' : 'cursor-pointer'}`}
                   >

@@ -29,7 +29,7 @@ export default function Contact() {
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full">
           <p className="reveal text-brand-200 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">Contáctanos</p>
-          <h1 className="reveal reveal-delay-1 font-display text-5xl text-white max-w-xl">
+          <h1 className="reveal reveal-delay-1 font-display text-4xl md:text-5xl text-white max-w-xl">
             Encuentra el proyecto <span className="italic text-brand-200">ideal para ti</span>
           </h1>
         </div>
