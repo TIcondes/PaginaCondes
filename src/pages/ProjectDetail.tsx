@@ -1,6 +1,6 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
-import { MapPin, Home, Building2, CheckCircle, ArrowLeft, ArrowRight, ChevronLeft, ChevronRight, Bed, Bath, RotateCw, Phone, Clock } from 'lucide-react'
-import { useState, useRef, lazy, Suspense } from 'react'
+import { MapPin, Home, Building2, CheckCircle, ArrowLeft, ArrowRight, ChevronLeft, ChevronRight, Bed, Bath, RotateCw, Phone, Clock, X } from 'lucide-react'
+import { useState, useRef, useEffect, lazy, Suspense } from 'react'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 import { usePageMeta } from '../hooks/usePageMeta'
 import { visibleProjects, CONTACT } from '../data'
@@ -20,8 +20,19 @@ function Panorama360Fallback() {
 
 // Expositor horizontal de imágenes (Renders / Avance de obra): todas las
 // fotos quedan a la vista de una vez, deslizables con flechas o con el dedo,
-// en vez de pestañas que ocultan un set detrás del otro.
-function ImageStrip({ title, images, projectName }: { title: string; images: string[]; projectName: string }) {
+// en vez de pestañas que ocultan un set detrás del otro. Cada foto es
+// clicable y abre en grande con `onImageClick`.
+function ImageStrip({
+  title,
+  images,
+  projectName,
+  onImageClick,
+}: {
+  title: string
+  images: string[]
+  projectName: string
+  onImageClick: (index: number) => void
+}) {
   const scrollerRef = useRef<HTMLDivElement>(null)
 
   const scroll = (dir: 1 | -1) => {
@@ -45,14 +56,20 @@ function ImageStrip({ title, images, projectName }: { title: string; images: str
         )}
         <div ref={scrollerRef} className="no-scrollbar flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory px-1 py-1">
           {images.map((src, i) => (
-            <img
+            <button
               key={src}
-              src={src}
-              alt={`${projectName} — ${title} ${i + 1}`}
-              className="w-64 sm:w-72 aspect-[4/3] object-cover rounded-2xl shrink-0 snap-start shadow-sm"
-              loading="lazy"
-              decoding="async"
-            />
+              onClick={() => onImageClick(i)}
+              aria-label={`Ver ${title.toLowerCase()} ${i + 1} en grande`}
+              className="shrink-0 snap-start group"
+            >
+              <img
+                src={src}
+                alt={`${projectName} — ${title} ${i + 1}`}
+                className="w-64 sm:w-72 aspect-[4/3] object-cover rounded-2xl shadow-sm transition-transform duration-300 group-hover:scale-[1.03] cursor-zoom-in"
+                loading="lazy"
+                decoding="async"
+              />
+            </button>
           ))}
         </div>
         {images.length > 1 && (
@@ -65,6 +82,87 @@ function ImageStrip({ title, images, projectName }: { title: string; images: str
           </button>
         )}
       </div>
+    </div>
+  )
+}
+
+// Visor a pantalla completa para ver un render/foto de avance en grande.
+// Cierra con Escape, clic afuera, o el botón X; navega con las flechas del
+// teclado o los botones. Bloquea el scroll del body mientras está abierto.
+function Lightbox({
+  images,
+  index,
+  title,
+  onClose,
+  onNavigate,
+}: {
+  images: string[]
+  index: number
+  title: string
+  onClose: () => void
+  onNavigate: (index: number) => void
+}) {
+  useEffect(() => {
+    const prevOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+      if (e.key === 'ArrowLeft') onNavigate((index - 1 + images.length) % images.length)
+      if (e.key === 'ArrowRight') onNavigate((index + 1) % images.length)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => {
+      document.body.style.overflow = prevOverflow
+      window.removeEventListener('keydown', onKeyDown)
+    }
+  }, [index, images.length, onClose, onNavigate])
+
+  return (
+    <div
+      className="fixed inset-0 z-[100] bg-gray-950/95 backdrop-blur-sm flex items-center justify-center p-4 sm:p-10 animate-fade-in"
+      onClick={onClose}
+    >
+      <button
+        onClick={onClose}
+        aria-label="Cerrar"
+        className="absolute top-4 right-4 sm:top-6 sm:right-6 z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors"
+      >
+        <X size={20} />
+      </button>
+
+      {images.length > 1 && (
+        <button
+          onClick={(e) => { e.stopPropagation(); onNavigate((index - 1 + images.length) % images.length) }}
+          aria-label="Imagen anterior"
+          className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors"
+        >
+          <ChevronLeft size={24} />
+        </button>
+      )}
+
+      <img
+        key={index}
+        src={images[index]}
+        alt={`${title} ${index + 1}`}
+        onClick={(e) => e.stopPropagation()}
+        className="max-w-full max-h-full object-contain animate-gallery-fade"
+      />
+
+      {images.length > 1 && (
+        <button
+          onClick={(e) => { e.stopPropagation(); onNavigate((index + 1) % images.length) }}
+          aria-label="Siguiente imagen"
+          className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors"
+        >
+          <ChevronRight size={24} />
+        </button>
+      )}
+
+      {images.length > 1 && (
+        <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 text-white/70 text-xs font-body tracking-wide">
+          {index + 1} / {images.length}
+        </div>
+      )}
     </div>
   )
 }
@@ -84,6 +182,10 @@ export default function ProjectDetail() {
   )
 
   const [show360, setShow360] = useState(false)
+  // Visor a pantalla completa para una foto de Renders o Avance de obra;
+  // `images` guarda qué set (renders o avance) está abierto para poder
+  // navegar entre las fotos de ese mismo set con las flechas.
+  const [lightbox, setLightbox] = useState<{ images: string[]; index: number; title: string } | null>(null)
   // Área activa dentro del recorrido 360° caminable del proyecto (uno solo
   // por proyecto, no por tipología), y la orientación con la que la cámara
   // debe entrar a esa área (viene del hotspot que se acaba de cruzar, para
@@ -161,14 +263,34 @@ export default function ProjectDetail() {
           en su propio expositor — ya no son pestañas que se ocultan entre sí. */}
       <section className="bg-gray-50 border-y border-gray-100 py-10 space-y-10" ref={galleryRef}>
         <div className="reveal max-w-7xl mx-auto px-6 lg:px-12">
-          <ImageStrip title="Renders" images={renderImages} projectName={project.name} />
+          <ImageStrip
+            title="Renders"
+            images={renderImages}
+            projectName={project.name}
+            onImageClick={(i) => setLightbox({ images: renderImages, index: i, title: 'Renders' })}
+          />
         </div>
         {avanceImages.length > 0 && (
           <div className="reveal reveal-delay-1 max-w-7xl mx-auto px-6 lg:px-12">
-            <ImageStrip title="Avance de obra" images={avanceImages} projectName={project.name} />
+            <ImageStrip
+              title="Avance de obra"
+              images={avanceImages}
+              projectName={project.name}
+              onImageClick={(i) => setLightbox({ images: avanceImages, index: i, title: 'Avance de obra' })}
+            />
           </div>
         )}
       </section>
+
+      {lightbox && (
+        <Lightbox
+          images={lightbox.images}
+          index={lightbox.index}
+          title={lightbox.title}
+          onClose={() => setLightbox(null)}
+          onNavigate={(i) => setLightbox((prev) => (prev ? { ...prev, index: i } : prev))}
+        />
+      )}
 
       {/* Recorrido Virtual 360° — visor nativo con Three.js, sin iframes externos */}
       <section className="bg-gray-950 py-10" ref={virtualRef}>
