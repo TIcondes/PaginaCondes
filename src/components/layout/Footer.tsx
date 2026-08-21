@@ -29,9 +29,14 @@ export default function Footer() {
             que Menú (corto) quede junto al logo en una fila de 2 columnas, y
             Contacto (más largo) ocupe el ancho completo debajo — reordenar
             el markup en vez de solo usar CSS haría que este último se viera
-            raro en uno de los dos tamaños. */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 mb-12">
-          <div>
+            raro en uno de los dos tamaños.
+            De md para arriba se pasa de grid (columnas de igual ancho, que
+            con contenido angosto como Menú dejaba un espacio enorme y
+            asimétrico) a flex + justify-between: cada bloque mide lo que
+            necesita su contenido y el espacio libre se reparte parejo entre
+            los tres, en vez de forzar tercios iguales. */}
+        <div className="grid grid-cols-2 gap-8 mb-12 md:flex md:items-start md:justify-between md:gap-12">
+          <div className="md:max-w-xs">
             <img
               src="https://condescorporacion.com/wp-content/uploads/2025/12/logo_V.png"
               alt="Condes Corporación"
@@ -42,7 +47,7 @@ export default function Footer() {
             </p>
           </div>
 
-          <div className="text-center md:order-2">
+          <div className="text-center md:order-2 md:text-left">
             <h4 className="font-body text-xs text-gray-500 tracking-[0.25em] uppercase mb-5">Menú</h4>
             <nav className="space-y-3">
               {navLinks.map((link) => (
@@ -57,7 +62,7 @@ export default function Footer() {
             </nav>
           </div>
 
-          <div className="col-span-2 md:col-span-1 md:order-1">
+          <div className="col-span-2 md:order-1 md:max-w-xs">
             <h4 className="font-body text-xs text-gray-500 tracking-[0.25em] uppercase mb-5">Contacto</h4>
             <div className="space-y-3">
               <a href={`mailto:${CONTACT.email}`} className="flex items-start gap-3 text-sm text-gray-400 hover:text-white transition-colors">
