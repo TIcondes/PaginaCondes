@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="mb-12 text-center">
           <h4 className="font-body text-xs text-gray-500 tracking-[0.25em] uppercase mb-5">Ubicación</h4>
-          <div className="max-w-xl mx-auto overflow-hidden border border-gray-800 rounded-sm">
+          <div className="max-w-xl mx-auto overflow-hidden border border-gray-800 rounded-xl">
             <iframe
               title="Ubicación Condes Corporación"
               src={`https://www.google.com/maps?q=${encodeURIComponent(CONTACT.address + ', Arequipa, Perú')}&output=embed`}
@@ -24,10 +24,12 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* En móvil, Menú va a la derecha del logo (grid de 2 columnas) en vez
-            de apilarse todo en una sola columna pegada a la izquierda.
-            Contacto ocupa el ancho completo debajo. Desde md, vuelve a las
-            3 columnas lado a lado de siempre. */}
+        {/* En desktop el orden visual es Logo / Contacto / Menú (como en
+            condescorporacion.com). En móvil se reacomoda con `order-*` para
+            que Menú (corto) quede junto al logo en una fila de 2 columnas, y
+            Contacto (más largo) ocupe el ancho completo debajo — reordenar
+            el markup en vez de solo usar CSS haría que este último se viera
+            raro en uno de los dos tamaños. */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 mb-12">
           <div>
             <img
@@ -40,7 +42,7 @@ export default function Footer() {
             </p>
           </div>
 
-          <div className="text-center">
+          <div className="text-center md:order-2">
             <h4 className="font-body text-xs text-gray-500 tracking-[0.25em] uppercase mb-5">Menú</h4>
             <nav className="space-y-3">
               {navLinks.map((link) => (
@@ -55,7 +57,7 @@ export default function Footer() {
             </nav>
           </div>
 
-          <div className="col-span-2 md:col-span-1">
+          <div className="col-span-2 md:col-span-1 md:order-1">
             <h4 className="font-body text-xs text-gray-500 tracking-[0.25em] uppercase mb-5">Contacto</h4>
             <div className="space-y-3">
               <a href={`mailto:${CONTACT.email}`} className="flex items-start gap-3 text-sm text-gray-400 hover:text-white transition-colors">
