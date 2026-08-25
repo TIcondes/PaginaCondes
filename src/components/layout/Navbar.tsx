@@ -24,16 +24,21 @@ export default function Navbar() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
-      {/* Fondo en dos capas que se funden con opacity en vez de cambiar el
-          background directamente: un gradiente no puede transicionar
-          suavemente a un color sólido (la transición simplemente salta), así
-          que en vez de eso se cruzan dos capas superpuestas. */}
-      <div className={`absolute inset-0 bg-gradient-to-b from-gray-950/40 via-gray-950/15 to-transparent backdrop-blur-sm transition-opacity duration-500 ${
-        transparent ? 'opacity-100' : 'opacity-0'
-      }`} />
-      <div className={`absolute inset-0 bg-white/95 backdrop-blur-sm shadow-sm border-b border-gray-100 transition-opacity duration-500 ${
-        transparent ? 'opacity-0' : 'opacity-100'
-      }`} />
+      {/* Fila superior de la barra: las dos capas de fondo que se funden con
+          opacity quedan encerradas en este `relative` propio (no en el
+          `header`), para que su `absolute inset-0` solo cubra esta fila y no
+          se estire sobre el menú móvil desplegable de más abajo. */}
+      <div className="relative">
+        {/* Fondo en dos capas que se funden con opacity en vez de cambiar el
+            background directamente: un gradiente no puede transicionar
+            suavemente a un color sólido (la transición simplemente salta), así
+            que en vez de eso se cruzan dos capas superpuestas. */}
+        <div className={`absolute inset-0 bg-gradient-to-b from-gray-950/40 via-gray-950/15 to-transparent backdrop-blur-sm transition-opacity duration-500 ${
+          transparent ? 'opacity-100' : 'opacity-0'
+        }`} />
+        <div className={`absolute inset-0 bg-white/95 backdrop-blur-sm shadow-sm border-b border-gray-100 transition-opacity duration-500 ${
+          transparent ? 'opacity-0' : 'opacity-100'
+        }`} />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-12">
         <div className={`relative flex items-center justify-between transition-all duration-500 ${transparent ? 'h-20 md:h-32' : 'h-16 md:h-24'}`}>
@@ -104,8 +109,12 @@ export default function Navbar() {
           </button>
         </div>
       </div>
+      </div>
 
-      <div className={`md:hidden bg-white border-t border-gray-100 overflow-hidden transition-all duration-300 ${
+      {/* Menú móvil: fondo blanco sólido propio (no las capas de difuminado
+          de arriba), para que los links y el botón siempre se lean nítidos
+          sin importar el estado transparente/blanco de la barra. */}
+      <div className={`md:hidden bg-white shadow-lg border-t border-gray-100 overflow-hidden transition-all duration-300 ${
         isOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
       }`}>
         <div className="px-6 py-4 space-y-1">
