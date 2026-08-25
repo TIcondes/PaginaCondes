@@ -18,6 +18,13 @@ function Panorama360Fallback() {
   )
 }
 
+// Toda foto real (public/images/proyectos/...) tiene una miniatura -thumb
+// generada aparte (ver imgtool/process*.js). Mostrar la miniatura en el
+// expositor en vez de encoger por CSS la imagen de tamaño completo evita
+// que el detalle fino (líneas de ventanas, texturas) se vea "apelmazado" al
+// achicarse. El lightbox sigue abriendo la imagen de tamaño completo.
+const toThumb = (src: string) => src.replace(/\.webp$/, '-thumb.webp')
+
 // Expositor horizontal de imágenes (Renders / Avance de obra): todas las
 // fotos quedan a la vista de una vez, deslizables con flechas o con el dedo,
 // en vez de pestañas que ocultan un set detrás del otro. Cada foto es
@@ -63,7 +70,7 @@ function ImageStrip({
               className="shrink-0 snap-start group"
             >
               <img
-                src={src}
+                src={toThumb(src)}
                 alt={`${projectName} — ${title} ${i + 1}`}
                 className="w-64 sm:w-72 aspect-[4/3] object-cover rounded-2xl shadow-sm transition-transform duration-300 group-hover:scale-[1.03] cursor-zoom-in"
                 loading="lazy"
