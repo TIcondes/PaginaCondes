@@ -38,7 +38,7 @@ export default function Footer() {
         <div className="grid grid-cols-2 gap-8 mb-12 md:flex md:items-start md:justify-between md:gap-12">
           <div className="md:max-w-xs">
             <img
-              src="https://condescorporacion.com/wp-content/uploads/2025/12/logo_V.png"
+              src={`${import.meta.env.BASE_URL}logos/logo.png`}
               alt="Condes Corporación"
               className="h-14 w-auto mb-4 brightness-0 invert"
             />

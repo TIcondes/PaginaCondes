@@ -38,7 +38,7 @@ export default function Projects() {
       <section className="relative min-h-[60vh] flex items-end pb-16 overflow-hidden" ref={headerRef}>
         <div className="absolute inset-0 reveal">
           <img
-            src="https://condescorporacion.com/wp-content/uploads/2026/08/RENDER-PRINCIPAL-edit-scaled.png"
+            src={`${import.meta.env.BASE_URL}images/proyectos/monaco/RENDER-PRINCIPAL.webp`}
             alt="Proyectos Condes Corporación"
             className="w-full h-full object-cover"
           />

@@ -1,5 +1,12 @@
 import type { Project, NavLink, PanoramaArea } from '../types'
 
+// Todas las fotos/renders reales viven en public/images (descargadas y
+// comprimidas a .webp desde condescorporacion.com — antes se cargaban
+// directo desde ahí y pesaban varios MB cada una, lo que hacía la carga muy
+// lenta). Este helper arma la ruta completa respetando el `base` de Vite
+// (necesario porque en producción el sitio vive bajo /PaginaCondes/).
+const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`
+
 export const navLinks: NavLink[] = [
   { label: 'Inicio', to: '/' },
   { label: 'Proyectos', to: '/proyectos' },
@@ -111,7 +118,7 @@ export const projects: Project[] = [
     zone: 'ciudad',
     // Imágenes principales que se ven en la tarjeta de presentación
     images: [
-      'https://condescorporacion.com/wp-content/uploads/2025/12/FOTO-FLORENCIA-PRINCIPAL-scaled.png',
+      asset('images/proyectos/florencia/FOTO-FLORENCIA-PRINCIPAL-scaled.webp'),
     ],
     logo: 'logos/proyectos/florencia.png',
     areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
@@ -128,23 +135,23 @@ export const projects: Project[] = [
     // Galería categorizada: aparece en pestañas (Renders / Planimetría / Avance) en la vista de detalle
     gallery: {
       renders: [
-        'https://condescorporacion.com/wp-content/uploads/2025/12/FOTO-FLORENCIA-PRINCIPAL-scaled.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/02/FOTO-1-_FLORENCIA-_-GALERIA-1-scaled.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/02/FOTO-2-_FLORENCIA-_-GALERIA-1-scaled.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/02/FOTO-3-_FLORENCIA-_-GALERIA-1-scaled.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/02/FOTO-4-_FLORENCIA-_-GALERIA-1-scaled.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/02/FOTO-6-_FLORENCIA-_-GALERIA-1-scaled.png',
+        asset('images/proyectos/florencia/FOTO-FLORENCIA-PRINCIPAL-scaled.webp'),
+        asset('images/proyectos/florencia/GALERIA-1.webp'),
+        asset('images/proyectos/florencia/GALERIA-2.webp'),
+        asset('images/proyectos/florencia/GALERIA-3.webp'),
+        asset('images/proyectos/florencia/GALERIA-4.webp'),
+        asset('images/proyectos/florencia/GALERIA-6.webp'),
       ],
-      planimetria: ['https://condescorporacion.com/wp-content/uploads/2026/01/PLANIMETRIA-FLORENCIA-02.png'],
+      planimetria: [asset('images/proyectos/florencia/PLANIMETRIA.webp')],
       // Fotos reales de avance de obra (no renders), tomadas en la propia
       // construcción — vienen numeradas por vivienda/etapa en el servidor.
       avance: [
-        'https://condescorporacion.com/wp-content/uploads/2026/06/1-PRIMERA.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/06/2-SEGUNDA.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/06/3-TERCERA.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/06/4-CUARTA.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/06/5-QUINTA.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/06/6-SEXTA.png',
+        asset('images/proyectos/florencia/AVANCE-1-PRIMERA.webp'),
+        asset('images/proyectos/florencia/AVANCE-2-SEGUNDA.webp'),
+        asset('images/proyectos/florencia/AVANCE-3-TERCERA.webp'),
+        asset('images/proyectos/florencia/AVANCE-4-CUARTA.webp'),
+        asset('images/proyectos/florencia/AVANCE-5-QUINTA.webp'),
+        asset('images/proyectos/florencia/AVANCE-6-SEXTA.webp'),
       ],
     },
 
@@ -181,7 +188,7 @@ export const projects: Project[] = [
     type: ['casas', 'departamentos'],
     zone: 'ciudad',
     images: [
-      'https://condescorporacion.com/wp-content/uploads/2025/12/FOTO-MONTSERRAT-PRINCIPAL-scaled.png',
+      asset('images/proyectos/monserrat/FOTO-MONTSERRAT-PRINCIPAL-scaled.webp'),
     ],
     logo: 'logos/proyectos/monserrat.png',
     areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
@@ -192,21 +199,21 @@ export const projects: Project[] = [
     amenities: ['Áreas verdes', 'Seguridad 24h', 'Estacionamiento', 'Gimnasio'],
     gallery: {
       renders: [
-        'https://condescorporacion.com/wp-content/uploads/2025/12/FOTO-MONTSERRAT-PRINCIPAL-scaled.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/02/FOTO-3-MONTSERRAT_-GALERIA-scaled.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/02/FOTO-4-MONTSERRAT_-GALERIA-scaled.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/02/FOTO-5-MONTSERRAT_-GALERIA-scaled.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/02/FOTO-6-MONTSERRAT_-GALERIA-scaled.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/05/MONSE-1.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/05/MONSE-2.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/05/MONSE-3.png',
+        asset('images/proyectos/monserrat/FOTO-MONTSERRAT-PRINCIPAL-scaled.webp'),
+        asset('images/proyectos/monserrat/GALERIA-3.webp'),
+        asset('images/proyectos/monserrat/GALERIA-4.webp'),
+        asset('images/proyectos/monserrat/GALERIA-5.webp'),
+        asset('images/proyectos/monserrat/GALERIA-6.webp'),
+        asset('images/proyectos/monserrat/MONSE-1.webp'),
+        asset('images/proyectos/monserrat/MONSE-2.webp'),
+        asset('images/proyectos/monserrat/MONSE-3.webp'),
       ],
-      planimetria: ['https://condescorporacion.com/wp-content/uploads/2026/02/PLANIMETRIA-MONTSERRAT.png'],
+      planimetria: [asset('images/proyectos/monserrat/PLANIMETRIA.webp')],
       // Fotos reales de avance de obra (no renders), tomadas en la propia construcción.
       avance: [
-        'https://condescorporacion.com/wp-content/uploads/2026/05/2-FOTO-1-FB.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/05/3-FOTO-2-FB.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/05/4-FOTO-3-FB.png',
+        asset('images/proyectos/monserrat/AVANCE-FOTO-1-FB.webp'),
+        asset('images/proyectos/monserrat/AVANCE-FOTO-2-FB.webp'),
+        asset('images/proyectos/monserrat/AVANCE-FOTO-3-FB.webp'),
       ],
     },
     typologies: [
@@ -244,7 +251,7 @@ export const projects: Project[] = [
     type: ['casas', 'departamentos'],
     zone: 'ciudad',
     images: [
-      'https://condescorporacion.com/wp-content/uploads/2025/12/FOTO-CONDES-R.-PRINCIPAL-scaled.png',
+      asset('images/proyectos/condes-residencial/FOTO-CONDES-R-PRINCIPAL-scaled.webp'),
     ],
     areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
     minHouseSize: 187,
@@ -259,9 +266,9 @@ export const projects: Project[] = [
     // Galería categorizada: aparece en pestañas (Renders / Planimetría / Avance) en la vista de detalle
     gallery: {
       renders: [
-        'https://condescorporacion.com/wp-content/uploads/2025/12/FOTO-CONDES-R.-PRINCIPAL-scaled.png',
+        asset('images/proyectos/condes-residencial/FOTO-CONDES-R-PRINCIPAL-scaled.webp'),
       ],
-      planimetria: ['https://condescorporacion.com/wp-content/uploads/2026/02/PLANIMETRIA-CONDES-R.png'],
+      planimetria: [asset('images/proyectos/condes-residencial/PLANIMETRIA.webp')],
       avance: [PLACEHOLDER_AVANCE_IMAGE],            // Pendiente: reemplazar por fotos reales de avance de obra
     },
 
@@ -302,7 +309,7 @@ export const projects: Project[] = [
     type: ['casas', 'departamentos'],
     zone: 'ciudad',
     images: [
-      'https://condescorporacion.com/wp-content/uploads/2026/01/FOTO-JARDINES-S-PRINCIPAL-scaled.jpg',
+      asset('images/proyectos/jardines-del-sol/FOTO-JARDINES-S-PRINCIPAL-scaled.webp'),
     ],
     logo: 'logos/proyectos/jardines-del-sol.png',
     areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
@@ -313,14 +320,14 @@ export const projects: Project[] = [
     amenities: ['Jardines privados', 'Seguridad 24h', 'Estacionamiento', 'Zona de juegos'],
     gallery: {
       renders: [
-        'https://condescorporacion.com/wp-content/uploads/2026/01/FOTO-JARDINES-S-PRINCIPAL-scaled.jpg',
-        'https://condescorporacion.com/wp-content/uploads/2026/05/3_Mesa-de-trabajo-1-scaled.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/05/4_Mesa-de-trabajo-1-scaled.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/05/5_Mesa-de-trabajo-1-scaled.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/05/7_Mesa-de-trabajo-1-scaled.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/05/8_Mesa-de-trabajo-1-scaled.png',
+        asset('images/proyectos/jardines-del-sol/FOTO-JARDINES-S-PRINCIPAL-scaled.webp'),
+        asset('images/proyectos/jardines-del-sol/MESA-DE-TRABAJO-3.webp'),
+        asset('images/proyectos/jardines-del-sol/MESA-DE-TRABAJO-4.webp'),
+        asset('images/proyectos/jardines-del-sol/MESA-DE-TRABAJO-5.webp'),
+        asset('images/proyectos/jardines-del-sol/MESA-DE-TRABAJO-7.webp'),
+        asset('images/proyectos/jardines-del-sol/MESA-DE-TRABAJO-8.webp'),
       ],
-      planimetria: ['https://condescorporacion.com/wp-content/uploads/2026/06/PLANIMETRIA-JARDINES-DEL-SOL.png'],
+      planimetria: [asset('images/proyectos/jardines-del-sol/PLANIMETRIA.webp')],
       avance: [PLACEHOLDER_AVANCE_IMAGE],            // Pendiente: reemplazar por fotos reales de avance de obra
     },
     typologies: [
@@ -354,7 +361,7 @@ export const projects: Project[] = [
     type: ['casas', 'departamentos'],
     zone: 'ciudad',
     images: [
-      'https://condescorporacion.com/wp-content/uploads/2026/04/PARQUE-CENTRAL-EDIFICIO.png',
+      asset('images/proyectos/parquecentral/PARQUE-CENTRAL-EDIFICIO.webp'),
     ],
     logo: 'logos/proyectos/parquecentral.png',
     areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
@@ -365,9 +372,9 @@ export const projects: Project[] = [
     amenities: ['Terraza comunal', 'Seguridad 24h', 'Estacionamiento', 'Sala de coworking'],
     gallery: {
       renders: [
-        'https://condescorporacion.com/wp-content/uploads/2026/04/PARQUE-CENTRAL-EDIFICIO.png',
+        asset('images/proyectos/parquecentral/PARQUE-CENTRAL-EDIFICIO.webp'),
       ],
-      planimetria: ['https://condescorporacion.com/wp-content/uploads/2026/04/PLANIMETRIA-PARQUE-CENTRAL-01-scaled.png'],
+      planimetria: [asset('images/proyectos/parquecentral/PLANIMETRIA.webp')],
       avance: [PLACEHOLDER_AVANCE_IMAGE],            // Pendiente: reemplazar por fotos reales de avance de obra
     },
     typologies: [
@@ -401,7 +408,7 @@ export const projects: Project[] = [
     type: ['casas'],
     zone: 'playa',
     images: [
-      'https://condescorporacion.com/wp-content/uploads/2026/02/FOTO-COSTA-REAL-PRINCIPAL.png',
+      asset('images/proyectos/costa-real/FOTO-COSTA-REAL-PRINCIPAL.webp'),
     ],
     logo: 'logos/proyectos/costa-real.png',
     areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
@@ -411,14 +418,14 @@ export const projects: Project[] = [
     amenities: ['Acceso directo a playa', 'Estacionamiento', 'Área de parrillas', 'Jardines'],
     gallery: {
       renders: [
-        'https://condescorporacion.com/wp-content/uploads/2026/02/FOTO-COSTA-REAL-PRINCIPAL.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/03/FOTO-1_-COSTAS_GALERIA1-scaled.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/02/FOTO-2_-COSTAS_GALERIA1-scaled.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/02/FOTO-3_-COSTAS_GALERIA1-scaled.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/02/FOTO-4_-COSTAS_GALERIA1-scaled.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/02/FOTO-5_-COSTAS_GALERIA1.png',
+        asset('images/proyectos/costa-real/FOTO-COSTA-REAL-PRINCIPAL.webp'),
+        asset('images/proyectos/costa-real/GALERIA-1.webp'),
+        asset('images/proyectos/costa-real/GALERIA-2.webp'),
+        asset('images/proyectos/costa-real/GALERIA-3.webp'),
+        asset('images/proyectos/costa-real/GALERIA-4.webp'),
+        asset('images/proyectos/costa-real/GALERIA-5.webp'),
       ],
-      planimetria: ['https://condescorporacion.com/wp-content/uploads/2026/05/PLANIMETRIA-COSTA-REAL-MAYO2026-scaled.png'],
+      planimetria: [asset('images/proyectos/costa-real/PLANIMETRIA.webp')],
       avance: [PLACEHOLDER_AVANCE_IMAGE],            // Pendiente: reemplazar por fotos reales de avance de obra
     },
     typologies: [
@@ -447,7 +454,7 @@ export const projects: Project[] = [
     type: ['departamentos'],
     zone: 'ciudad',
     images: [
-      'https://condescorporacion.com/wp-content/uploads/2026/08/RENDER-PRINCIPAL-edit-scaled.png',
+      asset('images/proyectos/monaco/RENDER-PRINCIPAL.webp'),
     ],
     logo: 'logos/proyectos/monaco.png',
     areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
@@ -457,17 +464,17 @@ export const projects: Project[] = [
     amenities: ['Ubicación estratégica', 'Estacionamiento techado', 'Seguridad 24h', 'Conexiones subterráneas', 'Documentación certificada'],
     gallery: {
       renders: [
-        'https://condescorporacion.com/wp-content/uploads/2026/08/RENDER-PRINCIPAL-edit-scaled.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/08/Escena-16-edit-scaled.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/08/MON_ARQ_RENDER_TIPO_3Escena-10-edit-scaled.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/08/MON_ARQ_RENDER_TIPO_3Escena-11-edit-scaled.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/08/TMO_TIP2_SALA-DET-2-edit-scaled.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/08/TMO_TIP2_TERRAZA-1-edit-scaled.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/08/TMO_TIP2_TERRAZA-3-edit-scaled.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/08/TMO_VIVIENDA_TIP_3_RENDER-edit.png',
-        'https://condescorporacion.com/wp-content/uploads/2026/08/TERRAZA-scaled.jpeg',
+        asset('images/proyectos/monaco/RENDER-PRINCIPAL.webp'),
+        asset('images/proyectos/monaco/ESCENA-16.webp'),
+        asset('images/proyectos/monaco/RENDER-TIPO-3-ESCENA-10.webp'),
+        asset('images/proyectos/monaco/RENDER-TIPO-3-ESCENA-11.webp'),
+        asset('images/proyectos/monaco/TIPO2-SALA.webp'),
+        asset('images/proyectos/monaco/TIPO2-TERRAZA-1.webp'),
+        asset('images/proyectos/monaco/TIPO2-TERRAZA-3.webp'),
+        asset('images/proyectos/monaco/VIVIENDA-TIPO-3.webp'),
+        asset('images/proyectos/monaco/TERRAZA.webp'),
       ],
-      planimetria: ['https://condescorporacion.com/wp-content/uploads/2026/08/TORRE-MONACO_PLN_JUNIO2026_A3-01-scaled.png'],
+      planimetria: [asset('images/proyectos/monaco/PLANIMETRIA.webp')],
       avance: [PLACEHOLDER_AVANCE_IMAGE], // Pendiente: reemplazar por fotos reales de avance de obra
     },
     typologies: [
@@ -476,13 +483,13 @@ export const projects: Project[] = [
         area: 103,
         bedrooms: 3,
         bathrooms: 2,
-        planImage: 'https://condescorporacion.com/wp-content/uploads/2026/08/TORRE-MONACO_PLN_JUNIO2026_A3-01-scaled.png',
+        planImage: asset('images/proyectos/monaco/PLANIMETRIA.webp'),
         features: ['Terraza', 'Acabados de calidad', 'Estacionamiento techado'],
       },
       {
         name: 'Espacio comercial — 53 m²',
         area: 53,
-        planImage: 'https://condescorporacion.com/wp-content/uploads/2026/08/TORRE-MONACO_PLN_JUNIO2026_A3-01-scaled.png',
+        planImage: asset('images/proyectos/monaco/PLANIMETRIA.webp'),
         features: ['Frente a Av. Lambramani', 'Ideal para negocio', 'Acceso independiente'],
       },
     ],
@@ -501,7 +508,7 @@ export const projects: Project[] = [
     type: ['casas'],
     zone: 'playa',
     images: [
-      'https://condescorporacion.com/wp-content/uploads/2026/08/09-1-scaled.jpg',
+      asset('images/proyectos/santa-maria/FOTO-09-1.webp'),
     ],
     logo: 'logos/proyectos/santa-maria.png',
     areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
@@ -511,29 +518,29 @@ export const projects: Project[] = [
     amenities: ['Club house', 'Dos piscinas recreativas', 'Canchas deportivas', 'Plazas y jardines', 'Conexiones subterráneas', 'Pet-friendly', 'Seguridad 24h'],
     gallery: {
       renders: [
-        'https://condescorporacion.com/wp-content/uploads/2026/08/09-1-scaled.jpg',
-        'https://condescorporacion.com/wp-content/uploads/2026/08/08-scaled.jpg',
-        'https://condescorporacion.com/wp-content/uploads/2026/08/04-scaled.jpg',
-        'https://condescorporacion.com/wp-content/uploads/2026/08/01-scaled.jpg',
-        'https://condescorporacion.com/wp-content/uploads/2026/08/MED-04-scaled.jpg',
-        'https://condescorporacion.com/wp-content/uploads/2026/08/MED-08-scaled.jpg',
-        'https://condescorporacion.com/wp-content/uploads/2026/08/03-scaled.jpg',
-        'https://condescorporacion.com/wp-content/uploads/2026/08/04-1-scaled.jpg',
+        asset('images/proyectos/santa-maria/FOTO-09-1.webp'),
+        asset('images/proyectos/santa-maria/FOTO-08.webp'),
+        asset('images/proyectos/santa-maria/FOTO-04.webp'),
+        asset('images/proyectos/santa-maria/FOTO-01.webp'),
+        asset('images/proyectos/santa-maria/MED-04.webp'),
+        asset('images/proyectos/santa-maria/MED-08.webp'),
+        asset('images/proyectos/santa-maria/FOTO-03.webp'),
+        asset('images/proyectos/santa-maria/FOTO-04-1.webp'),
       ],
-      planimetria: ['https://condescorporacion.com/wp-content/uploads/2026/08/SANTA-MARIA_PLANIMETRIA-MARZO-1-01-scaled.png'],
+      planimetria: [asset('images/proyectos/santa-maria/PLANIMETRIA.webp')],
       avance: [PLACEHOLDER_AVANCE_IMAGE], // Pendiente: reemplazar por fotos reales de avance de obra
     },
     typologies: [
       {
         name: 'Casa de playa — 215 m²',
         area: 215,
-        planImage: 'https://condescorporacion.com/wp-content/uploads/2026/08/SANTA-MARIA_PLANIMETRIA-MARZO-1-01-scaled.png',
+        planImage: asset('images/proyectos/santa-maria/PLANIMETRIA.webp'),
         features: ['Diseño de casa de playa', 'Doble altura', 'Club house cercano'],
       },
       {
         name: 'Lote — 300 m²',
         area: 300,
-        planImage: 'https://condescorporacion.com/wp-content/uploads/2026/08/SANTA-MARIA_PLANIMETRIA-MARZO-1-01-scaled.png',
+        planImage: asset('images/proyectos/santa-maria/PLANIMETRIA.webp'),
         features: ['Terreno independiente', 'Conexiones subterráneas', 'Zona de club house cercana'],
       },
     ],
@@ -560,20 +567,20 @@ export const seasonalBanner = {
 // Carrusel del hero de Inicio: renders principales de varios proyectos en
 // venta. Actualizar esta lista si se agrega/retira un proyecto destacado.
 export const heroImages: string[] = [
-  'https://condescorporacion.com/wp-content/uploads/2025/12/FOTO-FLORENCIA-PRINCIPAL-scaled.png',
-  'https://condescorporacion.com/wp-content/uploads/2026/08/RENDER-PRINCIPAL-edit-scaled.png',
-  'https://condescorporacion.com/wp-content/uploads/2025/12/FOTO-MONTSERRAT-PRINCIPAL-scaled.png',
-  'https://condescorporacion.com/wp-content/uploads/2026/02/FOTO-COSTA-REAL-PRINCIPAL.png',
-  'https://condescorporacion.com/wp-content/uploads/2026/04/PARQUE-CENTRAL-EDIFICIO.png',
-  'https://condescorporacion.com/wp-content/uploads/2026/01/FOTO-JARDINES-S-PRINCIPAL-scaled.jpg',
+  asset('images/proyectos/florencia/FOTO-FLORENCIA-PRINCIPAL-scaled.webp'),
+  asset('images/proyectos/monaco/RENDER-PRINCIPAL.webp'),
+  asset('images/proyectos/monserrat/FOTO-MONTSERRAT-PRINCIPAL-scaled.webp'),
+  asset('images/proyectos/costa-real/FOTO-COSTA-REAL-PRINCIPAL.webp'),
+  asset('images/proyectos/parquecentral/PARQUE-CENTRAL-EDIFICIO.webp'),
+  asset('images/proyectos/jardines-del-sol/FOTO-JARDINES-S-PRINCIPAL-scaled.webp'),
 ]
 
 export const teamImages: string[] = [
-  'https://condescorporacion.com/wp-content/uploads/2026/04/Arquitectura-1-1.png',
-  'https://condescorporacion.com/wp-content/uploads/2026/04/Legal-1.png',
-  'https://condescorporacion.com/wp-content/uploads/2026/04/Maqueteria-1.png',
-  'https://condescorporacion.com/wp-content/uploads/2026/04/CONTABLE.png',
-  'https://condescorporacion.com/wp-content/uploads/2026/04/arquitectura-2.png',
+  asset('images/equipo/Arquitectura-1.webp'),
+  asset('images/equipo/Legal.webp'),
+  asset('images/equipo/Maqueteria.webp'),
+  asset('images/equipo/Contabilidad.webp'),
+  asset('images/equipo/Arquitectura-2.webp'),
 ]
 
 export const CONTACT = {
