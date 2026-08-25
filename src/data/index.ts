@@ -1,10 +1,11 @@
 import type { Project, NavLink, PanoramaArea } from '../types'
 
-// Todas las fotos/renders reales viven en public/images (descargadas y
-// comprimidas a .webp desde condescorporacion.com — antes se cargaban
-// directo desde ahí y pesaban varios MB cada una, lo que hacía la carga muy
-// lenta). Este helper arma la ruta completa respetando el `base` de Vite
-// (necesario porque en producción el sitio vive bajo /PaginaCondes/).
+// Todas las fotos/renders reales viven en public/images (descargadas de
+// condescorporacion.com y reducidas a JPG ~1920px máx, calidad 85 — antes
+// se cargaban directo desde ahí y pesaban varios MB cada una, lo que hacía
+// la carga muy lenta). Este helper arma la ruta completa respetando el
+// `base` de Vite (necesario porque en producción el sitio vive bajo
+// /PaginaCondes/).
 const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`
 
 export const navLinks: NavLink[] = [
@@ -118,7 +119,7 @@ export const projects: Project[] = [
     zone: 'ciudad',
     // Imágenes principales que se ven en la tarjeta de presentación
     images: [
-      asset('images/proyectos/florencia/FOTO-FLORENCIA-PRINCIPAL-scaled.webp'),
+      asset('images/proyectos/florencia/FOTO-FLORENCIA-PRINCIPAL-scaled.jpg'),
     ],
     logo: 'logos/proyectos/florencia.png',
     areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
@@ -135,23 +136,23 @@ export const projects: Project[] = [
     // Galería categorizada: aparece en pestañas (Renders / Planimetría / Avance) en la vista de detalle
     gallery: {
       renders: [
-        asset('images/proyectos/florencia/FOTO-FLORENCIA-PRINCIPAL-scaled.webp'),
-        asset('images/proyectos/florencia/GALERIA-1.webp'),
-        asset('images/proyectos/florencia/GALERIA-2.webp'),
-        asset('images/proyectos/florencia/GALERIA-3.webp'),
-        asset('images/proyectos/florencia/GALERIA-4.webp'),
-        asset('images/proyectos/florencia/GALERIA-6.webp'),
+        asset('images/proyectos/florencia/FOTO-FLORENCIA-PRINCIPAL-scaled.jpg'),
+        asset('images/proyectos/florencia/GALERIA-1.jpg'),
+        asset('images/proyectos/florencia/GALERIA-2.jpg'),
+        asset('images/proyectos/florencia/GALERIA-3.jpg'),
+        asset('images/proyectos/florencia/GALERIA-4.jpg'),
+        asset('images/proyectos/florencia/GALERIA-6.jpg'),
       ],
-      planimetria: [asset('images/proyectos/florencia/PLANIMETRIA.webp')],
+      planimetria: [asset('images/proyectos/florencia/PLANIMETRIA.jpg')],
       // Fotos reales de avance de obra (no renders), tomadas en la propia
       // construcción — vienen numeradas por vivienda/etapa en el servidor.
       avance: [
-        asset('images/proyectos/florencia/AVANCE-1-PRIMERA.webp'),
-        asset('images/proyectos/florencia/AVANCE-2-SEGUNDA.webp'),
-        asset('images/proyectos/florencia/AVANCE-3-TERCERA.webp'),
-        asset('images/proyectos/florencia/AVANCE-4-CUARTA.webp'),
-        asset('images/proyectos/florencia/AVANCE-5-QUINTA.webp'),
-        asset('images/proyectos/florencia/AVANCE-6-SEXTA.webp'),
+        asset('images/proyectos/florencia/AVANCE-1-PRIMERA.jpg'),
+        asset('images/proyectos/florencia/AVANCE-2-SEGUNDA.jpg'),
+        asset('images/proyectos/florencia/AVANCE-3-TERCERA.jpg'),
+        asset('images/proyectos/florencia/AVANCE-4-CUARTA.jpg'),
+        asset('images/proyectos/florencia/AVANCE-5-QUINTA.jpg'),
+        asset('images/proyectos/florencia/AVANCE-6-SEXTA.jpg'),
       ],
     },
 
@@ -188,7 +189,7 @@ export const projects: Project[] = [
     type: ['casas', 'departamentos'],
     zone: 'ciudad',
     images: [
-      asset('images/proyectos/monserrat/FOTO-MONTSERRAT-PRINCIPAL-scaled.webp'),
+      asset('images/proyectos/monserrat/FOTO-MONTSERRAT-PRINCIPAL-scaled.jpg'),
     ],
     logo: 'logos/proyectos/monserrat.png',
     areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
@@ -199,21 +200,21 @@ export const projects: Project[] = [
     amenities: ['Áreas verdes', 'Seguridad 24h', 'Estacionamiento', 'Gimnasio'],
     gallery: {
       renders: [
-        asset('images/proyectos/monserrat/FOTO-MONTSERRAT-PRINCIPAL-scaled.webp'),
-        asset('images/proyectos/monserrat/GALERIA-3.webp'),
-        asset('images/proyectos/monserrat/GALERIA-4.webp'),
-        asset('images/proyectos/monserrat/GALERIA-5.webp'),
-        asset('images/proyectos/monserrat/GALERIA-6.webp'),
-        asset('images/proyectos/monserrat/MONSE-1.webp'),
-        asset('images/proyectos/monserrat/MONSE-2.webp'),
-        asset('images/proyectos/monserrat/MONSE-3.webp'),
+        asset('images/proyectos/monserrat/FOTO-MONTSERRAT-PRINCIPAL-scaled.jpg'),
+        asset('images/proyectos/monserrat/GALERIA-3.jpg'),
+        asset('images/proyectos/monserrat/GALERIA-4.jpg'),
+        asset('images/proyectos/monserrat/GALERIA-5.jpg'),
+        asset('images/proyectos/monserrat/GALERIA-6.jpg'),
+        asset('images/proyectos/monserrat/MONSE-1.jpg'),
+        asset('images/proyectos/monserrat/MONSE-2.jpg'),
+        asset('images/proyectos/monserrat/MONSE-3.jpg'),
       ],
-      planimetria: [asset('images/proyectos/monserrat/PLANIMETRIA.webp')],
+      planimetria: [asset('images/proyectos/monserrat/PLANIMETRIA.jpg')],
       // Fotos reales de avance de obra (no renders), tomadas en la propia construcción.
       avance: [
-        asset('images/proyectos/monserrat/AVANCE-FOTO-1-FB.webp'),
-        asset('images/proyectos/monserrat/AVANCE-FOTO-2-FB.webp'),
-        asset('images/proyectos/monserrat/AVANCE-FOTO-3-FB.webp'),
+        asset('images/proyectos/monserrat/AVANCE-FOTO-1-FB.jpg'),
+        asset('images/proyectos/monserrat/AVANCE-FOTO-2-FB.jpg'),
+        asset('images/proyectos/monserrat/AVANCE-FOTO-3-FB.jpg'),
       ],
     },
     typologies: [
@@ -251,7 +252,7 @@ export const projects: Project[] = [
     type: ['casas', 'departamentos'],
     zone: 'ciudad',
     images: [
-      asset('images/proyectos/condes-residencial/FOTO-CONDES-R-PRINCIPAL-scaled.webp'),
+      asset('images/proyectos/condes-residencial/FOTO-CONDES-R-PRINCIPAL-scaled.jpg'),
     ],
     areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
     minHouseSize: 187,
@@ -266,9 +267,9 @@ export const projects: Project[] = [
     // Galería categorizada: aparece en pestañas (Renders / Planimetría / Avance) en la vista de detalle
     gallery: {
       renders: [
-        asset('images/proyectos/condes-residencial/FOTO-CONDES-R-PRINCIPAL-scaled.webp'),
+        asset('images/proyectos/condes-residencial/FOTO-CONDES-R-PRINCIPAL-scaled.jpg'),
       ],
-      planimetria: [asset('images/proyectos/condes-residencial/PLANIMETRIA.webp')],
+      planimetria: [asset('images/proyectos/condes-residencial/PLANIMETRIA.jpg')],
       avance: [PLACEHOLDER_AVANCE_IMAGE],            // Pendiente: reemplazar por fotos reales de avance de obra
     },
 
@@ -309,7 +310,7 @@ export const projects: Project[] = [
     type: ['casas', 'departamentos'],
     zone: 'ciudad',
     images: [
-      asset('images/proyectos/jardines-del-sol/FOTO-JARDINES-S-PRINCIPAL-scaled.webp'),
+      asset('images/proyectos/jardines-del-sol/FOTO-JARDINES-S-PRINCIPAL-scaled.jpg'),
     ],
     logo: 'logos/proyectos/jardines-del-sol.png',
     areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
@@ -320,14 +321,14 @@ export const projects: Project[] = [
     amenities: ['Jardines privados', 'Seguridad 24h', 'Estacionamiento', 'Zona de juegos'],
     gallery: {
       renders: [
-        asset('images/proyectos/jardines-del-sol/FOTO-JARDINES-S-PRINCIPAL-scaled.webp'),
-        asset('images/proyectos/jardines-del-sol/MESA-DE-TRABAJO-3.webp'),
-        asset('images/proyectos/jardines-del-sol/MESA-DE-TRABAJO-4.webp'),
-        asset('images/proyectos/jardines-del-sol/MESA-DE-TRABAJO-5.webp'),
-        asset('images/proyectos/jardines-del-sol/MESA-DE-TRABAJO-7.webp'),
-        asset('images/proyectos/jardines-del-sol/MESA-DE-TRABAJO-8.webp'),
+        asset('images/proyectos/jardines-del-sol/FOTO-JARDINES-S-PRINCIPAL-scaled.jpg'),
+        asset('images/proyectos/jardines-del-sol/MESA-DE-TRABAJO-3.jpg'),
+        asset('images/proyectos/jardines-del-sol/MESA-DE-TRABAJO-4.jpg'),
+        asset('images/proyectos/jardines-del-sol/MESA-DE-TRABAJO-5.jpg'),
+        asset('images/proyectos/jardines-del-sol/MESA-DE-TRABAJO-7.jpg'),
+        asset('images/proyectos/jardines-del-sol/MESA-DE-TRABAJO-8.jpg'),
       ],
-      planimetria: [asset('images/proyectos/jardines-del-sol/PLANIMETRIA.webp')],
+      planimetria: [asset('images/proyectos/jardines-del-sol/PLANIMETRIA.jpg')],
       avance: [PLACEHOLDER_AVANCE_IMAGE],            // Pendiente: reemplazar por fotos reales de avance de obra
     },
     typologies: [
@@ -361,7 +362,7 @@ export const projects: Project[] = [
     type: ['casas', 'departamentos'],
     zone: 'ciudad',
     images: [
-      asset('images/proyectos/parquecentral/PARQUE-CENTRAL-EDIFICIO.webp'),
+      asset('images/proyectos/parquecentral/PARQUE-CENTRAL-EDIFICIO.jpg'),
     ],
     logo: 'logos/proyectos/parquecentral.png',
     areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
@@ -372,9 +373,9 @@ export const projects: Project[] = [
     amenities: ['Terraza comunal', 'Seguridad 24h', 'Estacionamiento', 'Sala de coworking'],
     gallery: {
       renders: [
-        asset('images/proyectos/parquecentral/PARQUE-CENTRAL-EDIFICIO.webp'),
+        asset('images/proyectos/parquecentral/PARQUE-CENTRAL-EDIFICIO.jpg'),
       ],
-      planimetria: [asset('images/proyectos/parquecentral/PLANIMETRIA.webp')],
+      planimetria: [asset('images/proyectos/parquecentral/PLANIMETRIA.jpg')],
       avance: [PLACEHOLDER_AVANCE_IMAGE],            // Pendiente: reemplazar por fotos reales de avance de obra
     },
     typologies: [
@@ -408,7 +409,7 @@ export const projects: Project[] = [
     type: ['casas'],
     zone: 'playa',
     images: [
-      asset('images/proyectos/costa-real/FOTO-COSTA-REAL-PRINCIPAL.webp'),
+      asset('images/proyectos/costa-real/FOTO-COSTA-REAL-PRINCIPAL.jpg'),
     ],
     logo: 'logos/proyectos/costa-real.png',
     areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
@@ -418,14 +419,14 @@ export const projects: Project[] = [
     amenities: ['Acceso directo a playa', 'Estacionamiento', 'Área de parrillas', 'Jardines'],
     gallery: {
       renders: [
-        asset('images/proyectos/costa-real/FOTO-COSTA-REAL-PRINCIPAL.webp'),
-        asset('images/proyectos/costa-real/GALERIA-1.webp'),
-        asset('images/proyectos/costa-real/GALERIA-2.webp'),
-        asset('images/proyectos/costa-real/GALERIA-3.webp'),
-        asset('images/proyectos/costa-real/GALERIA-4.webp'),
-        asset('images/proyectos/costa-real/GALERIA-5.webp'),
+        asset('images/proyectos/costa-real/FOTO-COSTA-REAL-PRINCIPAL.jpg'),
+        asset('images/proyectos/costa-real/GALERIA-1.jpg'),
+        asset('images/proyectos/costa-real/GALERIA-2.jpg'),
+        asset('images/proyectos/costa-real/GALERIA-3.jpg'),
+        asset('images/proyectos/costa-real/GALERIA-4.jpg'),
+        asset('images/proyectos/costa-real/GALERIA-5.jpg'),
       ],
-      planimetria: [asset('images/proyectos/costa-real/PLANIMETRIA.webp')],
+      planimetria: [asset('images/proyectos/costa-real/PLANIMETRIA.jpg')],
       avance: [PLACEHOLDER_AVANCE_IMAGE],            // Pendiente: reemplazar por fotos reales de avance de obra
     },
     typologies: [
@@ -454,7 +455,7 @@ export const projects: Project[] = [
     type: ['departamentos'],
     zone: 'ciudad',
     images: [
-      asset('images/proyectos/monaco/RENDER-PRINCIPAL.webp'),
+      asset('images/proyectos/monaco/RENDER-PRINCIPAL.jpg'),
     ],
     logo: 'logos/proyectos/monaco.png',
     areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
@@ -464,17 +465,17 @@ export const projects: Project[] = [
     amenities: ['Ubicación estratégica', 'Estacionamiento techado', 'Seguridad 24h', 'Conexiones subterráneas', 'Documentación certificada'],
     gallery: {
       renders: [
-        asset('images/proyectos/monaco/RENDER-PRINCIPAL.webp'),
-        asset('images/proyectos/monaco/ESCENA-16.webp'),
-        asset('images/proyectos/monaco/RENDER-TIPO-3-ESCENA-10.webp'),
-        asset('images/proyectos/monaco/RENDER-TIPO-3-ESCENA-11.webp'),
-        asset('images/proyectos/monaco/TIPO2-SALA.webp'),
-        asset('images/proyectos/monaco/TIPO2-TERRAZA-1.webp'),
-        asset('images/proyectos/monaco/TIPO2-TERRAZA-3.webp'),
-        asset('images/proyectos/monaco/VIVIENDA-TIPO-3.webp'),
-        asset('images/proyectos/monaco/TERRAZA.webp'),
+        asset('images/proyectos/monaco/RENDER-PRINCIPAL.jpg'),
+        asset('images/proyectos/monaco/ESCENA-16.jpg'),
+        asset('images/proyectos/monaco/RENDER-TIPO-3-ESCENA-10.jpg'),
+        asset('images/proyectos/monaco/RENDER-TIPO-3-ESCENA-11.jpg'),
+        asset('images/proyectos/monaco/TIPO2-SALA.jpg'),
+        asset('images/proyectos/monaco/TIPO2-TERRAZA-1.jpg'),
+        asset('images/proyectos/monaco/TIPO2-TERRAZA-3.jpg'),
+        asset('images/proyectos/monaco/VIVIENDA-TIPO-3.jpg'),
+        asset('images/proyectos/monaco/TERRAZA.jpg'),
       ],
-      planimetria: [asset('images/proyectos/monaco/PLANIMETRIA.webp')],
+      planimetria: [asset('images/proyectos/monaco/PLANIMETRIA.jpg')],
       avance: [PLACEHOLDER_AVANCE_IMAGE], // Pendiente: reemplazar por fotos reales de avance de obra
     },
     typologies: [
@@ -483,13 +484,13 @@ export const projects: Project[] = [
         area: 103,
         bedrooms: 3,
         bathrooms: 2,
-        planImage: asset('images/proyectos/monaco/PLANIMETRIA.webp'),
+        planImage: asset('images/proyectos/monaco/PLANIMETRIA.jpg'),
         features: ['Terraza', 'Acabados de calidad', 'Estacionamiento techado'],
       },
       {
         name: 'Espacio comercial — 53 m²',
         area: 53,
-        planImage: asset('images/proyectos/monaco/PLANIMETRIA.webp'),
+        planImage: asset('images/proyectos/monaco/PLANIMETRIA.jpg'),
         features: ['Frente a Av. Lambramani', 'Ideal para negocio', 'Acceso independiente'],
       },
     ],
@@ -508,7 +509,7 @@ export const projects: Project[] = [
     type: ['casas'],
     zone: 'playa',
     images: [
-      asset('images/proyectos/santa-maria/FOTO-09-1.webp'),
+      asset('images/proyectos/santa-maria/FOTO-09-1.jpg'),
     ],
     logo: 'logos/proyectos/santa-maria.png',
     areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
@@ -518,29 +519,29 @@ export const projects: Project[] = [
     amenities: ['Club house', 'Dos piscinas recreativas', 'Canchas deportivas', 'Plazas y jardines', 'Conexiones subterráneas', 'Pet-friendly', 'Seguridad 24h'],
     gallery: {
       renders: [
-        asset('images/proyectos/santa-maria/FOTO-09-1.webp'),
-        asset('images/proyectos/santa-maria/FOTO-08.webp'),
-        asset('images/proyectos/santa-maria/FOTO-04.webp'),
-        asset('images/proyectos/santa-maria/FOTO-01.webp'),
-        asset('images/proyectos/santa-maria/MED-04.webp'),
-        asset('images/proyectos/santa-maria/MED-08.webp'),
-        asset('images/proyectos/santa-maria/FOTO-03.webp'),
-        asset('images/proyectos/santa-maria/FOTO-04-1.webp'),
+        asset('images/proyectos/santa-maria/FOTO-09-1.jpg'),
+        asset('images/proyectos/santa-maria/FOTO-08.jpg'),
+        asset('images/proyectos/santa-maria/FOTO-04.jpg'),
+        asset('images/proyectos/santa-maria/FOTO-01.jpg'),
+        asset('images/proyectos/santa-maria/MED-04.jpg'),
+        asset('images/proyectos/santa-maria/MED-08.jpg'),
+        asset('images/proyectos/santa-maria/FOTO-03.jpg'),
+        asset('images/proyectos/santa-maria/FOTO-04-1.jpg'),
       ],
-      planimetria: [asset('images/proyectos/santa-maria/PLANIMETRIA.webp')],
+      planimetria: [asset('images/proyectos/santa-maria/PLANIMETRIA.jpg')],
       avance: [PLACEHOLDER_AVANCE_IMAGE], // Pendiente: reemplazar por fotos reales de avance de obra
     },
     typologies: [
       {
         name: 'Casa de playa — 215 m²',
         area: 215,
-        planImage: asset('images/proyectos/santa-maria/PLANIMETRIA.webp'),
+        planImage: asset('images/proyectos/santa-maria/PLANIMETRIA.jpg'),
         features: ['Diseño de casa de playa', 'Doble altura', 'Club house cercano'],
       },
       {
         name: 'Lote — 300 m²',
         area: 300,
-        planImage: asset('images/proyectos/santa-maria/PLANIMETRIA.webp'),
+        planImage: asset('images/proyectos/santa-maria/PLANIMETRIA.jpg'),
         features: ['Terreno independiente', 'Conexiones subterráneas', 'Zona de club house cercana'],
       },
     ],
@@ -567,20 +568,20 @@ export const seasonalBanner = {
 // Carrusel del hero de Inicio: renders principales de varios proyectos en
 // venta. Actualizar esta lista si se agrega/retira un proyecto destacado.
 export const heroImages: string[] = [
-  asset('images/proyectos/florencia/FOTO-FLORENCIA-PRINCIPAL-scaled.webp'),
-  asset('images/proyectos/monaco/RENDER-PRINCIPAL.webp'),
-  asset('images/proyectos/monserrat/FOTO-MONTSERRAT-PRINCIPAL-scaled.webp'),
-  asset('images/proyectos/costa-real/FOTO-COSTA-REAL-PRINCIPAL.webp'),
-  asset('images/proyectos/parquecentral/PARQUE-CENTRAL-EDIFICIO.webp'),
-  asset('images/proyectos/jardines-del-sol/FOTO-JARDINES-S-PRINCIPAL-scaled.webp'),
+  asset('images/proyectos/florencia/FOTO-FLORENCIA-PRINCIPAL-scaled.jpg'),
+  asset('images/proyectos/monaco/RENDER-PRINCIPAL.jpg'),
+  asset('images/proyectos/monserrat/FOTO-MONTSERRAT-PRINCIPAL-scaled.jpg'),
+  asset('images/proyectos/costa-real/FOTO-COSTA-REAL-PRINCIPAL.jpg'),
+  asset('images/proyectos/parquecentral/PARQUE-CENTRAL-EDIFICIO.jpg'),
+  asset('images/proyectos/jardines-del-sol/FOTO-JARDINES-S-PRINCIPAL-scaled.jpg'),
 ]
 
 export const teamImages: string[] = [
-  asset('images/equipo/Arquitectura-1.webp'),
-  asset('images/equipo/Legal.webp'),
-  asset('images/equipo/Maqueteria.webp'),
-  asset('images/equipo/Contabilidad.webp'),
-  asset('images/equipo/Arquitectura-2.webp'),
+  asset('images/equipo/Arquitectura-1.jpg'),
+  asset('images/equipo/Legal.jpg'),
+  asset('images/equipo/Maqueteria.jpg'),
+  asset('images/equipo/Contabilidad.jpg'),
+  asset('images/equipo/Arquitectura-2.jpg'),
 ]
 
 export const CONTACT = {

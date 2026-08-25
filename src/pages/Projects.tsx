@@ -38,7 +38,7 @@ export default function Projects() {
       <section className="relative min-h-[60vh] flex items-end pb-16 overflow-hidden" ref={headerRef}>
         <div className="absolute inset-0 reveal">
           <img
-            src={`${import.meta.env.BASE_URL}images/proyectos/monaco/RENDER-PRINCIPAL.webp`}
+            src={`${import.meta.env.BASE_URL}images/proyectos/monaco/RENDER-PRINCIPAL.jpg`}
             alt="Proyectos Condes Corporación"
             className="w-full h-full object-cover"
           />

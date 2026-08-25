@@ -96,7 +96,7 @@ export default function About() {
       <section className="relative min-h-[60vh] flex items-end pb-16 overflow-hidden" ref={heroRef}>
         <div className="absolute inset-0 reveal">
           <img
-            src={`${import.meta.env.BASE_URL}images/proyectos/parquecentral/PARQUE-CENTRAL-EDIFICIO.webp`}
+            src={`${import.meta.env.BASE_URL}images/proyectos/parquecentral/PARQUE-CENTRAL-EDIFICIO.jpg`}
             alt="Condes Corporación"
             className="w-full h-full object-cover animate-ken-burns"
           />
@@ -166,7 +166,7 @@ export default function About() {
       <div className="relative">
         <div className="sticky top-0 h-screen bg-white overflow-hidden">
           <img
-            src={`${import.meta.env.BASE_URL}images/proyectos/santa-maria/FOTO-09-1.webp`}
+            src={`${import.meta.env.BASE_URL}images/proyectos/santa-maria/FOTO-09-1.jpg`}
             alt="Condes Corporación"
             className="w-full h-full object-cover animate-fade-in"
           />
