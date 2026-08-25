@@ -50,7 +50,14 @@ export interface Project {
   status: 'disponible' | 'preventa' | 'entregado'
   type: ('casas' | 'departamentos')[]       // Tipos de inmuebles ofrecidos (para filtrado)
   zone: 'ciudad' | 'playa'                  // Zona geográfica (para filtrado)
-  images: string[]                          // Imágenes principales para la tarjeta de presentación
+  images: string[]                          // Imágenes principales (tamaño completo, para el hero de detalle, fondos y el lightbox)
+  // Versión chica del render principal (~800px), pensada para la tarjeta de
+  // /proyectos y el Home: mostrar la foto de tamaño completo achicada por
+  // CSS hace que el detalle fino (líneas de ventanas, texturas) se vea
+  // "apelmazado"/con muaré — esta miniatura se genera aparte, redimensionada
+  // una sola vez con buena calidad, para que se vea nítida en chico.
+  // Si no existe, se usa `images[0]` como respaldo.
+  thumbnail?: string
   logo?: string                             // Isotipo/logo a color del proyecto (public/logos/proyectos), mostrado en la tarjeta y en el detalle
   gallery?: ProjectGallery                  // Galería categorizada (renders, planimetría, avance)
   // Recorrido 360° caminable del proyecto: un único recorrido por proyecto

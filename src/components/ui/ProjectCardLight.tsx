@@ -26,7 +26,7 @@ export default function ProjectCardLight({ project, index = 0 }: Props) {
       <div className="relative aspect-[4/3]">
         <a href={`/proyectos/${project.slug}`} onClick={handleClick} className="block w-full h-full cursor-pointer">
           <img
-            src={project.images[0]}
+            src={project.thumbnail ?? project.images[0]}
             alt={project.name}
             className="w-full h-full object-cover rounded-2xl transition-transform duration-500 group-hover:scale-[1.02]"
             loading="lazy"

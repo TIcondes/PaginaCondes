@@ -20,7 +20,7 @@ export default function Contact() {
       <section className="relative min-h-[60vh] flex items-end pb-16 overflow-hidden" ref={headerRef}>
         <div className="absolute inset-0 reveal">
           <img
-            src={`${import.meta.env.BASE_URL}images/proyectos/jardines-del-sol/FOTO-JARDINES-S-PRINCIPAL-scaled.jpg`}
+            src={`${import.meta.env.BASE_URL}images/proyectos/jardines-del-sol/FOTO-JARDINES-S-PRINCIPAL-scaled.webp`}
             alt="Contáctanos — Condes Corporación"
             className="w-full h-full object-cover"
           />
