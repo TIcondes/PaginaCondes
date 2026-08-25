@@ -1,7 +1,7 @@
 import { useProjectTransition } from '../../context/TransitionContext'
 
 export default function ProjectTransition() {
-  const { isActive, isFadingOut, project } = useProjectTransition()
+  const { isActive, isFadingOut, project, skipTransition } = useProjectTransition()
 
   if (!isActive || !project) return null
 
@@ -13,7 +13,10 @@ export default function ProjectTransition() {
   return (
     <div
       className={`project-transition-overlay ${isFadingOut ? 'fade-out' : ''}`}
-      aria-hidden="true"
+      // Tocar/hacer clic en cualquier punto salta directo a la página del
+      // proyecto en vez de esperar el resto de la animación, para que nunca
+      // se sienta como que la pantalla quedó "congelada".
+      onClick={skipTransition}
     >
       {/* Render difuminado de fondo */}
       <div className="project-transition-bg">
