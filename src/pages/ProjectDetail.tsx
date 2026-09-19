@@ -93,6 +93,119 @@ function ImageStrip({
   )
 }
 
+// Galería de renders tipo "coverflow": el render activo va al centro, grande y
+// de frente, y los vecinos se inclinan hacia los lados (perspectiva 3D) y se
+// atenúan. Clic en un lateral lo trae al centro; clic en el central lo abre
+// en el visor a pantalla completa. También se navega con las flechas o
+// deslizando con el dedo. Solo se montan el activo y sus 2 vecinos por lado
+// para no cargar todos los renders de golpe.
+function RenderCoverflow({
+  images,
+  projectName,
+  onOpen,
+}: {
+  images: string[]
+  projectName: string
+  onOpen: (index: number) => void
+}) {
+  const [active, setActive] = useState(0)
+  const touchStartX = useRef<number | null>(null)
+  const total = images.length
+
+  const go = (index: number) => setActive(Math.max(0, Math.min(total - 1, index)))
+
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return
+    const dx = e.changedTouches[0].clientX - touchStartX.current
+    touchStartX.current = null
+    if (Math.abs(dx) > 40) go(active + (dx < 0 ? 1 : -1))
+  }
+
+  if (total === 0) return null
+
+  return (
+    <div>
+      <div
+        className="relative h-[260px] sm:h-[360px] md:h-[460px] lg:h-[520px] overflow-hidden"
+        style={{ perspective: '1600px' }}
+        onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX }}
+        onTouchEnd={onTouchEnd}
+      >
+        {images.map((src, i) => {
+          const d = i - active
+          if (Math.abs(d) > 2) return null
+          const isCenter = d === 0
+          return (
+            <button
+              key={src}
+              type="button"
+              onClick={() => (isCenter ? onOpen(i) : go(i))}
+              aria-label={isCenter ? `Ver render ${i + 1} en grande` : `Ir al render ${i + 1}`}
+              className={`absolute top-0 left-1/2 h-full w-[70%] sm:w-[60%] md:w-[56%] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                isCenter ? 'cursor-zoom-in' : 'cursor-pointer'
+              } ${Math.abs(d) === 2 ? 'pointer-events-none' : ''}`}
+              style={{
+                transform: `translateX(-50%) translateX(${d * 72}%) rotateY(${-d * 38}deg) scale(${isCenter ? 1 : 0.86})`,
+                opacity: Math.abs(d) === 2 ? 0 : 1,
+                filter: isCenter ? 'none' : 'brightness(0.55)',
+                zIndex: 10 - Math.abs(d),
+              }}
+            >
+              <img
+                src={src}
+                alt={`${projectName} — render ${i + 1}`}
+                className={`w-full h-full object-cover rounded-2xl ${isCenter ? 'shadow-2xl shadow-black/50' : ''}`}
+                decoding="async"
+              />
+            </button>
+          )
+        })}
+
+        {total > 1 && (
+          <>
+            <button
+              onClick={() => go(active - 1)}
+              disabled={active === 0}
+              aria-label="Render anterior"
+              className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/90 shadow-lg flex items-center justify-center text-gray-800 hover:bg-white hover:scale-110 transition-all duration-200 disabled:opacity-0 disabled:pointer-events-none"
+            >
+              <ChevronLeft size={22} />
+            </button>
+            <button
+              onClick={() => go(active + 1)}
+              disabled={active === total - 1}
+              aria-label="Siguiente render"
+              className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/90 shadow-lg flex items-center justify-center text-gray-800 hover:bg-white hover:scale-110 transition-all duration-200 disabled:opacity-0 disabled:pointer-events-none"
+            >
+              <ChevronRight size={22} />
+            </button>
+          </>
+        )}
+      </div>
+
+      {total > 1 && (
+        <div className="mt-6 flex flex-col items-center gap-3">
+          <p className="font-body text-xs tracking-[0.25em] text-white/60">
+            {String(active + 1).padStart(2, '0')} <span className="text-white/30">/</span> {String(total).padStart(2, '0')}
+          </p>
+          <div className="flex items-center gap-2">
+            {images.map((src, i) => (
+              <button
+                key={src}
+                onClick={() => go(i)}
+                aria-label={`Ir al render ${i + 1}`}
+                className={`h-1.5 rounded-full transition-all duration-500 ${
+                  i === active ? 'w-8 bg-brand-300' : 'w-1.5 bg-white/30 hover:bg-white/60'
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
 // Visor a pantalla completa para ver un render/foto de avance en grande.
 // Cierra con Escape, clic afuera, o el botón X; navega con las flechas del
 // teclado o los botones. Bloquea el scroll del body mientras está abierto.
@@ -204,6 +317,9 @@ export default function ProjectDetail() {
 
   const heroRef = useScrollReveal()
   const galleryRef = useScrollReveal()
+  // Esta sección solo existe en algunos proyectos: al navegar entre proyectos
+  // aparece/desaparece, así que se re-observa cuando cambia el slug.
+  const avanceRef = useScrollReveal([slug])
   const virtualRef = useScrollReveal()
   const contentRef = useScrollReveal()
   const locationRef = useScrollReveal()
@@ -275,17 +391,29 @@ export default function ProjectDetail() {
 
       {/* Renders siempre visibles, y debajo (solo si existe) el avance de obra
           en su propio expositor — ya no son pestañas que se ocultan entre sí. */}
-      <section className="bg-gray-50 border-y border-gray-100 py-10 space-y-10" ref={galleryRef}>
-        <div className="reveal max-w-7xl mx-auto px-6 lg:px-12">
-          <ImageStrip
-            title="Renders"
+      <section className="bg-gray-900 py-14 md:py-20 overflow-hidden" ref={galleryRef}>
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <p className="reveal text-center text-brand-300 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">Renders</p>
+          <h2 className="reveal reveal-delay-1 text-center font-display text-2xl md:text-4xl text-white mb-10 md:mb-14">
+            Descubre <span className="italic text-brand-300">{project.name}</span>
+          </h2>
+        </div>
+        {/* A todo el ancho de la pantalla (fuera del contenedor centrado) para
+            que los renders laterales lleguen hasta el borde en vez de cortarse
+            a media página. */}
+        <div className="reveal reveal-delay-2 max-w-[1800px] mx-auto">
+          <RenderCoverflow
+            key={project.slug}
             images={renderImages}
             projectName={project.name}
-            onImageClick={(i) => setLightbox({ images: renderImages, index: i, title: 'Renders' })}
+            onOpen={(i) => setLightbox({ images: renderImages, index: i, title: 'Renders' })}
           />
         </div>
-        {avanceImages.length > 0 && (
-          <div className="reveal reveal-delay-1 max-w-7xl mx-auto px-6 lg:px-12">
+      </section>
+
+      {avanceImages.length > 0 && (
+        <section className="bg-gray-50 border-y border-gray-100 py-10" ref={avanceRef}>
+          <div className="reveal max-w-7xl mx-auto px-6 lg:px-12">
             <ImageStrip
               title="Avance de obra"
               images={avanceImages}
@@ -293,8 +421,8 @@ export default function ProjectDetail() {
               onImageClick={(i) => setLightbox({ images: avanceImages, index: i, title: 'Avance de obra' })}
             />
           </div>
-        )}
-      </section>
+        </section>
+      )}
 
       {lightbox && (
         <Lightbox
