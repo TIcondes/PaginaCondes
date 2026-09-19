@@ -642,6 +642,10 @@ export const CONTACT = {
   phone: '+51 958 295 181',
   address: 'C. Parque Las Condes 123, Arequipa',
   sales: 'Auxiliar Lambramani',
+  // Qué busca el mapa del footer. Buscar la dirección como texto hace que
+  // Google ubique el pin unas cuadras corrido; el nombre del negocio cae en su
+  // ficha de Maps. Lo más preciso es poner aquí "lat,lng" del local.
+  mapQuery: 'Condes Corporación, Arequipa, Perú',
   instagram: 'https://www.instagram.com/condes_corp',
   facebook: 'https://www.facebook.com/share/17gaUMEzSG/',
   tiktok: 'https://www.tiktok.com/@condes.corporacion',

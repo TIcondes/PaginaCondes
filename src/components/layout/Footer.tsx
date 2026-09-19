@@ -11,7 +11,7 @@ export default function Footer() {
           <div className="max-w-4xl mx-auto overflow-hidden border border-gray-800 rounded-xl">
             <iframe
               title="Ubicación Condes Corporación"
-              src={`https://www.google.com/maps?q=${encodeURIComponent(CONTACT.address + ', Arequipa, Perú')}&output=embed`}
+              src={`https://www.google.com/maps?q=${encodeURIComponent(CONTACT.mapQuery)}&output=embed`}
               width="100%"
               height="320"
               // El embed simple de Maps no tiene parámetro de tema oscuro nativo:
