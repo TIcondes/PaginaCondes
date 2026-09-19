@@ -99,22 +99,43 @@ function ImageStrip({
 // en el visor a pantalla completa. También se navega con las flechas o
 // deslizando con el dedo. Solo se montan el activo y sus 2 vecinos por lado
 // para no cargar todos los renders de golpe.
+const AUTOPLAY_MS = 4500
+
 function RenderCoverflow({
   images,
   projectName,
   onOpen,
+  paused = false,
 }: {
   images: string[]
   projectName: string
   onOpen: (index: number) => void
+  paused?: boolean   // pausa externa (ej. mientras el visor a pantalla completa está abierto)
 }) {
   const [active, setActive] = useState(0)
+  // Pausa mientras el mouse está encima o el dedo está tocando el carrusel.
+  const [interacting, setInteracting] = useState(false)
   const touchStartX = useRef<number | null>(null)
   const total = images.length
+  // Con 3+ renders el carrusel da la vuelta (del último pasa al primero);
+  // con 1–2 no hay vecinos suficientes para que se vea bien en círculo.
+  const circular = total >= 3
+  const half = Math.floor(total / 2)
 
-  const go = (index: number) => setActive(Math.max(0, Math.min(total - 1, index)))
+  const go = (index: number) =>
+    setActive(circular ? ((index % total) + total) % total : Math.max(0, Math.min(total - 1, index)))
+
+  // Rotación automática: avanza al siguiente render cada AUTOPLAY_MS. Como el
+  // efecto depende de `active`, cualquier cambio manual reinicia la cuenta.
+  useEffect(() => {
+    if (total < 2 || paused || interacting) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const id = setTimeout(() => setActive((a) => (a + 1) % total), AUTOPLAY_MS)
+    return () => clearTimeout(id)
+  }, [active, total, paused, interacting])
 
   const onTouchEnd = (e: React.TouchEvent) => {
+    setInteracting(false)
     if (touchStartX.current === null) return
     const dx = e.changedTouches[0].clientX - touchStartX.current
     touchStartX.current = null
@@ -128,11 +149,13 @@ function RenderCoverflow({
       <div
         className="relative h-[260px] sm:h-[360px] md:h-[460px] lg:h-[520px] overflow-hidden"
         style={{ perspective: '1600px' }}
-        onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX }}
+        onMouseEnter={() => setInteracting(true)}
+        onMouseLeave={() => setInteracting(false)}
+        onTouchStart={(e) => { setInteracting(true); touchStartX.current = e.touches[0].clientX }}
         onTouchEnd={onTouchEnd}
       >
         {images.map((src, i) => {
-          const d = i - active
+          const d = circular ? ((i - active + total + half) % total) - half : i - active
           if (Math.abs(d) > 2) return null
           const isCenter = d === 0
           return (
@@ -165,7 +188,7 @@ function RenderCoverflow({
           <>
             <button
               onClick={() => go(active - 1)}
-              disabled={active === 0}
+              disabled={!circular && active === 0}
               aria-label="Render anterior"
               className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/90 shadow-lg flex items-center justify-center text-gray-800 hover:bg-white hover:scale-110 transition-all duration-200 disabled:opacity-0 disabled:pointer-events-none"
             >
@@ -173,7 +196,7 @@ function RenderCoverflow({
             </button>
             <button
               onClick={() => go(active + 1)}
-              disabled={active === total - 1}
+              disabled={!circular && active === total - 1}
               aria-label="Siguiente render"
               className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/90 shadow-lg flex items-center justify-center text-gray-800 hover:bg-white hover:scale-110 transition-all duration-200 disabled:opacity-0 disabled:pointer-events-none"
             >
@@ -407,6 +430,7 @@ export default function ProjectDetail() {
             images={renderImages}
             projectName={project.name}
             onOpen={(i) => setLightbox({ images: renderImages, index: i, title: 'Renders' })}
+            paused={lightbox !== null}
           />
         </div>
       </section>
