@@ -58,6 +58,10 @@ export interface Project {
   // una sola vez con buena calidad, para que se vea nítida en chico.
   // Si no existe, se usa `images[0]` como respaldo.
   thumbnail?: string
+  // Ubicación exacta del proyecto para el mapa del detalle. Sin esto, el mapa
+  // busca "nombre + ciudad" como texto y Google puede resolverlo a lugares
+  // distintos según el momento (por eso el pin a veces salía en otro sitio).
+  coordinates?: { lat: number; lng: number }
   logo?: string                             // Isotipo/logo a color del proyecto (public/logos/proyectos), mostrado en la tarjeta y en el detalle
   gallery?: ProjectGallery                  // Galería categorizada (renders, planimetría, avance)
   // Recorrido 360° caminable del proyecto: un único recorrido por proyecto

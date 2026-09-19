@@ -124,6 +124,7 @@ export const projects: Project[] = [
       asset('images/proyectos/florencia/FOTO-FLORENCIA-PRINCIPAL-scaled.webp'),
     ],
     thumbnail: asset('images/proyectos/florencia/FOTO-FLORENCIA-PRINCIPAL-scaled-thumb.webp'),
+    coordinates: { lat: -16.3705107, lng: -71.5575201 },
     logo: 'logos/proyectos/florencia.png',
     areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
 
@@ -195,6 +196,7 @@ export const projects: Project[] = [
       asset('images/proyectos/monserrat/FOTO-MONTSERRAT-PRINCIPAL-scaled.webp'),
     ],
     thumbnail: asset('images/proyectos/monserrat/FOTO-MONTSERRAT-PRINCIPAL-scaled-thumb.webp'),
+    coordinates: { lat: -16.427353, lng: -71.557948 },
     logo: 'logos/proyectos/monserrat.png',
     areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
     minHouseSize: 142,
@@ -318,6 +320,7 @@ export const projects: Project[] = [
       asset('images/proyectos/jardines-del-sol/FOTO-JARDINES-S-PRINCIPAL-scaled.webp'),
     ],
     thumbnail: asset('images/proyectos/jardines-del-sol/FOTO-JARDINES-S-PRINCIPAL-scaled-thumb.webp'),
+    coordinates: { lat: -16.3923813, lng: -71.5451651 },
     logo: 'logos/proyectos/jardines-del-sol.png',
     areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
     minHouseSize: 121,
@@ -423,6 +426,7 @@ export const projects: Project[] = [
       asset('images/proyectos/costa-real/FOTO-COSTA-REAL-PRINCIPAL.webp'),
     ],
     thumbnail: asset('images/proyectos/costa-real/FOTO-COSTA-REAL-PRINCIPAL-thumb.webp'),
+    coordinates: { lat: -17.0296153, lng: -72.0122546 },
     logo: 'logos/proyectos/costa-real.png',
     areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
     minHouseSize: 110,
@@ -470,6 +474,7 @@ export const projects: Project[] = [
       asset('images/proyectos/monaco/RENDER-PRINCIPAL.webp'),
     ],
     thumbnail: asset('images/proyectos/monaco/RENDER-PRINCIPAL-thumb.webp'),
+    coordinates: { lat: -16.414104, lng: -71.519797 },
     logo: 'logos/proyectos/monaco.png',
     areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
     minApartmentSize: 103,
@@ -525,6 +530,7 @@ export const projects: Project[] = [
       asset('images/proyectos/santa-maria/FOTO-09-1.webp'),
     ],
     thumbnail: asset('images/proyectos/santa-maria/FOTO-09-1-thumb.webp'),
+    coordinates: { lat: -17.0518125, lng: -71.9680625 },
     logo: 'logos/proyectos/santa-maria.png',
     areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
     minHouseSize: 215,

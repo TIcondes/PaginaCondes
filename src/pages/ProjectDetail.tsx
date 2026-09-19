@@ -221,6 +221,13 @@ export default function ProjectDetail() {
 
   const selectedTypology = project.typologies?.[selectedTypologyIndex]
 
+  // Con coordenadas el pin cae siempre en el mismo punto exacto; buscar por
+  // texto (nombre + ciudad) queda solo como respaldo porque Google puede
+  // resolverlo a un lugar distinto cada vez.
+  const mapQuery = project.coordinates
+    ? `${project.coordinates.lat},${project.coordinates.lng}`
+    : encodeURIComponent(`${project.name} ${project.city}`)
+
   // Único recorrido 360° caminable del proyecto: al hacer clic en un hotspot
   // (botón de puerta), se navega al área conectada y la cámara entra con la
   // orientación indicada por ese hotspot.
@@ -560,7 +567,7 @@ export default function ProjectDetail() {
             <div className="h-72 lg:h-auto w-full bg-gray-800 relative">
               <iframe
                 title={`Mapa de ${project.name}`}
-                src={`https://maps.google.com/maps?q=${encodeURIComponent(project.name + ' ' + project.city)}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
+                src={`https://maps.google.com/maps?q=${mapQuery}&t=&z=16&ie=UTF8&iwloc=&output=embed`}
                 width="100%"
                 height="100%"
                 style={{ border: 0, position: 'absolute', inset: 0 }}
@@ -601,7 +608,7 @@ export default function ProjectDetail() {
               </div>
 
               <a
-                href={`https://maps.google.com/?q=${encodeURIComponent(project.name + ' ' + project.city)}`}
+                href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary inline-flex items-center gap-2 w-full sm:w-auto justify-center"
