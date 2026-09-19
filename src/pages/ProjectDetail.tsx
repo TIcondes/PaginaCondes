@@ -623,7 +623,7 @@ export default function ProjectDetail() {
               sedes van arriba en chico y el horario abajo, más grande y
               centrado. */}
           <div className="mt-10 md:mt-12 max-w-5xl mx-auto">
-            <h2 className="reveal font-display text-lg md:text-2xl text-white text-center uppercase tracking-wide mb-6">
+            <h2 className="reveal font-display text-xl md:text-3xl text-white text-center uppercase tracking-wide mb-6">
               Visítanos en nuestras oficinas
             </h2>
 
@@ -633,30 +633,30 @@ export default function ProjectDetail() {
                   key={`${office.district}-${office.address}`}
                   className={`reveal ${['', 'reveal-delay-1', 'reveal-delay-2', 'reveal-delay-3'][i % 4]} rounded-2xl border-2 border-brand-300 bg-white/10 backdrop-blur-md shadow-lg overflow-hidden`}
                 >
-                  <p className={`px-4 py-1.5 text-[10px] font-body font-bold tracking-[0.2em] uppercase ${
+                  <p className={`px-4 py-1.5 text-xs font-body font-bold tracking-[0.18em] uppercase ${
                     i === 0 ? 'bg-brand-500/80 text-white' : 'bg-white/10 text-brand-200'
                   }`}>
                     {office.kind}
                   </p>
                   <div className="p-4 font-body">
-                    <p className="flex items-start gap-1.5 text-xs font-semibold text-white mb-1.5">
-                      <MapPin size={13} className="text-brand-300 shrink-0 mt-px" />
+                    <p className="flex items-start gap-1.5 text-sm md:text-base font-semibold text-white mb-1.5">
+                      <MapPin size={16} className="text-brand-300 shrink-0 mt-1" />
                       {office.district}
                     </p>
-                    <p className="text-xs text-gray-200 leading-snug">{office.address}</p>
-                    <p className="text-xs text-gray-300 leading-snug">{office.reference}</p>
+                    <p className="text-sm md:text-[15px] text-gray-200 leading-snug">{office.address}</p>
+                    <p className="text-sm md:text-[15px] text-gray-300 leading-snug">{office.reference}</p>
                   </div>
                 </div>
               ))}
             </div>
 
             <div className="reveal reveal-delay-2 mt-3 max-w-xl mx-auto rounded-2xl border-2 border-brand-300 bg-white/10 backdrop-blur-md shadow-lg overflow-hidden">
-              <p className="px-5 py-2 bg-brand-500/80 text-white text-center font-body font-bold tracking-[0.2em] uppercase text-xs md:text-sm flex items-center justify-center gap-2">
-                <Clock size={15} /> Horario de atención
+              <p className="px-5 py-2 bg-brand-500/80 text-white text-center font-body font-bold tracking-[0.18em] uppercase text-sm md:text-base flex items-center justify-center gap-2">
+                <Clock size={17} /> Horario de atención
               </p>
               <div className="px-5 py-4 md:py-5 text-center space-y-1 font-body">
                 {OFFICE_HOURS.map((row) => (
-                  <p key={row.days} className="text-white text-sm md:text-lg">
+                  <p key={row.days} className="text-white text-base md:text-xl">
                     <span className="font-bold">{row.days}:</span> {row.hours}
                   </p>
                 ))}
