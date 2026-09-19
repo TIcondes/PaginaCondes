@@ -49,7 +49,7 @@ export default function Navbar() {
                 <Link
                   key={link.to}
                   to={link.to}
-                  className={`font-body text-base italic tracking-wide transition-colors duration-200 relative group ${
+                  className={`font-body text-base tracking-wide transition-colors duration-200 relative group ${
                     transparent
                       ? 'text-white/90 hover:text-white'
                       : active
@@ -90,7 +90,7 @@ export default function Navbar() {
             href={CONTACT.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
-            className={`hidden md:inline-flex items-center gap-2 text-base font-body italic px-7 py-3.5 transition-all duration-300 ${
+            className={`hidden md:inline-flex items-center gap-2 text-base font-body px-7 py-3.5 transition-all duration-300 ${
               transparent
                 ? 'bg-white/10 text-white border border-white/30 hover:bg-white/20'
                 : 'bg-brand-600 text-white hover:bg-brand-700'
@@ -122,7 +122,7 @@ export default function Navbar() {
             <Link
               key={link.to}
               to={link.to}
-              className="block py-3 text-gray-700 font-body italic hover:text-brand-600 transition-colors border-b border-gray-50 last:border-0"
+              className="block py-3 text-gray-700 font-body hover:text-brand-600 transition-colors border-b border-gray-50 last:border-0"
             >
               {link.label}
             </Link>
@@ -131,7 +131,7 @@ export default function Navbar() {
             href={CONTACT.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 mt-3 bg-brand-600 text-white px-5 py-3 text-sm italic w-full justify-center"
+            className="flex items-center gap-2 mt-3 bg-brand-600 text-white px-5 py-3 text-sm w-full justify-center"
           >
             <Phone size={15} />
             Hablar con un asesor
