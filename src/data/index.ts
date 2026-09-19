@@ -360,6 +360,10 @@ export const projects: Project[] = [
     id: '5',
     name: 'Residencial Parque Central',
     slug: 'parquecentral',
+    // Oculto: proyecto pausado. Se conservan todos sus datos por si se
+    // retoma más adelante — para volver a publicarlo, borra esta línea
+    // (o ponla en `false`).
+    hidden: true,
     location: 'Cercado · Arequipa',
     district: 'Cercado',
     city: 'Arequipa',
@@ -582,7 +586,6 @@ export const heroImages: string[] = [
   asset('images/proyectos/monaco/RENDER-PRINCIPAL.webp'),
   asset('images/proyectos/monserrat/FOTO-MONTSERRAT-PRINCIPAL-scaled.webp'),
   asset('images/proyectos/costa-real/FOTO-COSTA-REAL-PRINCIPAL.webp'),
-  asset('images/proyectos/parquecentral/PARQUE-CENTRAL-EDIFICIO.webp'),
   asset('images/proyectos/jardines-del-sol/FOTO-JARDINES-S-PRINCIPAL-scaled.webp'),
 ]
 
