@@ -603,6 +603,40 @@ export const teamImages: string[] = [
   asset('images/equipo/Arquitectura-2.webp'),
 ]
 
+// Oficinas de atención (sección "Visítanos en nuestras oficinas" del detalle
+// de cada proyecto). La primera es la oficina central; el resto, sucursales.
+export const OFFICES = [
+  {
+    kind: 'Oficina central',
+    district: 'Cercado, Arequipa',
+    address: 'Calle Parque Las Condes 123.',
+    reference: 'Paralela a la Av. Independencia cuadra 9.',
+  },
+  {
+    kind: 'Sucursal',
+    district: 'José Luis Bustamante y Rivero, Arequipa',
+    address: 'Auxiliar Lambramani.',
+    reference: 'Al frente de Opera Cafetería.',
+  },
+  {
+    kind: 'Sucursal',
+    district: 'Cerro Colorado, Arequipa',
+    address: 'Av. Villa Hermosa 520.',
+    reference: 'Al costado de Toyota Mitsui Automotriz.',
+  },
+  {
+    kind: 'Sucursal',
+    district: 'Cercado, Arequipa',
+    address: 'Av. Alfonso Ugarte 512.',
+    reference: 'Al frente de Grupo Gloria.',
+  },
+]
+
+export const OFFICE_HOURS = [
+  { days: 'De lunes a viernes', hours: '9:00 a.m. a 6:00 p.m.' },
+  { days: 'Sábados', hours: '9:00 a.m. a 1:00 p.m.' },
+]
+
 export const CONTACT = {
   email: 'callcenter@condescorporacion.com',
   phone: '+51 958 295 181',

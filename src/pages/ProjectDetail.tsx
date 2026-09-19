@@ -3,7 +3,7 @@ import { MapPin, Home, Building2, CheckCircle, ArrowLeft, ArrowRight, ChevronLef
 import { useState, useRef, useEffect, lazy, Suspense } from 'react'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 import { usePageMeta } from '../hooks/usePageMeta'
-import { visibleProjects, CONTACT } from '../data'
+import { visibleProjects, CONTACT, OFFICES, OFFICE_HOURS } from '../data'
 
 // Three.js (usado por Panorama360Viewer) pesa varios cientos de KB: se carga
 // como chunk aparte vía import() dinámico, y solo se descarga cuando el
@@ -615,6 +615,52 @@ export default function ProjectDetail() {
               >
                 Abrir en Google Maps <ArrowRight size={16} />
               </a>
+            </div>
+          </div>
+
+          {/* Oficinas: sobre el mismo render oscurecido del fondo, tarjetas
+              translúcidas con difuminado y marco en color de acento. Las 4
+              sedes van arriba en chico y el horario abajo, más grande y
+              centrado. */}
+          <div className="mt-16 md:mt-20">
+            <h2 className="reveal font-display text-2xl md:text-4xl text-white text-center uppercase tracking-wide mb-10">
+              Visítanos en nuestras oficinas
+            </h2>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+              {OFFICES.map((office, i) => (
+                <div
+                  key={`${office.district}-${office.address}`}
+                  className={`reveal ${['', 'reveal-delay-1', 'reveal-delay-2', 'reveal-delay-3'][i % 4]} rounded-2xl border-2 border-brand-300 bg-white/10 backdrop-blur-md shadow-lg overflow-hidden`}
+                >
+                  <p className={`px-5 py-2 text-xs font-body font-bold tracking-[0.2em] uppercase ${
+                    i === 0 ? 'bg-brand-500/80 text-white' : 'bg-white/10 text-brand-200'
+                  }`}>
+                    {office.kind}
+                  </p>
+                  <div className="p-5 font-body">
+                    <p className="flex items-start gap-2 text-sm font-semibold text-white mb-2">
+                      <MapPin size={15} className="text-brand-300 shrink-0 mt-0.5" />
+                      {office.district}
+                    </p>
+                    <p className="text-sm text-gray-200 leading-relaxed">{office.address}</p>
+                    <p className="text-sm text-gray-300 leading-relaxed">{office.reference}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="reveal reveal-delay-2 mt-5 md:mt-6 max-w-3xl mx-auto rounded-2xl border-2 border-brand-300 bg-white/10 backdrop-blur-md shadow-lg overflow-hidden">
+              <p className="px-6 py-3 bg-brand-500/80 text-white text-center font-body font-bold tracking-[0.2em] uppercase text-sm md:text-base flex items-center justify-center gap-2">
+                <Clock size={18} /> Horario de atención
+              </p>
+              <div className="px-6 py-6 md:py-8 text-center space-y-2 font-body">
+                {OFFICE_HOURS.map((row) => (
+                  <p key={row.days} className="text-white text-lg md:text-2xl">
+                    <span className="font-bold">{row.days}:</span> {row.hours}
+                  </p>
+                ))}
+              </div>
             </div>
           </div>
         </div>
