@@ -74,7 +74,7 @@ export default function Home() {
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full">
           <h1 className="reveal font-display text-4xl md:text-6xl lg:text-7xl text-white tracking-wide leading-tight max-w-4xl mb-8">
-            Creamos <span className="italic text-brand-300">hogares</span> que inspiran
+            Creamos <span className="text-brand-300">hogares</span> que inspiran
           </h1>
           <Link to="/proyectos" className="reveal reveal-delay-1 btn-pill">
             Ver proyectos <ChevronRight size={16} />
@@ -169,7 +169,7 @@ export default function Home() {
             <div>
               <p className="reveal text-brand-600 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">Nuestro equipo</p>
               <h2 className="reveal reveal-delay-1 font-display text-3xl md:text-4xl text-gray-900 leading-tight mb-5">
-                Ingenieros y arquitectos <span className="italic text-brand-800">a tu servicio</span>
+                Ingenieros y arquitectos <span className="text-brand-800">a tu servicio</span>
               </h2>
               <p className="reveal reveal-delay-2 font-body text-gray-500 leading-relaxed mb-8 max-w-md">
                 Un equipo multidisciplinario que respalda cada proyecto con procesos transparentes y diseño de calidad.
