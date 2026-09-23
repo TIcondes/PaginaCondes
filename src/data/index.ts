@@ -57,6 +57,11 @@ export const navLinks: NavLink[] = [
 // disponibles.
 const PLACEHOLDER_AVANCE_IMAGE = 'https://images.unsplash.com/photo-1503387837-b154d5074bd2?w=1200&q=80'
 
+// Placeholder para proyectos nuevos que todavía no tienen sus fotos/renders
+// reales subidos a public/images. Reemplazar images/thumbnail/gallery por los
+// archivos reales en cuanto lleguen, y quitar `hidden` para publicarlo.
+const PLACEHOLDER_PROJECT_IMAGE = 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1600&q=80'
+
 // Placeholders del recorrido 360° caminable, uno por ambiente. Deben ser
 // visualmente distintos entre sí para que "caminar" de un ambiente a otro se
 // note (una foto real por ambiente, exportada de D5, es lo que va aquí
@@ -131,9 +136,9 @@ export const projects: Project[] = [
     // ---------------------------------------------------
     // 2. DESCRIPCIÓN Y ÁREAS
     // ---------------------------------------------------
-    minHouseSize: 102,
+    minHouseSize: 103,
     minApartmentSize: 54,
-    features: ['Casas desde 102 m²', 'Departamentos desde 54 m²', 'Servicios completos'],
+    features: ['Casas desde 103 m²', 'Departamentos desde 54 m²', 'Servicios completos'],
     description: 'Florencia Residencial es un proyecto diseñado para familias que buscan calidad y confort en una de las zonas de mayor crecimiento de Arequipa. Con amplias áreas verdes y acabados de primera, es la opción ideal para tu hogar.',
     amenities: ['Áreas verdes', 'Seguridad 24h', 'Estacionamiento', 'Sala comunal'],
 
@@ -165,17 +170,17 @@ export const projects: Project[] = [
     // ---------------------------------------------------
     typologies: [
       {
-        name: 'Casa — 102 m²',
-        area: 102,
+        name: 'Casa — 103 m²',
+        area: 103,
         bedrooms: 3,
-        bathrooms: 2,
+        bathrooms: 3,
         planImage: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1000&q=80',
-        features: ['Sala-comedor integrado', 'Patio posterior', 'Cocina equipada'],
+        features: ['Estudio independiente', 'Patio interior', 'Garaje'],
       },
       {
         name: 'Departamento — 54 m²',
         area: 54,
-        bedrooms: 2,
+        bedrooms: 1,
         bathrooms: 1,
         planImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1000&q=80',
         features: ['Balcón', 'Cocina americana', 'Lavandería'],
@@ -200,8 +205,8 @@ export const projects: Project[] = [
     logo: 'logos/proyectos/monserrat.png',
     areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
     minHouseSize: 142,
-    minApartmentSize: 109,
-    features: ['Casas desde 142 m²', 'Departamentos desde 109 m²', 'Servicios completos'],
+    minApartmentSize: 115,
+    features: ['Casas desde 142 m²', 'Departamentos desde 115 m²', 'Servicios completos'],
     description: 'Residencias Monserrat combina diseño contemporáneo con ubicación privilegiada en el Cercado de Arequipa. Perfecta para quienes buscan vivir cerca de los principales centros comerciales, educativos y de salud.',
     amenities: ['Áreas verdes', 'Seguridad 24h', 'Estacionamiento', 'Gimnasio'],
     gallery: {
@@ -233,12 +238,12 @@ export const projects: Project[] = [
         features: ['Estudio independiente', 'Terraza', 'Cochera doble'],
       },
       {
-        name: 'Departamento — 109 m²',
-        area: 109,
+        name: 'Departamento — 115 m²',
+        area: 115,
         bedrooms: 3,
-        bathrooms: 2,
+        bathrooms: 3,
         planImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1000&q=80',
-        features: ['Walk-in closet', 'Balcón', 'Depósito'],
+        features: ['Balcón', 'Zona de expansión', '3 baños privados'],
       },
     ],
   },
@@ -323,9 +328,9 @@ export const projects: Project[] = [
     coordinates: { lat: -16.3923813, lng: -71.5451651 },
     logo: 'logos/proyectos/jardines-del-sol.png',
     areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
-    minHouseSize: 121,
-    minApartmentSize: 112,
-    features: ['Casas desde 121 m²', 'Departamentos desde 112 m²', 'Servicios completos'],
+    minHouseSize: 369,
+    minApartmentSize: 115,
+    features: ['Casas desde 369 m²', 'Departamentos desde 115 m²', 'Servicios completos'],
     description: 'Ubicado en el exclusivo distrito de Yanahuara, Jardines del Sol te ofrece un entorno tranquilo con vistas privilegiadas al volcán Misti y acceso rápido al centro histórico de Arequipa.',
     amenities: ['Jardines privados', 'Seguridad 24h', 'Estacionamiento', 'Zona de juegos'],
     gallery: {
@@ -342,20 +347,20 @@ export const projects: Project[] = [
     },
     typologies: [
       {
-        name: 'Casa — 121 m²',
-        area: 121,
+        name: 'Casa — 369 m²',
+        area: 369,
         bedrooms: 3,
-        bathrooms: 2,
+        bathrooms: 4,
         planImage: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1000&q=80',
-        features: ['Jardín privado', 'Vista al Misti', 'Cocina equipada'],
+        features: ['Cochera doble', 'Elevador', '3 pisos'],
       },
       {
-        name: 'Departamento — 112 m²',
-        area: 112,
-        bedrooms: 3,
-        bathrooms: 2,
+        name: 'Departamento — 115 m²',
+        area: 115,
+        bedrooms: 2,
+        bathrooms: 3,
         planImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1000&q=80',
-        features: ['Balcón con vista', 'Depósito', 'Estacionamiento techado'],
+        features: ['Balcón con vista', 'Cocina abierta', 'Lavandería'],
       },
     ],
   },
@@ -432,7 +437,7 @@ export const projects: Project[] = [
     minHouseSize: 110,
     features: ['Casas desde 110 m²', 'Frente a playa', 'Servicios completos'],
     description: 'A solo metros de la playa de Mollendo, Costa Real Residencial es tu segunda vivienda ideal. Disfruta del mar, el sol y la tranquilidad con la misma calidad y respaldo legal de todos nuestros proyectos.',
-    amenities: ['Acceso directo a playa', 'Estacionamiento', 'Área de parrillas', 'Jardines'],
+    amenities: ['Piscina propia', 'Acceso directo a playa', 'Estacionamiento', 'Área de parrillas', 'Financiamiento directo hasta 12 meses'],
     gallery: {
       renders: [
         asset('images/proyectos/costa-real/FOTO-COSTA-REAL-PRINCIPAL.webp'),
@@ -450,9 +455,9 @@ export const projects: Project[] = [
         name: 'Casa de playa — 110 m²',
         area: 110,
         bedrooms: 3,
-        bathrooms: 2,
+        bathrooms: 3,
         planImage: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1000&q=80',
-        features: ['Vista al mar', 'Terraza', 'Área de parrillas'],
+        features: ['Piscina privada', 'Vista al mar', 'Doble cochera'],
       },
     ],
   },
@@ -478,7 +483,7 @@ export const projects: Project[] = [
     logo: 'logos/proyectos/monaco.png',
     areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
     minApartmentSize: 103,
-    features: ['Departamentos desde 103.24 m²', 'Espacios comerciales desde 52.98 m²', 'Servicios completos'],
+    features: ['Departamentos desde 103.24 m²', 'Espacios comerciales desde 52.98 m²', 'Penthouse desde 114.38 m²'],
     description: 'Torre Mónaco combina arquitectura moderna, ambientes funcionales y detalles que priorizan el confort y la seguridad, sobre la Av. Lambramani en José Luis Bustamante y Rivero — una ubicación estratégica con conexiones subterráneas y acabados de calidad.',
     amenities: ['Ubicación estratégica', 'Estacionamiento techado', 'Seguridad 24h', 'Conexiones subterráneas', 'Documentación certificada'],
     gallery: {
@@ -500,14 +505,15 @@ export const projects: Project[] = [
       {
         name: 'Departamento — 103 m²',
         area: 103,
-        bedrooms: 3,
-        bathrooms: 2,
+        bedrooms: 2,
+        bathrooms: 3,
         planImage: asset('images/proyectos/monaco/PLANIMETRIA.webp'),
         features: ['Terraza', 'Acabados de calidad', 'Estacionamiento techado'],
       },
       {
         name: 'Espacio comercial — 53 m²',
         area: 53,
+        bathrooms: 2,
         planImage: asset('images/proyectos/monaco/PLANIMETRIA.webp'),
         features: ['Frente a Av. Lambramani', 'Ideal para negocio', 'Acceso independiente'],
       },
@@ -533,8 +539,8 @@ export const projects: Project[] = [
     coordinates: { lat: -17.0518125, lng: -71.9680625 },
     logo: 'logos/proyectos/santa-maria.png',
     areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
-    minHouseSize: 215,
-    features: ['Casas desde 215 m²', 'Lotes desde 300 m²', 'Frente a playa'],
+    minHouseSize: 173,
+    features: ['Casas desde 173 m²', 'Lotes desde 226 m²', 'Frente a playa'],
     description: 'Residencias Santa María es nuestro nuevo proyecto frente al mar en Mejía, a pocos minutos de la plaza principal. Pensado para despertar frente al océano, combina casas y lotes de playa con áreas comunes completas: club house, piscinas recreativas, canchas deportivas y amplias zonas verdes.',
     amenities: ['Club house', 'Dos piscinas recreativas', 'Canchas deportivas', 'Plazas y jardines', 'Conexiones subterráneas', 'Pet-friendly', 'Seguridad 24h'],
     gallery: {
@@ -553,16 +559,110 @@ export const projects: Project[] = [
     },
     typologies: [
       {
-        name: 'Casa de playa — 215 m²',
-        area: 215,
+        name: 'Casa de playa — 173 m²',
+        area: 173,
+        bedrooms: 5,
+        bathrooms: 5,
         planImage: asset('images/proyectos/santa-maria/PLANIMETRIA.webp'),
-        features: ['Diseño de casa de playa', 'Doble altura', 'Club house cercano'],
+        features: ['Piscina privada', 'Doble altura', 'Ducha desarenador'],
       },
       {
-        name: 'Lote — 300 m²',
-        area: 300,
+        name: 'Lote — 226 m²',
+        area: 226,
         planImage: asset('images/proyectos/santa-maria/PLANIMETRIA.webp'),
         features: ['Terreno independiente', 'Conexiones subterráneas', 'Zona de club house cercana'],
+      },
+    ],
+  },
+  {
+    id: '9',
+    name: 'Edificio Los Cedros',
+    slug: 'los-cedros',
+    // Oculto: todavía no tiene fotos/renders reales (pendiente de recibirlas).
+    // Quitar esta línea para publicarlo en cuanto se reemplacen los
+    // placeholders de `images`/`thumbnail`/`gallery` por los archivos reales.
+    hidden: true,
+    location: 'Yanahuara · Arequipa',
+    district: 'Yanahuara',
+    city: 'Arequipa',
+    tag: 'Nuevo',
+    status: 'preventa',
+    type: ['departamentos'],
+    zone: 'ciudad',
+    images: [PLACEHOLDER_PROJECT_IMAGE],
+    thumbnail: PLACEHOLDER_PROJECT_IMAGE,
+    areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
+    minApartmentSize: 52,
+    features: ['Departamentos desde 52 m²', 'Frente al parque Los Cedros', 'Servicios completos'],
+    description: 'Edificio Los Cedros está ubicado en la Urb. Los Cedros D-4, al frente del parque Los Cedros, en Yanahuara — a minutos de Mall Plaza Cayma, Real Plaza y el Parque del Avión. Departamentos de un dormitorio pensados para un estilo de vida dinámico, con cocheras, ascensor y zona social en la azotea.',
+    amenities: ['Cocheras', 'Conexiones subterráneas', 'Ascensor', 'Frente al parque', 'Sismorresistente', 'Seguridad 24/7'],
+    gallery: {
+      renders: [PLACEHOLDER_PROJECT_IMAGE],
+      planimetria: [PLACEHOLDER_PROJECT_IMAGE],
+      avance: [PLACEHOLDER_AVANCE_IMAGE],
+    },
+    typologies: [
+      {
+        name: 'Departamento Tipo 3 — 52 m²',
+        area: 52,
+        bedrooms: 1,
+        bathrooms: 1,
+        planImage: PLACEHOLDER_PROJECT_IMAGE,
+        features: ['Sala-comedor', 'Cocina', 'Lavandería'],
+      },
+      {
+        name: 'Departamento Tipo 2 — 104.5 m²',
+        area: 105,
+        bedrooms: 2,
+        bathrooms: 3,
+        planImage: PLACEHOLDER_PROJECT_IMAGE,
+        features: ['Cochera', 'Sala-comedor', 'Lavandería'],
+      },
+    ],
+  },
+  {
+    id: '10',
+    name: 'Marín 402',
+    slug: 'marin-402',
+    // Oculto: todavía no tiene fotos/renders reales (pendiente de recibirlas).
+    // Quitar esta línea para publicarlo en cuanto se reemplacen los
+    // placeholders de `images`/`thumbnail`/`gallery` por los archivos reales.
+    hidden: true,
+    location: 'Yanahuara · Arequipa',
+    district: 'Yanahuara',
+    city: 'Arequipa',
+    tag: 'Nuevo',
+    status: 'preventa',
+    type: ['departamentos'],
+    zone: 'ciudad',
+    images: [PLACEHOLDER_PROJECT_IMAGE],
+    thumbnail: PLACEHOLDER_PROJECT_IMAGE,
+    areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
+    minApartmentSize: 120,
+    features: ['Departamentos desde 119.66 m²', 'A una cuadra del Mall Plaza Cayma', 'Áreas comerciales'],
+    description: 'Marín 402 está ubicado en Tronchadero 402, Yanahuara, a solo 1 minuto de la Av. Ejército y el Mall Plaza Cayma. Departamentos de 3 dormitorios con amplitud y conexión inmediata a bancos, supermercados, centros comerciales y restaurantes.',
+    amenities: ['Ingreso vehicular', 'Áreas comerciales', 'Cerca a bancos y supermercados', 'Cerca a clínicas'],
+    gallery: {
+      renders: [PLACEHOLDER_PROJECT_IMAGE],
+      planimetria: [PLACEHOLDER_PROJECT_IMAGE],
+      avance: [PLACEHOLDER_AVANCE_IMAGE],
+    },
+    typologies: [
+      {
+        name: 'Departamento Tipología 1 — 120 m²',
+        area: 120,
+        bedrooms: 3,
+        bathrooms: 3,
+        planImage: PLACEHOLDER_PROJECT_IMAGE,
+        features: ['Sala', 'Comedor', 'Cocina', 'Lavandería', 'Balcón'],
+      },
+      {
+        name: 'Departamento Tipología 2 — 133 m²',
+        area: 133,
+        bedrooms: 3,
+        bathrooms: 3,
+        planImage: PLACEHOLDER_PROJECT_IMAGE,
+        features: ['Sala', 'Comedor', 'Cocina', 'Lavandería', 'Balcón'],
       },
     ],
   },
