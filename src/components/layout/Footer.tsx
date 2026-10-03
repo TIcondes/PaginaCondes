@@ -27,15 +27,15 @@ export default function Footer() {
         {/* En desktop: 3 columnas iguales con Logo a la izquierda, Menú
             centrado y Contacto a la derecha (cada bloque se alinea con
             `justify-self` dentro de su columna, así Menú queda en el centro
-            exacto de la página). En móvil se reacomoda: Logo y Menú
-            comparten una fila de 2 columnas, y Contacto (más largo) ocupa el
-            ancho completo debajo. */}
-        <div className="grid grid-cols-2 gap-8 mb-12 md:grid-cols-3 md:items-start">
-          <div className="md:max-w-xs md:justify-self-start">
+            exacto de la página). En móvil se apilan en 1 columna: Logo y
+            texto centrados arriba, Menú centrado debajo, y Contacto
+            (alineado a la izquierda) al final. */}
+        <div className="grid grid-cols-1 gap-10 mb-12 md:grid-cols-3 md:gap-8 md:items-start">
+          <div className="text-center md:text-left md:max-w-xs md:justify-self-start">
             <img
-              src={`${import.meta.env.BASE_URL}logos/logo.png`}
+              src={`${import.meta.env.BASE_URL}logos/logo-blanco.png`}
               alt="Condes Corporación"
-              className="h-14 w-auto mb-4 brightness-0 invert"
+              className="h-20 md:h-14 w-auto mb-4 mx-auto md:mx-0"
             />
             <p className="font-body text-sm text-gray-400 leading-relaxed">
               Proyectos inmobiliarios de calidad con respaldo legal y técnico en Arequipa, Perú.
@@ -57,7 +57,7 @@ export default function Footer() {
             </nav>
           </div>
 
-          <div className="col-span-2 md:col-span-1 md:order-2 md:max-w-xs md:justify-self-end">
+          <div className="md:order-2 md:max-w-xs md:justify-self-end">
             <h4 className="font-body text-xs text-gray-500 tracking-[0.25em] uppercase mb-5">Contacto</h4>
             <div className="space-y-3">
               <a href={`mailto:${CONTACT.email}`} className="flex items-start gap-3 text-sm text-gray-400 hover:text-white transition-colors">
