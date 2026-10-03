@@ -774,12 +774,12 @@ export default function ProjectDetail() {
               translúcidas con difuminado y marco en color de acento. Las 4
               sedes van arriba en chico y el horario abajo, más grande y
               centrado. */}
-          <div className="mt-10 md:mt-12 max-w-5xl mx-auto">
+          <div className="mt-10 md:mt-12">
             <h2 className="reveal font-display text-xl md:text-3xl text-white text-center uppercase tracking-wide mb-6">
               Visítanos en nuestras oficinas
             </h2>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
               {OFFICES.map((office, i) => (
                 <div
                   key={`${office.district}-${office.address}`}

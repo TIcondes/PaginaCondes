@@ -35,7 +35,7 @@ export default function Footer() {
             <img
               src={`${import.meta.env.BASE_URL}logos/logo-blanco.png`}
               alt="Condes Corporación"
-              className="h-20 md:h-14 w-auto mb-4 mx-auto md:mx-0"
+              className="h-20 w-auto mb-4 mx-auto md:mx-0"
             />
             <p className="font-body text-sm text-gray-400 leading-relaxed">
               Proyectos inmobiliarios de calidad con respaldo legal y técnico en Arequipa, Perú.
