@@ -414,7 +414,7 @@ export default function ProjectDetail() {
 
       {/* Renders siempre visibles, y debajo (solo si existe) el avance de obra
           en su propio expositor — ya no son pestañas que se ocultan entre sí. */}
-      <section className="bg-gray-900 py-14 md:py-20 overflow-hidden" ref={galleryRef}>
+      <section className="bg-brand-900 py-14 md:py-20 overflow-hidden" ref={galleryRef}>
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <p className="reveal text-center text-brand-300 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">Renders</p>
           <h2 className="reveal reveal-delay-1 text-center font-display text-2xl md:text-4xl text-white mb-10 md:mb-14">
