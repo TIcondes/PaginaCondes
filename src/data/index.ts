@@ -815,6 +815,10 @@ export const teamImages: string[] = [
   asset('images/equipo/Arquitectura-2.webp'),
 ]
 
+// Foto del equipo usada en el bloque "Somos Condes Corporación" (About) y en
+// la sección "Nuestro equipo" del Home — una sola foto fija, no un carrusel.
+export const aboutTeamImage = asset('images/equipo/about-team.webp')
+
 // Oficinas de atención (sección "Visítanos en nuestras oficinas" del detalle
 // de cada proyecto). La primera es la oficina central; el resto, sucursales.
 export const OFFICES = [

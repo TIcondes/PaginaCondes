@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type PointerEvent } from 'react'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 import { usePageMeta } from '../hooks/usePageMeta'
-import { teamImages, CONTACT } from '../data'
+import { teamImages, aboutTeamImage, CONTACT } from '../data'
 import { Ruler, Scale, Shield, Calculator, ArrowRight, Target, Eye, Pause, Play } from 'lucide-react'
 
 const disciplinesImg = (file: string) => `${import.meta.env.BASE_URL}images/disciplinas/${file}`
@@ -111,44 +111,26 @@ export default function About() {
         </div>
       </section>
 
-      {/* Somos Condes Corporación — banner de presentación con carrusel chico
-          del equipo (mismas fotos que antes, ahora en formato reducido con
-          puntos en vez de flechas/pausa). Va entre el título y Misión/Visión,
-          como en condescorporacion.com. */}
+      {/* Somos Condes Corporación — foto fija del equipo a la izquierda,
+          texto a la derecha. Va entre el título y Misión/Visión, como en
+          condescorporacion.com. */}
       <section className="py-20 bg-gray-50" ref={introRef}>
         <div className="max-w-7xl mx-auto px-6 lg:px-12 grid md:grid-cols-2 gap-12 items-center">
-          <div className="reveal">
+          <div className="reveal relative aspect-[4/3] w-full max-w-md mx-auto md:mx-0 overflow-hidden rounded-2xl shadow-lg">
+            <img
+              src={aboutTeamImage}
+              alt="Equipo Condes Corporación"
+              className="absolute inset-0 w-full h-full object-cover"
+              loading="eager"
+            />
+          </div>
+
+          <div className="reveal reveal-delay-1">
             <p className="text-brand-600 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">Somos</p>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-gray-900 mb-5">Condes Corporación</h2>
             <p className="font-body text-gray-500 leading-relaxed">
               Fundada en 2023, somos una desarrolladora inmobiliaria arequipeña firmemente comprometida con el crecimiento y desarrollo de la región. Nuestro portafolio incluye un significativo número de proyectos diseñados con la misión de brindar un espacio propio y seguro a las familias del sur del Perú.
             </p>
-          </div>
-
-          <div className="reveal reveal-delay-1 relative aspect-[4/3] w-full max-w-md mx-auto md:mx-0 md:ml-auto overflow-hidden rounded-2xl shadow-lg">
-            {teamImages.map((src, i) => (
-              <img
-                key={src}
-                src={src}
-                alt="Equipo Condes Corporación"
-                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
-                  i === activeImg ? 'opacity-100' : 'opacity-0'
-                }`}
-                loading={i === 0 ? 'eager' : 'lazy'}
-              />
-            ))}
-            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
-              {teamImages.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setActiveImg(i)}
-                  aria-label={`Ver foto ${i + 1} del equipo`}
-                  className={`h-1.5 rounded-full transition-all duration-300 ${
-                    i === activeImg ? 'w-5 bg-white' : 'w-1.5 bg-white/50 hover:bg-white/80'
-                  }`}
-                />
-              ))}
-            </div>
           </div>
         </div>
       </section>

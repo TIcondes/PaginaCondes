@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, ChevronRight, Pause, Play } from 'lucide-react'
+import { ArrowRight, ChevronRight } from 'lucide-react'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 import { usePageMeta } from '../hooks/usePageMeta'
-import { visibleProjects, teamImages, heroImages, seasonalBanner } from '../data'
+import { visibleProjects, aboutTeamImage, heroImages, seasonalBanner } from '../data'
 import ProjectCardLight from '../components/ui/ProjectCardLight'
 
 const costaReal = visibleProjects.find((p) => p.slug === 'costa-real')
-const TEAM_SLIDE_INTERVAL = 4500 // ms entre cada cambio de foto del carrusel de equipo
 const HERO_SLIDE_INTERVAL = 16000 // ms entre cada cambio de render en el hero (debe coincidir con heroZoom en index.css)
 const HOME_PROJECTS_LIMIT = 4
 
@@ -28,20 +27,6 @@ export default function Home() {
   const nosotrosRef = useScrollReveal()
   const projectsRef = useScrollReveal()
   const ctaRef = useScrollReveal()
-
-  // Carrusel de fotos del equipo: cambia de imagen lentamente con un
-  // crossfade, y se puede pausar (accesibilidad para quienes prefieren
-  // menos movimiento en pantalla).
-  const [activeTeamImg, setActiveTeamImg] = useState(0)
-  const [teamAutoplay, setTeamAutoplay] = useState(true)
-
-  useEffect(() => {
-    if (!teamAutoplay) return
-    const id = setInterval(() => {
-      setActiveTeamImg((i) => (i + 1) % teamImages.length)
-    }, TEAM_SLIDE_INTERVAL)
-    return () => clearInterval(id)
-  }, [teamAutoplay])
 
   // Carrusel del hero: crossfade automático entre renders de varios proyectos.
   const [activeHeroImg, setActiveHeroImg] = useState(0)
@@ -146,24 +131,12 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="reveal reveal-delay-2 relative aspect-[4/3] overflow-hidden bg-gray-100">
-              {teamImages.map((src, i) => (
-                <img
-                  key={src}
-                  src={src}
-                  alt="Equipo Condes Corporación"
-                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
-                    i === activeTeamImg ? 'opacity-100' : 'opacity-0'
-                  }`}
-                  loading={i === 0 ? 'eager' : 'lazy'}
-                />
-              ))}
-              <button
-                onClick={() => setTeamAutoplay((playing) => !playing)}
-                className="absolute bottom-4 right-4 w-9 h-9 flex items-center justify-center bg-gray-950/60 text-white hover:bg-gray-950/80 transition-colors"
-                aria-label={teamAutoplay ? 'Pausar carrusel de fotos' : 'Reanudar carrusel de fotos'}
-              >
-                {teamAutoplay ? <Pause size={14} /> : <Play size={14} />}
-              </button>
+              <img
+                src={aboutTeamImage}
+                alt="Equipo Condes Corporación"
+                className="absolute inset-0 w-full h-full object-cover"
+                loading="lazy"
+              />
             </div>
 
             <div>
