@@ -48,7 +48,7 @@ export default function Projects() {
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full">
           <p className="reveal text-brand-300 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">Portafolio</p>
           <h1 className="reveal reveal-delay-1 font-display text-4xl md:text-5xl text-white">
-            Todos nuestros <span className="italic text-brand-300">proyectos</span>
+            Todos nuestros <span className="text-brand-300">proyectos</span>
           </h1>
         </div>
       </section>

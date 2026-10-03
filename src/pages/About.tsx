@@ -106,7 +106,7 @@ export default function About() {
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full">
           <p className="reveal text-brand-300 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">Quiénes somos</p>
           <h1 className="reveal reveal-delay-1 font-display text-4xl md:text-5xl text-white max-w-xl">
-            Un equipo de <span className="italic text-brand-300">profesionales</span>
+            Un equipo de <span className="text-brand-300">profesionales</span>
           </h1>
         </div>
       </section>
@@ -302,7 +302,7 @@ export default function About() {
           <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full">
             <p className="reveal text-brand-300 text-xs font-body font-semibold tracking-[0.25em] uppercase mb-3">Nuestro equipo</p>
             <h2 className="reveal reveal-delay-1 font-display text-3xl md:text-5xl text-white max-w-2xl mb-8">
-              Conoce a los <span className="italic text-brand-300">profesionales</span>
+              Conoce a los <span className="text-brand-300">profesionales</span>
             </h2>
             <a href={CONTACT.whatsapp} target="_blank" rel="noopener noreferrer" className="reveal reveal-delay-2 btn-pill">
               Hablar con nosotros <ArrowRight size={16} />
