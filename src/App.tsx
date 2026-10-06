@@ -5,6 +5,7 @@ import WhatsAppButton from './components/layout/WhatsAppButton'
 import ScrollToTopButton from './components/layout/ScrollToTopButton'
 import ScrollToTop from './components/layout/ScrollToTop'
 import ProjectTransition from './components/ui/ProjectTransition'
+import IntroSplash from './components/ui/IntroSplash'
 import { TransitionProvider } from './context/TransitionContext'
 import Home from './pages/Home'
 import Projects from './pages/Projects'
@@ -16,6 +17,7 @@ import Privacy from './pages/Privacy'
 export default function App() {
   return (
     <TransitionProvider>
+      <IntroSplash />
       <ScrollToTop />
       <Navbar />
       <main>
