@@ -630,7 +630,13 @@ export default function ProjectDetail() {
               )}
 
               <div className="reveal reveal-delay-3 border border-gray-100 bg-white">
-                <div className="relative aspect-[21/9] bg-gray-50">
+                {/* Altura fija (no aspect-ratio) porque los planos reales vienen en
+                    orientaciones muy distintas: horizontales (la mayoría de
+                    departamentos) y verticales/triangulares (algunas casas,
+                    ej. Los Cedros) — con un aspect-ratio fijo, un plano vertical
+                    quedaba aplastado a una franja casi invisible dentro de una
+                    caja panorámica. */}
+                <div className="relative h-[420px] sm:h-[520px] md:h-[600px] bg-gray-50">
                   <img
                     key={selectedTypology.planImages[selectedFloorIndex]}
                     src={selectedTypology.planImages[selectedFloorIndex]}

@@ -609,6 +609,12 @@ export const projects: Project[] = [
         asset('images/proyectos/monaco/TIPO2-TERRAZA-3.webp'),
         asset('images/proyectos/monaco/VIVIENDA-TIPO-3.webp'),
         asset('images/proyectos/monaco/TERRAZA.webp'),
+        asset('images/proyectos/monaco/p01_000.webp'),
+        asset('images/proyectos/monaco/p05_079.webp'),
+        asset('images/proyectos/monaco/p06_087.webp'),
+        asset('images/proyectos/monaco/p18_136.webp'),
+        asset('images/proyectos/monaco/p20_140.webp'),
+        asset('images/proyectos/monaco/p22_154.webp'),
       ],
       planimetria: [asset('images/proyectos/monaco/PLANIMETRIA.webp')],
       avance: [PLACEHOLDER_AVANCE_IMAGE], // Pendiente: reemplazar por fotos reales de avance de obra
@@ -779,10 +785,6 @@ export const projects: Project[] = [
     id: '9',
     name: 'Edificio Los Cedros',
     slug: 'los-cedros',
-    // Oculto: todavía no tiene fotos/renders reales (pendiente de recibirlas).
-    // Quitar esta línea para publicarlo en cuanto se reemplacen los
-    // placeholders de `images`/`thumbnail`/`gallery` por los archivos reales.
-    hidden: true,
     location: 'Yanahuara · Arequipa',
     district: 'Yanahuara',
     city: 'Arequipa',
@@ -790,16 +792,26 @@ export const projects: Project[] = [
     status: 'preventa',
     type: ['departamentos'],
     zone: 'ciudad',
-    images: [PLACEHOLDER_PROJECT_IMAGE],
-    thumbnail: PLACEHOLDER_PROJECT_IMAGE,
+    images: [asset('images/proyectos/los-cedros/p001_000.webp')],
+    thumbnail: asset('images/proyectos/los-cedros/p001_000-thumb.webp'),
     areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
     minApartmentSize: 52,
     features: ['Departamentos desde 52 m²', 'Frente al parque Los Cedros', 'Servicios completos'],
     description: 'Edificio Los Cedros está ubicado en la Urb. Los Cedros D-4, al frente del parque Los Cedros, en Yanahuara — a minutos de Mall Plaza Cayma, Real Plaza y el Parque del Avión. Departamentos de un dormitorio pensados para un estilo de vida dinámico, con cocheras, ascensor y zona social en la azotea.',
     amenities: ['Cocheras', 'Conexiones subterráneas', 'Ascensor', 'Frente al parque', 'Sismorresistente', 'Seguridad 24/7'],
     gallery: {
-      renders: [PLACEHOLDER_PROJECT_IMAGE],
-      planimetria: [PLACEHOLDER_PROJECT_IMAGE],
+      renders: [
+        asset('images/proyectos/los-cedros/p001_000.webp'),
+        asset('images/proyectos/los-cedros/p004_008.webp'),
+        asset('images/proyectos/los-cedros/p006_012.webp'),
+        asset('images/proyectos/los-cedros/p008_024.webp'),
+        asset('images/proyectos/los-cedros/p010_036.webp'),
+        asset('images/proyectos/los-cedros/p010_037.webp'),
+        asset('images/proyectos/los-cedros/p010_039.webp'),
+        asset('images/proyectos/los-cedros/p011_040.webp'),
+        asset('images/proyectos/los-cedros/p011_041.webp'),
+      ],
+      planimetria: [asset('images/proyectos/los-cedros/tipologias/estacionamientos.webp')],
       avance: [PLACEHOLDER_AVANCE_IMAGE],
     },
     typologies: [
@@ -808,7 +820,7 @@ export const projects: Project[] = [
         area: 77,
         bedrooms: 1,
         bathrooms: 1,
-        planImages: [PLACEHOLDER_PROJECT_IMAGE],
+        planImages: [asset('images/proyectos/los-cedros/tipologias/topo1.webp')],
         features: ['Sala-comedor', 'Cocina', 'Lavandería'],
       },
       {
@@ -816,7 +828,7 @@ export const projects: Project[] = [
         area: 105,
         bedrooms: 2,
         bathrooms: 3,
-        planImages: [PLACEHOLDER_PROJECT_IMAGE],
+        planImages: [asset('images/proyectos/los-cedros/tipologias/topo2.webp')],
         features: ['Cochera', 'Sala-comedor', 'Lavandería'],
       },
       {
@@ -824,7 +836,7 @@ export const projects: Project[] = [
         area: 52,
         bedrooms: 1,
         bathrooms: 1,
-        planImages: [PLACEHOLDER_PROJECT_IMAGE],
+        planImages: [asset('images/proyectos/los-cedros/tipologias/topo3.webp')],
         features: ['Sala-comedor', 'Cocina', 'Lavandería'],
       },
       {
@@ -832,7 +844,7 @@ export const projects: Project[] = [
         area: 54,
         bedrooms: 1,
         bathrooms: 1,
-        planImages: [PLACEHOLDER_PROJECT_IMAGE],
+        planImages: [asset('images/proyectos/los-cedros/tipologias/topo4.webp')],
         features: ['Sala-comedor', 'Cocina', 'Lavandería'],
       },
     ],
