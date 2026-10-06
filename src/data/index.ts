@@ -853,10 +853,6 @@ export const projects: Project[] = [
     id: '10',
     name: 'Marín 402',
     slug: 'marin-402',
-    // Oculto: todavía no tiene fotos/renders reales (pendiente de recibirlas).
-    // Quitar esta línea para publicarlo en cuanto se reemplacen los
-    // placeholders de `images`/`thumbnail`/`gallery` por los archivos reales.
-    hidden: true,
     location: 'Yanahuara · Arequipa',
     district: 'Yanahuara',
     city: 'Arequipa',
@@ -864,35 +860,27 @@ export const projects: Project[] = [
     status: 'preventa',
     type: ['departamentos'],
     zone: 'ciudad',
-    images: [PLACEHOLDER_PROJECT_IMAGE],
-    thumbnail: PLACEHOLDER_PROJECT_IMAGE,
+    // Sin render de fachada/exterior todavía: se usa el plano de la
+    // Tipología 1 como imagen principal mientras tanto. Reemplazar por un
+    // render real en cuanto esté disponible.
+    images: [asset('images/proyectos/marin-402/tipologias/topo1.webp')],
+    thumbnail: asset('images/proyectos/marin-402/tipologias/topo1-thumb.webp'),
     areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
     minApartmentSize: 120,
     features: ['Departamentos desde 119.66 m²', 'A una cuadra del Mall Plaza Cayma', 'Áreas comerciales'],
     description: 'Marín 402 está ubicado en Tronchadero 402, Yanahuara, a solo 1 minuto de la Av. Ejército y el Mall Plaza Cayma. Departamentos de 3 dormitorios con amplitud y conexión inmediata a bancos, supermercados, centros comerciales y restaurantes.',
     amenities: ['Ingreso vehicular', 'Áreas comerciales', 'Cerca a bancos y supermercados', 'Cerca a clínicas'],
     gallery: {
-      renders: [PLACEHOLDER_PROJECT_IMAGE],
+      renders: [
+        asset('images/proyectos/marin-402/tipologias/topo1.webp'),
+        asset('images/proyectos/marin-402/tipologias/topo1-piso.webp'),
+        asset('images/proyectos/marin-402/tipologias/topo2.webp'),
+        asset('images/proyectos/marin-402/tipologias/topo2-piso.webp'),
+      ],
       planimetria: [PLACEHOLDER_PROJECT_IMAGE],
       avance: [PLACEHOLDER_AVANCE_IMAGE],
     },
     typologies: [
-      {
-        name: 'Departamento 201 — 153.5 m²',
-        area: 154,
-        bedrooms: 3,
-        bathrooms: 3,
-        planImages: [PLACEHOLDER_PROJECT_IMAGE],
-        features: ['Sala', 'Comedor', 'Cocina', 'Patio', 'Balcón'],
-      },
-      {
-        name: 'Departamento 202 — 179.6 m²',
-        area: 180,
-        bedrooms: 3,
-        bathrooms: 3,
-        planImages: [PLACEHOLDER_PROJECT_IMAGE],
-        features: ['Sala', 'Comedor', 'Cocina', 'Patio', 'Balcón'],
-      },
       {
         name: 'Departamento Tipología 1 — 120 m²',
         area: 120,
