@@ -337,6 +337,10 @@ export default function ProjectDetail() {
   const [entryYaw, setEntryYaw] = useState(0)
   // Tipología elegida en el selector de la sección "Tipología"
   const [selectedTypologyIndex, setSelectedTypologyIndex] = useState(0)
+  // Piso/imagen activa dentro de la tipología seleccionada (las casas de
+  // varios niveles traen un plano por piso). Se reinicia a 0 cada vez que
+  // cambia la tipología, para no quedar "en el segundo piso" de la nueva.
+  const [selectedFloorIndex, setSelectedFloorIndex] = useState(0)
 
   const heroRef = useScrollReveal()
   const galleryRef = useScrollReveal()
@@ -612,7 +616,7 @@ export default function ProjectDetail() {
                   {project.typologies.map((t, i) => (
                     <button
                       key={t.name}
-                      onClick={() => setSelectedTypologyIndex(i)}
+                      onClick={() => { setSelectedTypologyIndex(i); setSelectedFloorIndex(0) }}
                       className={`px-5 py-2.5 text-sm font-body font-medium border transition-all duration-200 ${
                         selectedTypologyIndex === i
                           ? 'bg-brand-600 text-white border-brand-600'
@@ -628,15 +632,39 @@ export default function ProjectDetail() {
               <div className="reveal reveal-delay-3 border border-gray-100 bg-white">
                 <div className="relative aspect-[21/9] bg-gray-50">
                   <img
-                    src={selectedTypology.planImage}
-                    alt={`Plano de ${selectedTypology.name}`}
-                    className="w-full h-full object-contain p-8"
+                    key={selectedTypology.planImages[selectedFloorIndex]}
+                    src={selectedTypology.planImages[selectedFloorIndex]}
+                    alt={`Plano de ${selectedTypology.name}${selectedTypology.planImages.length > 1 ? ` — piso ${selectedFloorIndex + 1}` : ''}`}
+                    className="w-full h-full object-contain p-8 animate-gallery-fade"
                     loading="lazy"
                     decoding="async"
                   />
                   <div className="absolute top-4 left-4 px-3 py-1.5 bg-gray-950/80 text-white text-xs font-body tracking-wide">
                     {selectedTypology.name}
                   </div>
+
+                  {/* Selector de piso: solo aparece cuando la tipología trae más de
+                      un plano (casas/triplex de varios niveles). */}
+                  {selectedTypology.planImages.length > 1 && (
+                    <div className="absolute top-4 right-4 flex flex-wrap justify-end gap-1.5 max-w-[70%]">
+                      {selectedTypology.planImages.map((_, i) => {
+                        const label = selectedTypology.planImageLabels?.[i] ?? `Piso ${i + 1}`
+                        return (
+                          <button
+                            key={label}
+                            onClick={() => setSelectedFloorIndex(i)}
+                            className={`px-3 py-1.5 text-xs font-body font-medium rounded-full border transition-colors ${
+                              selectedFloorIndex === i
+                                ? 'bg-brand-600 text-white border-brand-600'
+                                : 'bg-white/90 text-gray-700 border-white/90 hover:bg-white'
+                            }`}
+                          >
+                            {label}
+                          </button>
+                        )
+                      })}
+                    </div>
+                  )}
                 </div>
 
                 <div className="p-8 border-t border-gray-100">

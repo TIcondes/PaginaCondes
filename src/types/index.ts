@@ -26,7 +26,15 @@ export interface Typology {
   area: number                // m2 de esta tipología
   bedrooms?: number
   bathrooms?: number
-  planImage: string           // Imagen del plano de esta tipología
+  // Una o más imágenes del plano. Las casas/triplex de varios pisos traen un
+  // plano por piso (en el mismo orden en que se suben); los departamentos de
+  // un solo nivel traen un único elemento.
+  planImages: string[]
+  // Etiqueta de cada imagen en `planImages` (ej. "Primer piso", "Terraza").
+  // Si no se define, se autogenera "Piso 1", "Piso 2"... — solo hace falta
+  // cuando el orden no es un simple conteo de pisos (ej. una terraza extra,
+  // o varias vistas de referencia de un departamento de un solo nivel).
+  planImageLabels?: string[]
   features?: string[]         // Características específicas de esta tipología (ej. "Cocina equipada", "Balcón")
 }
 
