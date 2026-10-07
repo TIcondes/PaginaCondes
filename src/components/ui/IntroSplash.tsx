@@ -5,10 +5,13 @@ import { useLocation } from 'react-router-dom'
 // al entrar a Inicio — así no interrumpe cada vez que el usuario vuelve a "/"
 // navegando por el sitio, ni aparece en otras páginas.
 const SESSION_KEY = 'condes-intro-shown'
-// Si el video tarda en cargar/arrancar (autoplay bloqueado, red lenta, etc.)
-// no se queda trabado esperando: a los 6s pasa igual a disolverse.
-const FALLBACK_MS = 6000
-const FADE_MS = 1100
+const PLAYBACK_RATE = 1.5
+// El video dura 10s reales (~6.7s a 1.5x). Si tarda en cargar/arrancar
+// (autoplay bloqueado, red lenta, etc.) no se queda trabado esperando: a
+// los 9s pasa igual a disolverse — con margen de sobra para que en el caso
+// normal sea siempre el propio final del video el que dispare el desvanecido.
+const FALLBACK_MS = 9000
+const FADE_MS = 2200
 
 type Phase = 'video' | 'fading' | 'done'
 
@@ -59,21 +62,26 @@ export default function IntroSplash() {
       style={{ transitionDuration: `${FADE_MS}ms` }}
     >
       <video
+        ref={(el) => { if (el) el.playbackRate = PLAYBACK_RATE }}
         src={`${import.meta.env.BASE_URL}videos/animacioninicio.mp4`}
         autoPlay
         muted
         playsInline
+        // Algunos navegadores reinician playbackRate a 1 apenas resuelven los
+        // metadatos del video, pisando el valor puesto por el ref — se vuelve
+        // a fijar acá para asegurar que quede en 1.5x.
+        onLoadedMetadata={(e) => { e.currentTarget.playbackRate = PLAYBACK_RATE }}
         onEnded={startFade}
-        // Máscara radial: los bordes del video se funden a transparente (se
-        // ve el blanco del fondo a través), en vez de un recorte rectangular
-        // duro — así el video se "disuelve" en la pantalla en vez de verse
-        // como una tarjeta flotando encima.
-        className={`w-64 sm:w-80 md:w-96 transition-all ease-out ${
+        // Máscara radial amplia: el núcleo sólido es chico y el resto es un
+        // degradado largo hacia transparente, para que no quede ni un borde
+        // tenue del rectángulo — se ve el blanco del fondo "comiéndose" el
+        // video por todos lados en vez de un cuadro con esquinas suavizadas.
+        className={`w-[90vw] sm:w-[75vw] md:w-[65vw] max-w-3xl transition-all ease-out ${
           fading ? 'opacity-0 blur-xl scale-125' : 'opacity-100 blur-none scale-100'
         }`}
         style={{
-          WebkitMaskImage: 'radial-gradient(ellipse 50% 50% at center, black 45%, transparent 85%)',
-          maskImage: 'radial-gradient(ellipse 50% 50% at center, black 45%, transparent 85%)',
+          WebkitMaskImage: 'radial-gradient(ellipse 50% 50% at center, black 20%, transparent 70%)',
+          maskImage: 'radial-gradient(ellipse 50% 50% at center, black 20%, transparent 70%)',
           transitionDuration: `${FADE_MS}ms`,
         }}
       />
