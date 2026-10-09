@@ -864,11 +864,9 @@ export const projects: Project[] = [
     status: 'preventa',
     type: ['departamentos'],
     zone: 'ciudad',
-    // Sin render de fachada/exterior todavía: se usa el plano de la
-    // Tipología 1 como imagen principal mientras tanto. Reemplazar por un
-    // render real en cuanto esté disponible.
-    images: [asset('images/proyectos/marin-402/tipologias/topo1.webp')],
-    thumbnail: asset('images/proyectos/marin-402/tipologias/topo1-thumb.webp'),
+    images: [asset('images/proyectos/marin-402/reendersss4.webp')],
+    thumbnail: asset('images/proyectos/marin-402/reendersss4-thumb.webp'),
+    logo: 'logos/proyectos/marin-402.png',
     areas360: buildAreas360(), // Pendiente: reemplazar por las imágenes 360 reales de cada ambiente
     minApartmentSize: 120,
     features: ['Departamentos desde 119.66 m²', 'A una cuadra del Mall Plaza Cayma', 'Áreas comerciales'],
@@ -876,10 +874,13 @@ export const projects: Project[] = [
     amenities: ['Ingreso vehicular', 'Áreas comerciales', 'Cerca a bancos y supermercados', 'Cerca a clínicas'],
     gallery: {
       renders: [
-        asset('images/proyectos/marin-402/tipologias/topo1.webp'),
-        asset('images/proyectos/marin-402/tipologias/topo1-piso.webp'),
-        asset('images/proyectos/marin-402/tipologias/topo2.webp'),
-        asset('images/proyectos/marin-402/tipologias/topo2-piso.webp'),
+        asset('images/proyectos/marin-402/reendersss4.webp'),
+        asset('images/proyectos/marin-402/p01_000_rgb.webp'),
+        asset('images/proyectos/marin-402/p08_202_rgb.webp'),
+        asset('images/proyectos/marin-402/reendersss.webp'),
+        asset('images/proyectos/marin-402/reendersss2.webp'),
+        asset('images/proyectos/marin-402/reendersss3.webp'),
+        asset('images/proyectos/marin-402/p05_091_rgb.webp'),
       ],
       planimetria: [PLACEHOLDER_PROJECT_IMAGE],
       avance: [PLACEHOLDER_AVANCE_IMAGE],
