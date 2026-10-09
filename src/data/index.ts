@@ -785,6 +785,10 @@ export const projects: Project[] = [
     id: '9',
     name: 'Edificio Los Cedros',
     slug: 'los-cedros',
+    // Oculto a pedido. Se conservan todos sus datos (ya tiene renders y
+    // tipologías reales) por si se retoma más adelante — para volver a
+    // publicarlo, borra esta línea (o ponla en `false`).
+    hidden: true,
     location: 'Yanahuara · Arequipa',
     district: 'Yanahuara',
     city: 'Arequipa',
