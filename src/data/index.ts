@@ -57,11 +57,6 @@ export const navLinks: NavLink[] = [
 // disponibles.
 const PLACEHOLDER_AVANCE_IMAGE = 'https://images.unsplash.com/photo-1503387837-b154d5074bd2?w=1200&q=80'
 
-// Placeholder para proyectos nuevos que todavía no tienen sus fotos/renders
-// reales subidos a public/images. Reemplazar images/thumbnail/gallery por los
-// archivos reales en cuanto lleguen, y quitar `hidden` para publicarlo.
-const PLACEHOLDER_PROJECT_IMAGE = 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1600&q=80'
-
 // Placeholders del recorrido 360° caminable, uno por ambiente. Deben ser
 // visualmente distintos entre sí para que "caminar" de un ambiente a otro se
 // note (una foto real por ambiente, exportada de D5, es lo que va aquí
@@ -882,7 +877,7 @@ export const projects: Project[] = [
         asset('images/proyectos/marin-402/reendersss3.webp'),
         asset('images/proyectos/marin-402/p05_091_rgb.webp'),
       ],
-      planimetria: [PLACEHOLDER_PROJECT_IMAGE],
+      planimetria: [asset('images/proyectos/marin-402/planimetria.webp')],
       avance: [PLACEHOLDER_AVANCE_IMAGE],
     },
     typologies: [
