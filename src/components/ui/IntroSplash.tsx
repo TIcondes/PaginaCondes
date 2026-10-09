@@ -28,21 +28,29 @@ export default function IntroSplash() {
 
   const startFade = () => setPhase((p) => (p === 'video' ? 'fading' : p))
 
+  // El flag de sessionStorage y el timer de respaldo solo deben armarse una
+  // vez, al entrar con el intro activo — por eso van en un efecto aparte con
+  // deps vacías (no dependen de `phase`, que sigue cambiando después).
   useEffect(() => {
     if (phase === 'done') return
-
     sessionStorage.setItem(SESSION_KEY, '1')
-    const prevOverflow = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-
     const fallback = setTimeout(startFade, FALLBACK_MS)
-
-    return () => {
-      document.body.style.overflow = prevOverflow
-      clearTimeout(fallback)
-    }
+    return () => clearTimeout(fallback)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  // Bloquea el scroll del body mientras el intro está activo. Atado a
+  // `locked` (no a `[]`) para que la limpieza —que restaura el scroll—
+  // corra apenas `phase` llega a 'done', en vez de depender de que el
+  // componente se desmonte (nunca se desmonta: solo pasa a renderizar
+  // `null`), que es lo que dejaba el scroll trabado para siempre.
+  const locked = phase !== 'done'
+  useEffect(() => {
+    if (!locked) return
+    const prevOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => { document.body.style.overflow = prevOverflow }
+  }, [locked])
 
   useEffect(() => {
     if (phase !== 'fading') return
