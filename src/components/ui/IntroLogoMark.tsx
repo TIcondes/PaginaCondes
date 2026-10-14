@@ -37,7 +37,7 @@ export default function IntroLogoMark() {
               cx={cx}
               cy={cy}
               r={r}
-              className="intro-dot fill-gray-900"
+              className="intro-dot fill-brand-700"
               // fill-box + center: la escala del "pop" ocurre alrededor del
               // propio centro del punto, sin importar dónde esté en el
               // círculo (por defecto, el origen de transform en SVG es el
@@ -49,8 +49,8 @@ export default function IntroLogoMark() {
       </svg>
 
       <div className="intro-word mt-4 text-center" style={{ animationDelay: `${wordDelay}ms` }}>
-        <p className="font-display text-2xl sm:text-3xl font-bold tracking-wide text-gray-900">CONDES</p>
-        <p className="font-body text-[0.6rem] sm:text-xs tracking-[0.35em] text-gray-500 mt-0.5">CORPORACIÓN</p>
+        <p className="font-display text-2xl sm:text-3xl font-bold tracking-wide text-brand-800">CONDES</p>
+        <p className="font-body text-[0.6rem] sm:text-xs tracking-[0.35em] text-brand-600 mt-0.5">CORPORACIÓN</p>
       </div>
     </div>
   )
