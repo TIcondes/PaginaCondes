@@ -1,14 +1,15 @@
-// Recreación en SVG/CSS del logo de puntos "dibujándose" en sentido
-// horario que traía el video de intro original (ver IntroSplash) — sin
-// peso de video ni parpadeo de carga: arranca al instante.
-
-// Radio de cada punto, en el orden en que aparecen (empezando arriba,
-// sentido horario). Varían de tamaño para que se vea igual de orgánico
-// que el mazo de puntos de la marca, no un spinner parejo.
-const DOT_RADII = [9, 7, 5.5, 5, 6, 7.5, 9.5, 11.5, 13.5, 14.5, 12.5, 10.5, 9, 8, 8, 9]
+// Recreación en SVG/CSS del logo de puntos "dibujándose" que traía el
+// video de intro original (ver IntroSplash) — sin peso de video ni
+// parpadeo de carga: arranca al instante. Es una "C" abierta (como
+// public/logos/logo.png), no un círculo cerrado: arranca arriba, gira en
+// sentido ANTIhorario (12 → 9 → 6 → 3, como las manecillas del reloj
+// yendo "al revés") y se detiene cerca de la 1, dejando un hueco arriba a
+// la derecha — mismo ángulo de inicio/arco/tamaños que el logo real.
+const DOT_RADII = [14, 12, 11, 10, 10, 13, 11, 13, 17, 16, 10, 8, 7]
+const ARC_DEGREES = 320
 const RING_RADIUS = 72
 const CENTER = 100
-const STAGGER_MS = 65
+const STAGGER_MS = 80
 const DOT_DURATION_MS = 360
 
 // Duración total de la animación (último punto + su propio tiempo, más el
@@ -24,7 +25,10 @@ export default function IntroLogoMark() {
     <div className="flex flex-col items-center">
       <svg viewBox="0 0 200 200" className="w-24 h-24 sm:w-28 sm:h-28" aria-hidden="true">
         {DOT_RADII.map((r, i) => {
-          const theta = -Math.PI / 2 + (i * 2 * Math.PI) / DOT_RADII.length
+          // Ángulo decreciente = sentido antihorario en coordenadas SVG
+          // (y crece hacia abajo). Arranca en -90° (arriba) y recorre
+          // ARC_DEGREES hacia atrás, no las vueltas completas 360°.
+          const theta = (-90 - (i * ARC_DEGREES) / (DOT_RADII.length - 1)) * (Math.PI / 180)
           const cx = CENTER + RING_RADIUS * Math.cos(theta)
           const cy = CENTER + RING_RADIUS * Math.sin(theta)
           return (
