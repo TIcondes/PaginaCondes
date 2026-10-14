@@ -9,21 +9,24 @@ const DOT_RADII = [14, 12, 11, 10, 10, 13, 11, 13, 17, 16, 10, 8, 7]
 const ARC_DEGREES = 320
 const RING_RADIUS = 72
 const CENTER = 100
-const STAGGER_MS = 80
-const DOT_DURATION_MS = 360
+const STAGGER_MS = 140
+const DOT_DURATION_MS = 500
+
+// Duración de la animación del nombre (debe coincidir con introWordReveal en index.css)
+const WORD_REVEAL_MS = 850
 
 // Duración total de la animación (último punto + su propio tiempo, más el
 // fundido del nombre) — IntroSplash la usa para saber cuándo pasar a la
 // fase de disolución hacia Inicio.
 export const INTRO_ANIMATION_MS =
-  (DOT_RADII.length - 1) * STAGGER_MS + DOT_DURATION_MS + 650 /* delay del nombre */ + 600 /* su propia duración */ + 300 /* pausa final */
+  (DOT_RADII.length - 1) * STAGGER_MS + DOT_DURATION_MS + 350 /* pausa antes del nombre */ + WORD_REVEAL_MS + 500 /* pausa final, logo completo en pantalla */
 
 export default function IntroLogoMark() {
-  const wordDelay = (DOT_RADII.length - 1) * STAGGER_MS + DOT_DURATION_MS - 150
+  const wordDelay = (DOT_RADII.length - 1) * STAGGER_MS + DOT_DURATION_MS - 100
 
   return (
     <div className="flex flex-col items-center">
-      <svg viewBox="0 0 200 200" className="w-24 h-24 sm:w-28 sm:h-28" aria-hidden="true">
+      <svg viewBox="0 0 200 200" className="w-36 h-36 sm:w-44 sm:h-44" aria-hidden="true">
         {DOT_RADII.map((r, i) => {
           // Ángulo decreciente = sentido antihorario en coordenadas SVG
           // (y crece hacia abajo). Arranca en -90° (arriba) y recorre
