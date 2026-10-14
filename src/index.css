@@ -92,10 +92,10 @@
   animation: galleryFade 0.5s ease-out;
 }
 
-/* Intro de Inicio: el logo de puntos se va "dibujando" en sentido horario
-   (cada punto aparece con un pequeño rebote, ver IntroSplash) y después el
-   nombre entra con un fundido hacia arriba. animation-delay de cada punto
-   se calcula en JS según su posición en el círculo. */
+/* Intro de Inicio: el logo de puntos se va "dibujando" (cada punto aparece
+   chico y crece con un pequeño rebote, ver IntroLogoMark) y después el
+   nombre emerge empujando el círculo hacia arriba. animation-delay de cada
+   punto se calcula en JS según su posición en el círculo. */
 @keyframes introDotPop {
   0%   { transform: scale(0); opacity: 0; }
   60%  { transform: scale(1.2); opacity: 1; }
@@ -104,12 +104,17 @@
 .intro-dot {
   animation: introDotPop 360ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
-@keyframes introWordFade {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
+/* Arranca en max-height:0 (el bloque no ocupa lugar, así que el círculo
+   queda solo y centrado) y crece hasta dar lugar al nombre — ese cambio de
+   alto es lo que visualmente "empuja" al círculo hacia arriba, porque todo
+   el conjunto sigue centrado verticalmente en la pantalla. */
+@keyframes introWordReveal {
+  from { max-height: 0; opacity: 0; }
+  to   { max-height: 6rem; opacity: 1; }
 }
-.intro-word {
-  animation: introWordFade 600ms ease-out both;
+.intro-word-wrap {
+  max-height: 0;
+  animation: introWordReveal 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 /* Oculta la barra de scroll de los expositores de imágenes horizontales

@@ -48,9 +48,17 @@ export default function IntroLogoMark() {
         })}
       </svg>
 
-      <div className="intro-word mt-4 text-center" style={{ animationDelay: `${wordDelay}ms` }}>
-        <p className="font-display text-2xl sm:text-3xl font-bold tracking-wide text-brand-800">CONDES</p>
-        <p className="font-body text-[0.6rem] sm:text-xs tracking-[0.35em] text-brand-600 mt-0.5">CORPORACIÓN</p>
+      {/* Hasta que no le toca su turno, este bloque mide 0 de alto (max-height:
+          0 + overflow hidden) — así el círculo queda solo, centrado en la
+          pantalla. Cuando el nombre entra, el bloque crece y, como el
+          contenedor de IntroSplash centra todo el conjunto verticalmente, el
+          círculo queda "empujado" hacia arriba para hacerle lugar, en vez de
+          quedar ya fijo en su posición final desde el principio. */}
+      <div className="intro-word-wrap overflow-hidden" style={{ animationDelay: `${wordDelay}ms` }}>
+        <div className="pt-4 text-center">
+          <p className="font-display text-2xl sm:text-3xl font-bold tracking-wide text-brand-800">CONDES</p>
+          <p className="font-body text-[0.6rem] sm:text-xs tracking-[0.35em] text-brand-600 mt-0.5">CORPORACIÓN</p>
+        </div>
       </div>
     </div>
   )
