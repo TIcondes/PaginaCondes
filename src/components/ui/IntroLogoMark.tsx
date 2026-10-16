@@ -5,12 +5,16 @@
 // sentido ANTIhorario (12 → 9 → 6 → 3, como las manecillas del reloj
 // yendo "al revés") y se detiene cerca de la 1, dejando un hueco arriba a
 // la derecha — mismo ángulo de inicio/arco/tamaños que el logo real.
-const DOT_RADII = [14, 12, 11, 10, 10, 13, 11, 13, 17, 16, 10, 8, 7]
+// Los radios tienen que ser lo bastante grandes para que cada punto casi
+// toque al siguiente (si no, los más chicos quedan "sueltos" cerca del
+// hueco en vez de verse como una cadena continua — eso fue lo que pasó con
+// el array anterior, demasiado chico en las puntas).
+const DOT_RADII = [16, 14, 13, 13, 13, 15, 13, 15, 19, 18, 14, 12, 11]
 // 320° (el hueco "real" del logo estático) se leía casi como un círculo
 // cerrado a este tamaño — un hueco chico se confunde con un spinner. Con
 // menos grados el hueco es mucho más grande y se lee sin dudas como "C".
 const ARC_DEGREES = 270
-const RING_RADIUS = 72
+const RING_RADIUS = 68
 const CENTER = 100
 const STAGGER_MS = 140
 const DOT_DURATION_MS = 500
