@@ -1,75 +1,172 @@
-// Recreación en SVG/CSS del logo de puntos "dibujándose" que traía el
-// video de intro original (ver IntroSplash) — sin peso de video ni
-// parpadeo de carga: arranca al instante. Es una "C" abierta (como
-// public/logos/logo.png), no un círculo cerrado: arranca arriba, gira en
-// sentido ANTIhorario (12 → 9 → 6 → 3, como las manecillas del reloj
-// yendo "al revés") y se detiene cerca de la 1, dejando un hueco arriba a
-// la derecha — mismo ángulo de inicio/arco/tamaños que el logo real.
-// Los radios tienen que ser lo bastante grandes para que cada punto casi
-// toque al siguiente (si no, los más chicos quedan "sueltos" cerca del
-// hueco en vez de verse como una cadena continua — eso fue lo que pasó con
-// el array anterior, demasiado chico en las puntas).
-const DOT_RADII = [16, 14, 13, 13, 13, 15, 13, 15, 19, 18, 14, 12, 11]
-// 320° (el hueco "real" del logo estático) se leía casi como un círculo
-// cerrado a este tamaño — un hueco chico se confunde con un spinner. Con
-// menos grados el hueco es mucho más grande y se lee sin dudas como "C".
-const ARC_DEGREES = 270
-const RING_RADIUS = 68
-const CENTER = 100
+// Recreación en SVG/CSS del logo de puntos "dibujándose"
+// del video de intro original.
+//
+// La animación conserva EXACTAMENTE la duración original.
+// Solo se modifica:
+// - La forma del logo para que sea una "C" real.
+// - El primer punto aparece abajo a la derecha.
+// - El primer punto es el más pequeño.
+// - Los puntos aumentan progresivamente de tamaño.
+// - Se mantiene una separación visual continua entre los puntos.
+//
+// La animación comienza en el punto inferior derecho y avanza
+// en sentido antihorario alrededor de la C.
+
+const DOT_RADII = [
+  8,   // 1.º — abajo a la derecha, pequeño
+  10,
+  12,
+  14,
+  16,
+  17,
+  18,
+  18,
+  17,
+  16,
+  14,
+  12,
+  10
+]
+
+// Posiciones de los puntos.
+// La forma está diseñada como una C abierta hacia la derecha.
+//
+// El primer punto está abajo a la derecha.
+// Los siguientes avanzan en sentido antihorario.
+//
+// El sistema de coordenadas del SVG es:
+// x → derecha
+// y → abajo
+const DOT_POSITIONS = [
+  // Inicio: abajo a la derecha
+  { x: 148, y: 150 },
+
+  // Parte inferior
+  { x: 128, y: 163 },
+  { x: 105, y: 168 },
+  { x: 82, y: 164 },
+  { x: 62, y: 151 },
+
+  // Lado izquierdo inferior
+  { x: 47, y: 134 },
+  { x: 40, y: 112 },
+
+  // Lado izquierdo superior
+  { x: 40, y: 89 },
+  { x: 47, y: 68 },
+  { x: 62, y: 50 },
+
+  // Parte superior
+  { x: 82, y: 38 },
+  { x: 105, y: 33 },
+  { x: 127, y: 38 }
+]
+
+// Duración entre la aparición de cada punto.
+// NO CAMBIAR: debe conservar la velocidad de la animación original.
 const STAGGER_MS = 140
+
+// Duración individual de cada punto.
+// NO CAMBIAR.
 const DOT_DURATION_MS = 500
 
-// Duración de la animación del nombre (debe coincidir con introWordReveal en index.css)
+// Duración de la animación del nombre.
+// Debe coincidir con introWordReveal en index.css.
 const WORD_REVEAL_MS = 850
 
-// Duración total de la animación (último punto + su propio tiempo, más el
-// fundido del nombre) — IntroSplash la usa para saber cuándo pasar a la
-// fase de disolución hacia Inicio.
+// Duración total de la animación.
+//
+// Se conserva EXACTAMENTE la misma fórmula y tiempos
+// que tenía la versión original.
 export const INTRO_ANIMATION_MS =
-  (DOT_RADII.length - 1) * STAGGER_MS + DOT_DURATION_MS + 350 /* pausa antes del nombre */ + WORD_REVEAL_MS + 500 /* pausa final, logo completo en pantalla */
+  (DOT_RADII.length - 1) * STAGGER_MS +
+  DOT_DURATION_MS +
+  350 /* pausa antes del nombre */ +
+  WORD_REVEAL_MS +
+  500 /* pausa final, logo completo en pantalla */
+
 
 export default function IntroLogoMark() {
-  const wordDelay = (DOT_RADII.length - 1) * STAGGER_MS + DOT_DURATION_MS - 100
+
+  // El nombre empieza prácticamente al terminar
+  // la aparición del último punto.
+  //
+  // Se conserva el mismo cálculo original.
+  const wordDelay =
+    (DOT_RADII.length - 1) * STAGGER_MS +
+    DOT_DURATION_MS -
+    100
 
   return (
     <div className="flex flex-col items-center">
-      <svg viewBox="0 0 200 200" className="w-36 h-36 sm:w-44 sm:h-44" aria-hidden="true">
+
+      <svg
+        viewBox="0 0 200 200"
+        className="w-36 h-36 sm:w-44 sm:h-44"
+        aria-hidden="true"
+      >
+
         {DOT_RADII.map((r, i) => {
-          // Ángulo decreciente = sentido antihorario en coordenadas SVG
-          // (y crece hacia abajo). Arranca en -90° (arriba) y recorre
-          // ARC_DEGREES hacia atrás, no las vueltas completas 360°.
-          const theta = (-90 - (i * ARC_DEGREES) / (DOT_RADII.length - 1)) * (Math.PI / 180)
-          const cx = CENTER + RING_RADIUS * Math.cos(theta)
-          const cy = CENTER + RING_RADIUS * Math.sin(theta)
+
+          const { x, y } = DOT_POSITIONS[i]
+
           return (
             <circle
               key={i}
-              cx={cx}
-              cy={cy}
+              cx={x}
+              cy={y}
               r={r}
               className="intro-dot fill-brand-700"
-              // fill-box + center: la escala del "pop" ocurre alrededor del
-              // propio centro del punto, sin importar dónde esté en el
-              // círculo (por defecto, el origen de transform en SVG es el
-              // (0,0) de todo el <svg>, no el del elemento).
-              style={{ transformBox: 'fill-box', transformOrigin: 'center', animationDelay: `${i * STAGGER_MS}ms` }}
+
+              // La transformación ocurre alrededor
+              // del propio centro del círculo.
+              style={{
+                transformBox: 'fill-box',
+                transformOrigin: 'center',
+
+                // Mantiene exactamente el mismo
+                // retraso entre puntos.
+                animationDelay: `${i * STAGGER_MS}ms`
+              }}
             />
           )
         })}
+
       </svg>
 
-      {/* Hasta que no le toca su turno, este bloque mide 0 de alto (max-height:
-          0 + overflow hidden) — así el círculo queda solo, centrado en la
-          pantalla. Cuando el nombre entra, el bloque crece y, como el
-          contenedor de IntroSplash centra todo el conjunto verticalmente, el
-          círculo queda "empujado" hacia arriba para hacerle lugar, en vez de
-          quedar ya fijo en su posición final desde el principio. */}
-      <div className="intro-word-wrap overflow-hidden" style={{ animationDelay: `${wordDelay}ms` }}>
+
+      {/* 
+        Hasta que no le toca su turno, este bloque mide 0 de alto
+        (max-height: 0 + overflow hidden).
+
+        Así la C queda sola y centrada inicialmente.
+
+        Cuando aparece el nombre, el bloque crece y el contenedor
+        de IntroSplash centra nuevamente el conjunto verticalmente,
+        haciendo que la C suba para dejar espacio al texto.
+      */}
+
+      <div
+        className="intro-word-wrap overflow-hidden"
+        style={{
+          animationDelay: `${wordDelay}ms`
+        }}
+      >
+
         <div className="pt-4 text-center">
-          <p className="font-display text-2xl sm:text-3xl font-bold tracking-wide text-brand-800">CONDES</p>
-          <p className="font-body text-[0.6rem] sm:text-xs tracking-[0.35em] text-brand-600 mt-0.5">CORPORACIÓN</p>
+
+          <p className="font-display text-2xl sm:text-3xl font-bold tracking-wide text-brand-800">
+            CONDES
+          </p>
+
+          <p className="font-body text-[0.6rem] sm:text-xs tracking-[0.35em] text-brand-600 mt-0.5">
+            CORPORACIÓN
+          </p>
+
         </div>
+
       </div>
+
     </div>
   )
 }
