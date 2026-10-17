@@ -23,19 +23,19 @@
 // El tamaño aumenta progresivamente hasta llegar
 // a los puntos grandes de la parte inferior.
 const DOT_RADII = [
-  6,   // 1.º — arriba derecha
+  6,    // 1.º — arriba derecha
+  6.5,
   7,
+  7.5,
   8,
+  8.5,
   9,
+  9.5,
   10,
+  10.5,
   11,
-  12,
-  13,
-  14,
-  15,
-  16,
-  17,
-  18   // último — abajo derecha, más grande
+  11.5,
+  12    // último — abajo derecha
 ]
 
 
