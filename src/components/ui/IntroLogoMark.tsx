@@ -1,72 +1,66 @@
 // Recreación en SVG/CSS del logo de puntos "dibujándose"
 // del video de intro original.
 //
-// La animación conserva EXACTAMENTE la duración original.
-// Solo se modifica:
-// - La forma del logo para que sea una "C" real.
-// - El primer punto aparece abajo a la derecha.
-// - El primer punto es el más pequeño.
-// - Los puntos aumentan progresivamente de tamaño.
-// - Se mantiene una separación visual continua entre los puntos.
+// La duración de la animación se mantiene EXACTAMENTE igual.
+// Solo se ajusta la geometría y el tamaño de los puntos.
 //
-// La animación comienza en el punto inferior derecho y avanza
-// en sentido antihorario alrededor de la C.
+// El logo forma una "C" abierta hacia la derecha.
+// El primer punto aparece abajo a la derecha y es el más pequeño.
+// Los siguientes puntos van creciendo progresivamente.
 
 const DOT_RADII = [
-  8,   // 1.º — abajo a la derecha, pequeño
+  6,   // 1.º — abajo a la derecha
+  7,
+  8,
+  9,
   10,
+  11,
   12,
+  13,
   14,
-  16,
-  17,
-  18,
-  18,
-  17,
-  16,
   14,
-  12,
-  10
+  13,
+  11,
+  9
 ]
 
 // Posiciones de los puntos.
-// La forma está diseñada como una C abierta hacia la derecha.
+// La C está ligeramente más cerrada que antes.
+// El primer punto está abajo a la derecha y el recorrido
+// continúa en sentido antihorario.
 //
-// El primer punto está abajo a la derecha.
-// Los siguientes avanzan en sentido antihorario.
-//
-// El sistema de coordenadas del SVG es:
+// SVG:
 // x → derecha
 // y → abajo
 const DOT_POSITIONS = [
-  // Inicio: abajo a la derecha
-  { x: 148, y: 150 },
+  // Inicio — abajo a la derecha
+  { x: 145, y: 148 },
 
   // Parte inferior
-  { x: 128, y: 163 },
-  { x: 105, y: 168 },
-  { x: 82, y: 164 },
-  { x: 62, y: 151 },
+  { x: 128, y: 160 },
+  { x: 108, y: 166 },
+  { x: 87, y: 163 },
+  { x: 68, y: 153 },
 
   // Lado izquierdo inferior
-  { x: 47, y: 134 },
-  { x: 40, y: 112 },
+  { x: 53, y: 139 },
+  { x: 45, y: 121 },
+  { x: 42, y: 101 },
 
   // Lado izquierdo superior
-  { x: 40, y: 89 },
-  { x: 47, y: 68 },
-  { x: 62, y: 50 },
+  { x: 45, y: 81 },
+  { x: 53, y: 63 },
+  { x: 68, y: 49 },
 
   // Parte superior
-  { x: 82, y: 38 },
-  { x: 105, y: 33 },
-  { x: 127, y: 38 }
+  { x: 87, y: 39 },
+  { x: 108, y: 36 }
 ]
 
-// Duración entre la aparición de cada punto.
-// NO CAMBIAR: debe conservar la velocidad de la animación original.
+// NO CAMBIAR.
+// Mantiene exactamente la velocidad original.
 const STAGGER_MS = 140
 
-// Duración individual de cada punto.
 // NO CAMBIAR.
 const DOT_DURATION_MS = 500
 
@@ -75,9 +69,7 @@ const DOT_DURATION_MS = 500
 const WORD_REVEAL_MS = 850
 
 // Duración total de la animación.
-//
-// Se conserva EXACTAMENTE la misma fórmula y tiempos
-// que tenía la versión original.
+// Se mantiene exactamente igual que en la versión original.
 export const INTRO_ANIMATION_MS =
   (DOT_RADII.length - 1) * STAGGER_MS +
   DOT_DURATION_MS +
@@ -88,10 +80,10 @@ export const INTRO_ANIMATION_MS =
 
 export default function IntroLogoMark() {
 
-  // El nombre empieza prácticamente al terminar
+  // El nombre comienza prácticamente al terminar
   // la aparición del último punto.
   //
-  // Se conserva el mismo cálculo original.
+  // Se conserva el cálculo original.
   const wordDelay =
     (DOT_RADII.length - 1) * STAGGER_MS +
     DOT_DURATION_MS -
@@ -118,14 +110,13 @@ export default function IntroLogoMark() {
               r={r}
               className="intro-dot fill-brand-700"
 
-              // La transformación ocurre alrededor
-              // del propio centro del círculo.
               style={{
+                // El efecto de escala se hace alrededor
+                // del propio centro del círculo.
                 transformBox: 'fill-box',
                 transformOrigin: 'center',
 
-                // Mantiene exactamente el mismo
-                // retraso entre puntos.
+                // MISMO tiempo entre puntos.
                 animationDelay: `${i * STAGGER_MS}ms`
               }}
             />
@@ -136,14 +127,11 @@ export default function IntroLogoMark() {
 
 
       {/* 
-        Hasta que no le toca su turno, este bloque mide 0 de alto
-        (max-height: 0 + overflow hidden).
-
-        Así la C queda sola y centrada inicialmente.
-
-        Cuando aparece el nombre, el bloque crece y el contenedor
-        de IntroSplash centra nuevamente el conjunto verticalmente,
-        haciendo que la C suba para dejar espacio al texto.
+        El nombre permanece oculto hasta que comienza
+        su animación.
+        
+        Esto mantiene el comportamiento original:
+        primero aparece la C y después entra CONDES.
       */}
 
       <div
