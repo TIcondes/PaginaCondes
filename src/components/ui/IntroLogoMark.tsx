@@ -2,11 +2,16 @@
 // del video de intro original.
 //
 // La duración de la animación se mantiene EXACTAMENTE igual.
-// Solo se ajusta la geometría y el tamaño de los puntos.
+// Se ajusta únicamente la geometría del logo.
 //
-// El logo forma una "C" abierta hacia la derecha.
-// El primer punto aparece abajo a la derecha y es el más pequeño.
-// Los siguientes puntos van creciendo progresivamente.
+// Características:
+// - La C está más cerrada.
+// - Los círculos están más separados entre sí.
+// - Los círculos conservan el tamaño actual.
+// - El primer círculo aparece abajo a la derecha.
+// - El primer círculo es el más pequeño.
+// - Los siguientes aumentan progresivamente.
+// - La animación continúa en sentido antihorario.
 
 const DOT_RADII = [
   6,   // 1.º — abajo a la derecha
@@ -25,36 +30,46 @@ const DOT_RADII = [
 ]
 
 // Posiciones de los puntos.
-// La C está ligeramente más cerrada que antes.
-// El primer punto está abajo a la derecha y el recorrido
-// continúa en sentido antihorario.
 //
-// SVG:
-// x → derecha
-// y → abajo
+// La trayectoria forma una C más cerrada.
+// Los puntos tienen mayor separación entre sí para
+// evitar que se vean como una cadena demasiado compacta.
+//
+// El primer punto está abajo a la derecha.
+// Después se recorre la C en sentido antihorario.
 const DOT_POSITIONS = [
-  // Inicio — abajo a la derecha
-  { x: 145, y: 148 },
+  // ─────────────────────────
+  // INICIO — abajo derecha
+  // ─────────────────────────
+  { x: 148, y: 146 },
 
-  // Parte inferior
-  { x: 128, y: 160 },
-  { x: 108, y: 166 },
-  { x: 87, y: 163 },
-  { x: 68, y: 153 },
+  // ─────────────────────────
+  // PARTE INFERIOR
+  // ─────────────────────────
+  { x: 126, y: 161 },
+  { x: 101, y: 167 },
+  { x: 76, y: 161 },
+  { x: 57, y: 146 },
 
-  // Lado izquierdo inferior
-  { x: 53, y: 139 },
-  { x: 45, y: 121 },
-  { x: 42, y: 101 },
+  // ─────────────────────────
+  // LADO IZQUIERDO
+  // ─────────────────────────
+  { x: 45, y: 125 },
+  { x: 40, y: 101 },
+  { x: 45, y: 77 },
 
-  // Lado izquierdo superior
-  { x: 45, y: 81 },
-  { x: 53, y: 63 },
-  { x: 68, y: 49 },
+  // ─────────────────────────
+  // PARTE SUPERIOR
+  // ─────────────────────────
+  { x: 57, y: 56 },
+  { x: 76, y: 41 },
+  { x: 101, y: 35 },
+  { x: 126, y: 41 },
 
-  // Parte superior
-  { x: 87, y: 39 },
-  { x: 108, y: 36 }
+  // ─────────────────────────
+  // EXTREMO SUPERIOR DERECHO
+  // ─────────────────────────
+  { x: 143, y: 55 }
 ]
 
 // NO CAMBIAR.
@@ -69,7 +84,7 @@ const DOT_DURATION_MS = 500
 const WORD_REVEAL_MS = 850
 
 // Duración total de la animación.
-// Se mantiene exactamente igual que en la versión original.
+// Se conserva exactamente la fórmula original.
 export const INTRO_ANIMATION_MS =
   (DOT_RADII.length - 1) * STAGGER_MS +
   DOT_DURATION_MS +
@@ -80,10 +95,7 @@ export const INTRO_ANIMATION_MS =
 
 export default function IntroLogoMark() {
 
-  // El nombre comienza prácticamente al terminar
-  // la aparición del último punto.
-  //
-  // Se conserva el cálculo original.
+  // Se conserva exactamente el cálculo original.
   const wordDelay =
     (DOT_RADII.length - 1) * STAGGER_MS +
     DOT_DURATION_MS -
@@ -109,14 +121,9 @@ export default function IntroLogoMark() {
               cy={y}
               r={r}
               className="intro-dot fill-brand-700"
-
               style={{
-                // El efecto de escala se hace alrededor
-                // del propio centro del círculo.
                 transformBox: 'fill-box',
                 transformOrigin: 'center',
-
-                // MISMO tiempo entre puntos.
                 animationDelay: `${i * STAGGER_MS}ms`
               }}
             />
@@ -125,22 +132,12 @@ export default function IntroLogoMark() {
 
       </svg>
 
-
-      {/* 
-        El nombre permanece oculto hasta que comienza
-        su animación.
-        
-        Esto mantiene el comportamiento original:
-        primero aparece la C y después entra CONDES.
-      */}
-
       <div
         className="intro-word-wrap overflow-hidden"
         style={{
           animationDelay: `${wordDelay}ms`
         }}
       >
-
         <div className="pt-4 text-center">
 
           <p className="font-display text-2xl sm:text-3xl font-bold tracking-wide text-brand-800">
@@ -152,7 +149,6 @@ export default function IntroLogoMark() {
           </p>
 
         </div>
-
       </div>
 
     </div>
