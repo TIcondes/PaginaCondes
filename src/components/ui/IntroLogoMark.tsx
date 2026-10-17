@@ -1,20 +1,29 @@
 // Recreación en SVG/CSS del logo de puntos "dibujándose"
 // del video de intro original.
 //
-// La duración de la animación se mantiene EXACTAMENTE igual.
-// Se ajusta únicamente la geometría del logo.
+// La animación mantiene EXACTAMENTE la duración original.
 //
 // Características:
-// - La C está más cerrada.
-// - Los círculos están más separados entre sí.
-// - Los círculos conservan el tamaño actual.
-// - El primer círculo aparece abajo a la derecha.
-// - El primer círculo es el más pequeño.
-// - Los siguientes aumentan progresivamente.
-// - La animación continúa en sentido antihorario.
+// - Forma de C más cerrada.
+// - Mayor separación entre los círculos.
+// - Primer círculo arriba a la derecha.
+// - Primer círculo pequeño.
+// - Los círculos crecen progresivamente.
+// - Los círculos más grandes quedan en la parte inferior.
+// - Recorrido en sentido antihorario.
+//
+// SVG:
+// x → derecha
+// y → abajo
 
+
+// Tamaño de cada punto.
+//
+// El primero es el más pequeño.
+// El tamaño aumenta progresivamente hasta llegar
+// a los puntos grandes de la parte inferior.
 const DOT_RADII = [
-  6,   // 1.º — abajo a la derecha
+  6,   // 1.º — arriba derecha
   7,
   8,
   9,
@@ -23,68 +32,101 @@ const DOT_RADII = [
   12,
   13,
   14,
-  14,
-  13,
-  11,
-  9
+  15,
+  16,
+  17,
+  18   // último — abajo derecha, más grande
 ]
+
 
 // Posiciones de los puntos.
 //
-// La trayectoria forma una C más cerrada.
-// Los puntos tienen mayor separación entre sí para
-// evitar que se vean como una cadena demasiado compacta.
+// La C está más cerrada que en las versiones anteriores.
+// La abertura está hacia la derecha.
 //
-// El primer punto está abajo a la derecha.
-// Después se recorre la C en sentido antihorario.
+// El recorrido comienza arriba a la derecha:
+//
+//        1 ●
+//      ●
+//    ●
+//   ●
+//  ●
+// ●
+// ●
+// ●
+//  ●
+//   ●
+//     ●
+//       ●
+//          ● 13
+//
+// Es decir:
+// pequeño → pequeño → ... → grande
+//
+// Los puntos están ligeramente más separados para que
+// no formen una cadena demasiado compacta.
 const DOT_POSITIONS = [
   // ─────────────────────────
-  // INICIO — abajo derecha
+  // INICIO — ARRIBA DERECHA
   // ─────────────────────────
-  { x: 148, y: 146 },
-
-  // ─────────────────────────
-  // PARTE INFERIOR
-  // ─────────────────────────
-  { x: 126, y: 161 },
-  { x: 101, y: 167 },
-  { x: 76, y: 161 },
-  { x: 57, y: 146 },
-
-  // ─────────────────────────
-  // LADO IZQUIERDO
-  // ─────────────────────────
-  { x: 45, y: 125 },
-  { x: 40, y: 101 },
-  { x: 45, y: 77 },
+  { x: 139, y: 50 },
 
   // ─────────────────────────
   // PARTE SUPERIOR
   // ─────────────────────────
-  { x: 57, y: 56 },
-  { x: 76, y: 41 },
-  { x: 101, y: 35 },
-  { x: 126, y: 41 },
+  { x: 116, y: 37 },
+  { x: 91, y: 34 },
+  { x: 67, y: 41 },
 
   // ─────────────────────────
-  // EXTREMO SUPERIOR DERECHO
+  // LADO IZQUIERDO SUPERIOR
   // ─────────────────────────
-  { x: 143, y: 55 }
+  { x: 48, y: 55 },
+  { x: 37, y: 74 },
+
+  // ─────────────────────────
+  // LADO IZQUIERDO
+  // ─────────────────────────
+  { x: 33, y: 97 },
+  { x: 35, y: 120 },
+
+  // ─────────────────────────
+  // LADO IZQUIERDO INFERIOR
+  // ─────────────────────────
+  { x: 44, y: 141 },
+  { x: 59, y: 157 },
+
+  // ─────────────────────────
+  // PARTE INFERIOR
+  // ─────────────────────────
+  { x: 80, y: 167 },
+  { x: 104, y: 169 },
+
+  // ─────────────────────────
+  // FINAL — ABAJO DERECHA
+  // ─────────────────────────
+  { x: 128, y: 160 }
 ]
 
-// NO CAMBIAR.
-// Mantiene exactamente la velocidad original.
-const STAGGER_MS = 140
 
 // NO CAMBIAR.
+// Tiempo entre la aparición de cada punto.
+const STAGGER_MS = 140
+
+
+// NO CAMBIAR.
+// Duración individual de cada punto.
 const DOT_DURATION_MS = 500
+
 
 // Duración de la animación del nombre.
 // Debe coincidir con introWordReveal en index.css.
 const WORD_REVEAL_MS = 850
 
+
 // Duración total de la animación.
-// Se conserva exactamente la fórmula original.
+//
+// Se conserva EXACTAMENTE la fórmula original.
 export const INTRO_ANIMATION_MS =
   (DOT_RADII.length - 1) * STAGGER_MS +
   DOT_DURATION_MS +
@@ -95,11 +137,15 @@ export const INTRO_ANIMATION_MS =
 
 export default function IntroLogoMark() {
 
-  // Se conserva exactamente el cálculo original.
+  // El nombre comienza prácticamente cuando termina
+  // la aparición del último punto.
+  //
+  // Se mantiene exactamente igual que en la versión original.
   const wordDelay =
     (DOT_RADII.length - 1) * STAGGER_MS +
     DOT_DURATION_MS -
     100
+
 
   return (
     <div className="flex flex-col items-center">
@@ -121,9 +167,14 @@ export default function IntroLogoMark() {
               cy={y}
               r={r}
               className="intro-dot fill-brand-700"
+
               style={{
+                // La transformación ocurre alrededor
+                // del centro del propio círculo.
                 transformBox: 'fill-box',
                 transformOrigin: 'center',
+
+                // MISMO retraso entre puntos.
                 animationDelay: `${i * STAGGER_MS}ms`
               }}
             />
@@ -132,12 +183,22 @@ export default function IntroLogoMark() {
 
       </svg>
 
+
+      {/* 
+        Hasta que no le toca su turno, este bloque mide 0 de alto
+        y permanece oculto.
+        
+        Cuando comienza la animación del nombre, el bloque crece
+        y el contenedor de IntroSplash centra nuevamente el conjunto.
+      */}
+
       <div
         className="intro-word-wrap overflow-hidden"
         style={{
           animationDelay: `${wordDelay}ms`
         }}
       >
+
         <div className="pt-4 text-center">
 
           <p className="font-display text-2xl sm:text-3xl font-bold tracking-wide text-brand-800">
@@ -149,6 +210,7 @@ export default function IntroLogoMark() {
           </p>
 
         </div>
+
       </div>
 
     </div>
